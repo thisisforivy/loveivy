@@ -2,6 +2,7 @@ package edb.engine
 
 import edb.parser._
 import edb.catalog._
+import edb.enviroment._
 import spark.SparkContext
 import SparkContext._
 import spark.{RDD}

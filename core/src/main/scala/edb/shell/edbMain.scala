@@ -3,6 +3,7 @@ package edb.shell
 import edb.parser._
 import edb.catalog._
 import edb.engine._
+import edb.enviroment._
 
 import spark.SparkContext
 import SparkContext._
