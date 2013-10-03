@@ -1,0 +1,309 @@
+package edb.catalog
+import scala._
+import scala.io._
+import scala.reflect.BeanProperty
+import java.util._
+import scala.util.control.Breaks._
+
+/* define the supported attribute type */
+sealed abstract class Attribute {
+  @BeanProperty var name: String = _
+}
+case class IntAtt (_name: String) extends Attribute 
+{
+  setName(_name)
+  override def toString = "int " + name
+  override def equals(other: Any): Boolean = other match {
+    case o: IntAtt => o.getName() == this.getName() 
+    case _ => false 
+  }
+}
+
+case class FloatAtt (_name: String) extends Attribute
+{
+  setName(_name)
+  override def toString = "float " + name
+  override def equals(other: Any): Boolean = other match {
+    case o: FloatAtt => o.getName() == this.getName() 
+    case _ => false 
+  }
+
+}
+
+case class DoubleAtt (_name: String) extends Attribute
+{
+  setName(_name)
+  override def toString = "double " + name
+  override def equals(other: Any): Boolean = other match {
+    case o: DoubleAtt => o.getName() == this.getName() 
+    case _ => false 
+  }
+}
+
+case class LongAtt (_name: String) extends Attribute
+{
+  setName(_name)
+  override def toString = "long " + name
+  override def equals(other: Any): Boolean = other match {
+    case o: LongAtt => o.getName() == this.getName() 
+    case _ => false 
+  }
+}
+
+case class BooleanAtt (_name: String) extends Attribute
+{
+  setName(_name)
+  override def toString = "boolean " + name
+  override def equals(other: Any): Boolean = other match {
+    case o: BooleanAtt => o.getName() == this.getName() 
+    case _ => false 
+  }
+}
+
+case class StringAtt (_name: String) extends Attribute
+{
+  setName(_name)
+  override def toString = "string " + name
+  override def equals(other: Any): Boolean = other match {
+    case o: StringAtt => o.getName() == this.getName() 
+    case _ => false 
+  }
+}
+
+
+case class DateAtt (_name: String) extends Attribute
+{
+  setName(_name)
+  override def toString = "date" + name
+  override def equals(other: Any): Boolean = other match {
+    case o: DateAtt => o.getName() == this.getName() 
+    case _ => false 
+  }
+}
+
+
+/* define the supported value type, we use case class so that
+ * scala generatate HashCode and comparison method 
+ */
+sealed abstract class genericValue{
+  @BeanProperty var name: String = _
+
+}
+case class IntVal (val _name: String, val _value: Int) extends genericValue{
+
+  @BeanProperty var value: Int = _
+  setValue(_value)
+  setName(_name)
+  override def toString =  "[" + name+ ":int " + value + "]"
+  override def equals(other: Any): Boolean = other match {
+    case o: IntVal => o.getName() == this.getName() && o.getValue == this.getValue()
+    case _ => false 
+  }
+}
+case class DoubleVal (val _name: String, _value: Double) extends genericValue{
+
+  @BeanProperty var value: Double = _
+  setValue(_value)
+  setName(_name)
+  override def toString =  "[" + name+ ":double " + value + "]"
+  override def equals(other: Any): Boolean = other match {
+    case o: DoubleVal => o.getName() == this.getName() && o.getValue == this.getValue()
+    case _ => false 
+  }
+}
+
+case class FloatVal (val _name: String, _value: Float) extends genericValue{
+
+  @BeanProperty var value: Float = _
+  setValue(_value)
+  setName(_name)
+  override def toString =  "[" + name+ ":float " + value + "]"
+  override def equals(other: Any): Boolean = other match {
+    case o: FloatVal => o.getName() == this.getName() && o.getValue == this.getValue()
+    case _ => false 
+  }
+}
+case class LongVal (val _name: String, _value: Long) extends genericValue{
+
+  @BeanProperty var value: Long = _
+  setValue(_value)
+  setName(_name)
+  override def toString =  "[" + name+ ":long " + value + "]"
+  override def equals(other: Any): Boolean = other match {
+    case o: LongVal => o.getName() == this.getName() && o.getValue == this.getValue()
+    case _ => false 
+  }
+}
+case class BooleanVal (val _name: String, _value: Boolean) extends genericValue{
+
+  @BeanProperty var value: Boolean = _
+  setValue(_value)
+  setName(_name)
+  override def toString =  "[" + name+ ":boolean " + value + "]"
+  override def equals(other: Any): Boolean = other match {
+    case o: BooleanVal => o.getName() == this.getName() && o.getValue == this.getValue()
+    case _ => false 
+  }
+}
+case class StringVal (val _name: String, _value: String) extends genericValue{
+
+  @BeanProperty var value: String = _
+  setValue(_value)
+  setName(_name)
+  override def toString =  "[" + name+ ":string " + value + "]"
+  override def equals(other: Any): Boolean = other match {
+    case o: StringVal => o.getName() == this.getName() && o.getValue == this.getValue()
+    case _ => false 
+  }
+}
+case class DateVal (val _name: String, _value: Long) extends genericValue{
+
+  @BeanProperty var value: Long = _
+  setValue(_value)
+  setName(_name)
+  override def toString =  "[" + name+ ":date " + value + "]"
+  override def equals(other: Any): Boolean = other match {
+    case o: DateVal => o.getName() == this.getName() && o.getValue == this.getValue()
+    case _ => false 
+  }
+}
+
+import java.util.StringTokenizer
+class Schema (_id: Int, _version: Byte){
+
+  /* BeanProperty add getname and setname  methods */
+  /* "_" just mean default value */
+
+  @BeanProperty val  id= _id 
+  @BeanProperty val version = _version
+  @BeanProperty var name: String = _
+  @BeanProperty var latestVersion: Int = _
+  @BeanProperty var numAtts: Int = _
+  @BeanProperty var atts: Array[Attribute] = _ 
+  @BeanProperty var numKeyAtts: Int = _
+  //store the key att index
+  @BeanProperty var keys: Array[Int] = _
+
+  //creating schema
+  {
+    val sch = Catalog.getTableSchema(id, version)
+    var st = new StringTokenizer(sch, ";")
+    val attList = st.nextToken()
+    val keyList = st.nextToken()
+
+    //validity check. attList cannot be empty
+    //keyList can be empty
+    if(Option(attList).isEmpty) {
+      Console.err.println("attribute list from catalog is empty")
+      exit(100)
+    }
+
+    //creating schema
+    //1. parse attribute list
+    st = new StringTokenizer(attList,",")
+    this.setNumAtts(st.countTokens())
+    this.setAtts(new Array[Attribute](this.getNumAtts())) 
+
+    for (i<- 0 to this.getNumAtts()-1){
+      val column = st.nextToken().trim()
+      val parts: Array[String] = column.split(" ")
+
+      this.atts(i)= parts(0).trim().toLowerCase() match{
+        case "int" =>  new IntAtt(parts(1).trim())
+        case "long" =>  new LongAtt(parts(1).trim())
+        case "double" =>  new DoubleAtt(parts(1).trim())
+        case "float" => new FloatAtt(parts(1).trim())
+        case "boolean" => new BooleanAtt(parts(1).trim())
+        case "string" => new StringAtt(parts(1).trim())
+        case "date" => new DateAtt(parts(1).trim())
+        case _ => {
+          Console.err.println("Unsupported attribute type "+ parts.toString)
+          exit(100)
+        }
+      }
+    }
+    //2. parse key attribute list
+
+    val attName: Array[String] = new Array[String](this.numAtts)
+
+    for(i <- 0 to this.numAtts-1){
+      attName(i)=atts(i).getName()
+    }
+
+    if(!Option(keyList).isEmpty){ 
+      st = new StringTokenizer(keyList,",")
+      this.setNumKeyAtts(st.countTokens())
+      this.setKeys(new Array[Int](this.getNumKeyAtts())) 
+
+      var j = 0
+      for (i<- 0 to this.getNumKeyAtts()-1){
+        val keyName = st.nextToken().trim()
+        val idx = attName.indexOf(keyName)
+        this.keys(j) = if (idx > -1)  idx else {
+          Console.err.println("cannot find key "+ keyName)
+          exit(100)
+        }
+        j= j+1
+      }
+    }
+    //sort the keys low to high
+    Arrays.sort(this.keys)
+  }
+  override def equals (other: Any): Boolean = other match {
+    //note here we must use if elseif ... o/w only the last boolean 
+    //statement is returned
+    case o: Schema =>{
+      if (this.getId() != o.getId())
+        false
+      else if (this.getVersion != o.getVersion())
+        false
+      else if (this.getName() != o.getName())
+        false
+      else if (this.getNumAtts() != o.getNumAtts())
+        false
+      else if (this.getNumKeyAtts() != o.getNumKeyAtts())
+        false
+      else {
+
+        var  ret = true
+        var otherAtts = o.getAtts()
+
+        //check keys
+        for (i <- 0 to this.numKeyAtts - 1){
+          if (atts(i) != otherAtts(i)){
+            ret = false
+            break
+          }
+        }
+        //check atts
+        for (i <- 0 to this.numAtts - 1){
+          if (atts(i) != otherAtts(i)){
+            ret = false
+            break
+          }
+        }
+        ret
+      }
+    }
+    case _ => false
+  }
+
+  override def toString = {
+    val str1 = Catalog.getTableName(id)+ "(" 
+    var str2 = ""
+    for (att <-atts) {
+      str2 += att.toString + ","
+    }
+
+    //get rid of additional comma
+    str2 = str2.substring(0, str2.length-1)
+
+    var str3 =""
+    for(i<-keys){
+      str3 += atts(i).getName()+ ","
+    }
+    //get rid of additional comma
+    str3 = str3.substring(0, str3.length-1)
+    str1+ str2 +";" + str3 + ")"
+  }
+}

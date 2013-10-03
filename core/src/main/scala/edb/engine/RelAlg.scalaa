@@ -1,0 +1,101 @@
+package edb.engine
+
+import edb.parser._
+import edb.catalog._
+import spark.SparkContext
+import SparkContext._
+import spark.{RDD}
+import spark.{Logging}
+import scala.reflect.BeanProperty
+
+/*
+ RelAlg ();
+ ~RelAlg ();
+ void SJ (DBFile &R, DBFile &S, char *outName, DBFile &RSFile,
+   Comparison **myComparisons, int CNFLength, 
+   int *numComparisons, int *myAtts, int numAtts, Schema &RSschema);
+ void Multiply (DBFile &R, DBFile &S, char *outName, 
+   DBFile &RSFile, Comparison **myComparisons, int CNFLength, 
+   int *numComparisons, int *myAtts, int numAtts, Schema &RSschema);
+ void RemDups (DBFile &R, char *outName, DBFile &output);
+ void Kill (DBFile &R);
+ void Project (DBFile &R, char *outName, DBFile &output,
+   int *myAtts, int numAtts, Schema &outSchema);
+ void Select (DBFile &R, char *outName, DBFile &output,Comparison **myComparisons, 
+   int CNFLength, int *numComparisons, int *myAtts, int numAtts, Schema &OutSchema);
+ double Avg (DBFile &R, int whichAtt);
+ double Sum (DBFile &R, int whichAtt);
+ int Count (DBFile &R);
+ */
+
+object RelAlg1 extends Logging{
+
+  /**
+    * @param input the input RDD
+    * @param the  predicate tree
+    * @param attList the output projection attribute 
+    *        index list. If null, then all 
+    *        attributes preserved
+    * @return resulting EdbRDD
+    */
+  def Select (input: EdbRDD, 
+    pred: PREDICATE, 
+    attList: Array[Int]): EdbRDD ={
+    def filterFunc(tuple:SequenceRecord): Boolean= {
+      Utils.inspector(tuple,pred)
+    }
+
+    //create new schema
+    var sch: Schema = null
+    //no project
+    if (Option(attList).isEmpty){    
+      sch = input.getSch.copy()
+      new EdbRDD(sch,input.getRdd.filter(filterFunc))
+
+    } else {
+      //project 
+      sch = new Schema()
+      sch.setSchema(attList,input.getSch)
+      var filterRdd = input.getRdd.filter(filterFunc)
+      new EdbRDD(sch,Project(new EdbRDD(input.getSch, filterRdd),attList).getRdd)
+    }
+  }
+
+  /**
+    * @param input the input RDD
+    * @param attList the output projection attribute 
+    *        index list. If null, then all 
+    *        attributes preserved
+    * @return resulting EdbRDD
+    */
+  def Project(input: EdbRDD, 
+    attList: Array[Int]): EdbRDD ={
+    var sch: Schema = null
+    //null projection, return original RDD
+    if (Option(attList).isEmpty)
+      input
+    else {
+      //project
+      sch = new Schema()
+      sch.setSchema(attList,input.getSch)
+      new EdbRDD(sch,input.getRdd.map(x=>x.copy(attList)))
+    }
+  }
+  /**
+    * @param left left-side of the join
+    * @param right right-side of the join
+    * @param pred join predicate in conjunction form, A=B AND C=D
+    * @param attList the output projection attribute of the concatenate tuple
+    * @return join resulting EdbRDD
+    */
+ /* def Join(
+    left: EdbRDD, 
+    right: EdbRDD, 
+    pred: PREDICATE, 
+    attList: Array[Int]): EdbRDD= {
+    //prepare keyList from pred
+    //transform left => t_left <key, tuple> 
+    //transform right => t_right <key, tuple>
+    //return Project(t_left.join(t_right, numReducer), attList)
+  } */
+} 

@@ -1,0 +1,123 @@
+1. DBFile: we use sequenceFile with compression
+=================================================
+
+enum DBFile{
+  SequenceDBFile,
+  TextDBFile
+}
+
+/**
+ * Wrapper for HDFS Scanner RDD
+ *
+ */
+Class DBFile { 
+  //note we leave the relation stats of the file blank for the initial version
+  //if we decide to add optimizer later, the next iteration should include them
+ Filelocation: Path (dir to hold the file). /edb/tablespace/tableName/part-*
+ schema: the schema
+ fileType: SequenceFile or TextFile
+ FileHandle: reference to the associated RDD
+ sc: SparkContext
+
+ //raw file is always like part-xxxx under path
+ init (FileLocation: String, sch: Schema, type: fileType)//create a HDFS file
+ link(cahce?) //load the file into a RDD, cache if arg is True
+ save () //dump RDD to hdfs
+
+}
+
+2. Expression type system 
+
+Expression (final result will always be in generic DB type) 
+
+get generic DB type
+all +,-,*,/, >,<, >=,<=, ==, != will carry out in generic DB type
+When it come to the comparison, we stay in the generic DB type comparison
+
+
+2. Comparison Data structure
+=======================================================
+We have the following rules for pushing predicate down 
+a left deep tree
+
+a) If current node is OR, and it has join predicate, we cannot push it down. e.g A.a = B.b or A.c=3, we cannot push A.c=3 
+   to below (A join B). {return this }. However, if the curernt OR  is a disjunct of a single table predicate, we can push it down
+   to access path.
+
+b) If current root node is AND, we call left = PUSH(left sub-tree), and right = PUSH(right sub-tree). 
+IF left == null, and right == null, THEN return null.
+ELSE IF  left != null and right == null THEN { set right = null, return this} 
+ELSE IF  left == null and right != null THEN { set left = null, return this }
+
+The pushed predicate tree will be constructed to a list of CNF, each element is a predicate tree. 
+In the leaf node of each tree, we will have Comparison object to represent each predicate.
+
+We need a inspector to inspect the CNF tree (list of predicate)
+In this version, we only allow one single attribute from a relation. Expression like a.c1 + a.c2 >4 is not supported.
+
+
+3. RDD representation from http://www.cs.berkeley.edu/~matei/papers/2012/nsdi_spark.pdf
+
+Five pieces of info:
+
+- a set of partitions, atomic pieces of the data set: partitions(): return a list of partition objects
+- a set of dependencies of parent RDD : dependencies(): a list of dependencies. 
+    a) Narrow dependency: each partition of parent will be used at most by one partition of the child RDD
+    b) Wide dependency: each partition of parent may have multiple child RDD partitions depend on it.
+- a function of computing the dataset based on parents: iterator(p, parentIterators): compute elements of partition p given iterators of parent partitions
+- meta data of partition scheme: partitioner(): meta data specifying how the data is partitioned Range/Hash?
+ e.g. a RDD linked to a hdfs file has a partition for each block, 
+  and which machine each block is stored 
+- meta data of data placement: prefereedLocations(p): List of nodes where partition p can be accessed faster
+ 
+1) final def dependencies: Seq[Dependency[_]] 
+2) final def partitions: Array[Partition] 
+3) final def preferredLocations(split: Partition): Seq[String] 
+4) final def iterator(split: Partition, context: TaskContext): Iterator[T]
+5) val partitioner: Option[Partitioner]
+
+4.  EdbRDD.scala , a RDD wrapper for RelAlg. This is
+the representation for data container that flowing 
+through the operator tree
+
+/**
+ * Wrapper for RDD
+ *
+ */
+Class EdbRDD { 
+ schema: the schema
+ rdd: reference to the associated RDD
+ sc: SparkContext
+}
+
+5. RelAlg, the physical operators (RDD[SequenceRecord] in, 
+   RDD[SequenceRecord] out
+
+- Select operator: For each input RDD, we use the mapper function
+  to accept a closure, containing the comparison predicate,
+  and produce a new RDD with filter SequenceRecord .
+
+- Project operator: For each input RDD, we use the mapper
+  function to accept a closure, containing the projected 
+  attList, and produce a new RDD with new SequenceRecord .
+
+- Grouping operator: For each input RDD, we use the mapper
+  function to accept a closure and a AttList, and a AggList
+  and produce a new RDD with new SequenceRecord (this requires 
+  shuffle). Can use reduceByKey. See Yinnan's code
+  this is a map-reduce job. Hash on AttList, Agg on Reducer
+
+- Sort operator: see Yufei's minimal map-reduce algorithm
+
+- Join operator: For each input RDD, we do a map-reduce job
+  The mapper accept a AttList (join key), and hash on it.
+  Then, on reducer side, we do the join by nested loop.
+
+- multiply: ship the small RDD to each mapper, and nested loop there
+
+
+
+
+
+
+

@@ -1,0 +1,195 @@
+package edb.engine
+
+import edb.parser._
+import edb.catalog._
+import spark.SparkContext
+import SparkContext._
+import spark.{RDD}
+import scala.reflect.BeanProperty
+import scala._
+import scala.io._
+
+/*
+ * Boolean Comparison Operator (from predicate) 
+ *
+ * Note: This is not rdbms physical operator. 
+ * Predicate = Source <op> Target
+ * <op> supports "=", "<>", "<", 
+ * ">", "<=", ">="
+ *
+ */
+sealed abstract class Operator
+//=
+case class EQUAL extends Operator
+// <>
+case class NOTEQUAL extends Operator
+// <
+case class LESS extends Operator
+// >
+case class GREATER extends Operator
+//<=
+case class LE extends Operator
+//>=
+case class GE extends Operator 
+
+
+
+/**
+  * This operator is a function 
+  * supplied to RDD.map(operator)
+  * It takes the CNF predicate chain
+  * and apply the CNF to a given tuple
+  * return TRUE if the tuple pass the 
+  * CNF. FALSE otherwise
+  *
+  */
+class FilterOperator (_cnfLst: List[PREDICATE]) 
+extends  Function1[SequenceRecord, Boolean] {
+
+  private val cnfList: List[PREDICATE]= _cnfLst
+  private val sch: Schema = null 
+  private var att2IndxMap: Map[String,Int] = Map()
+
+  /**
+    * This helper func inspect a predicate on
+    * the current tuple to decide if the tuple
+    * satsify the predicate
+    * @param tuple the tuple to be inspected
+    * @param tree the predicate tree
+    *
+    */
+  def inspector(tuple:SequenceRecord,tree: PREDICATE): Boolean = 
+  tree match {
+    case PRED_AND (p1, p2)=> inspector(tuple, p1) &&  inspector (tuple, p2)
+    case PRED_OR (p1, p2)=> inspector(tuple, p1) || inspector(tuple, p2)
+    case PRED_EQUAL (e1, e2)=> compare(eval(e1,tuple),  
+      eval(e2,tuple), new EQUAL)
+    case PRED_NOTEQUAL(e1, e2)=> compare(eval(e1,tuple),
+      eval(e2,tuple), new NOTEQUAL)
+    case PRED_LESS(e1, e2)=> compare(eval(e1,tuple), eval(e2,tuple), new LESS)
+    case PRED_GREATER(e1, e2)=>compare(eval(e1,tuple),
+      eval (e2,tuple), new GREATER)
+    case PRED_LE (e1, e2) => compare(eval(e1,tuple),  eval(e2,tuple), new LE)
+    case PRED_GE (e1, e2) => compare(eval (e1,tuple),
+      eval(e2,tuple), new GE)
+  }
+
+  def compare(left: AnyVal, right: AnyVal, op: Operator): Boolean = {
+    var l = 
+    if (left.isInstanceOf[Int])
+      left.asInstanceOf[Int]
+    else if (left.isInstanceOf[Float])
+      left.asInstanceOf[Float]
+    else if (left.isInstanceOf[Double])
+      left.asInstanceOf[Double]
+    else if (left.isInstanceOf[Long])
+      left.asInstanceOf[Long]
+    else if (left.asInstanceOf[Boolean])
+      left.asInstanceOf[Boolean]
+    else {
+      Console.err.println("Unsupported casting") 
+      exit(100)
+    }
+    var r = 
+    if (right.isInstanceOf[Int])
+      right.asInstanceOf[Int]
+    else if (right.isInstanceOf[Float])
+      right.asInstanceOf[Float]
+    else if (right.isInstanceOf[Double])
+      right.asInstanceOf[Double]
+    else if (right.isInstanceOf[Long])
+      right.asInstanceOf[Long]
+    else if (right.asInstanceOf[Boolean])
+      right.asInstanceOf[Boolean]
+    else {
+      Console.err.println("Unsupported casting") 
+      exit(100)
+    }
+
+    op match {
+      case e1: EQUAL=> l == r
+      case e2: NOTEQUAL => l != r
+      case e3: LESS => l < r
+      case e4: GREATER => l > r
+      case e5: LE => l <= r
+      case e6: GE => l >= r
+      case _  => {
+        Console.err.println("Unsupported comparison oprator" +
+          left + "," + right)
+        exit(100)
+      }
+    } 
+
+  }
+
+
+
+  /**
+    * This function evalue an epxression. It carries
+    * converted type info bottom up
+    */
+  def eval(e: EXPRESSION, tuple: SequenceRecord): AnyVal  = 
+  e match {
+    //At parser time, we can easily  
+    //look up record attribute. 
+    //and find correspondence of a 
+    //predicate A=B, where A come from
+    case IDENTIFIER (iden) => getVal(tuple, iden)   //look up record att
+    case NUMBER(lit)=> lit
+    case ADD(e1,e2) => eval(e1) + eval(e2)
+    case SUBTRACT(e1,e2) => eval(e1) - eval(e2)
+    case DIV(e1,e2)=> eval(e1) / eval(e2)
+    case MUL(e1,e2)=>eval(e1) * eval(e2)
+    case AS_EXP(e, a)=> eval(e)
+    case _ =>  {
+      Console.err.println("Unsupported evaluation on expression "+ e.toString)
+      exit(100)
+    }
+  }
+
+
+  /**
+    * For the current record, we use identifier 
+    * to find the value of the column
+    *
+    */
+  def getVal(tuple: SequenceRecord, iden: String): AnyVal = {
+
+    //first use, cache schema, cache attName->idx mapping
+    if (this.schema == null){
+      this.schema = tuple.getSch()
+      //loop through schema atts,build map
+      var i =0;
+      for(att<- this.schema.getAtts()){
+        this.att2IndxMap += att.getName()->i
+        i += 1
+      }
+    }
+
+    val vals: Array[genericValue]= tuple.getData()
+
+    val idx = this.att2IndexMap.get(iden) match
+    {
+
+      case Some(x)=> x
+      case None => {
+        Console.err.println("att was not found for "+ iden + " in "+ this.schema.toString)
+        exit(100)
+      }
+    }
+    //if it's Doulbe, it returns Double representation,
+    //if it's Int, it returns Int representation
+    vals(x).getValue
+
+  }
+
+  def apply(tuple: SequenceRecord): Boolean = {
+
+    for(predTree <- cnfList) {
+      if(!inspector(tuple, predTree))
+        return false
+    }
+    true
+  }
+
+}

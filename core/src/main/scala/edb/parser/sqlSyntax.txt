@@ -1,0 +1,53 @@
+/**
+ * This is a small subset of SQL 99 syntax.
+ * It has select-from-where-groupby-orderby-having components
+ */
+
+SQL ::= QUERY_BLOCK 
+
+QUERY_BLOCK ::= 'select'  SELECT_LIST TABLE_EXPRESSION
+
+TABLE_EXPRESSION ::= FROM_CLAUSE WHERE_CLAUSE? GROUPBY_CLAUSE?  HAVING_CLAUSE? 
+
+FROM_CLAUSE ::=  'from'  TABLE_REF_LIST (',' TABLE_REF_LIST)*
+
+TABLE_REF_LIST ::= TABLE AS_CLAUSE?
+
+TABLE ::= IDENTIFIER
+
+SELECT_LIST ::= '*' | SELECT_SUBLIST (',' SELECT_SUBLIST)*
+
+SELECT_SUBLIST ::= EXPRESSION  AS_CLAUSE? 
+
+EXPRESSION ::= AGG| TERM (('+'|'-') TERM)*
+TERM ::= FACTOR (('*'|'/') FACTOR)*
+FACTOR ::= NUMERIC_PRIMARY | '(' EXPRESSION ')'
+NUMERIC_PRIMARY ::=  NUMERIC_LITERAL |COLUMN
+NUMERIC_LITERAL ::= DIGIT
+COLUMN ::= IDENTIFIER
+
+AS_CLAUSE ::= 'as' ? ALIAS
+
+ALIAS ::= IDENTIFIER
+
+AGG ::= 'sum' '(' COLUMN ')' | 'avg' '(' COLUMN ') | 'min' '(' COLUMN ')' | 'max' '(' COLUMN ')' | 'count' '(' CNT_EXP ')'
+
+CNT_EXP ::= '*' | column
+
+WHERE_CLAUSE ::=   'where' PRED_TREE
+
+/* the production rule make AND has higher priority than OR */
+PRED_TREE ::= BTERM ( 'OR' BTERM)*
+BTERM ::= BFACTOR ('AND' BFACTOR)*
+BFACTOR ::= PRED_PRIMARY | '(' PRED_LIST ')'
+PRED_PRIMARY ::= COMP_PRED 
+COMP_PRED ::= EXPRESSION COMP_OP EXPRESSION
+COMP_OP ::= '=' | '<>' | '<' | '>' | '<=' | '>=' 
+
+/* similar to SELECT_SUBLIST, which is an expression list seperated by comma */
+GROUPBY_CLAUSE ::= 'group' 'by' GRPBY_SUBLIST (',' GRPBY_SUBLIST)*
+GRPBY__SUBLIST ::= EXPRESSION  AS_CLAUSE? 
+
+/* similar to WHERE clause */
+HAVING_CLAUSE ::= 'having' PRED_TREE 
+

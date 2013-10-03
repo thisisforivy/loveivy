@@ -1,0 +1,78 @@
+/**
+* we decide to use HDFS as the catalog storage for the consideration
+* that we may have multiple job scheduler server accessing the same
+* catalog file from hdfs.
+*/
+
+The catalog support the following features:
+
+- Schema evolution via versioning table
+- table meta data
+
+We use key value pair to store meta data
+
+***************************************************************************
+***************************************************************************
+
+Global table ID list. This array keeps a unique id for each table
+
+"TableIDs"
+
+***************************************************************************
+***************************************************************************
+
+Table schema meta data key-value list 
+
+id.name=tableName: String
+id.latestVersion=versionId: integer
+id.location=hdfsPath: String
+
+/* before ';' is the table schema, after ';' is the col list for table key */
+
+id.1=(type colName (default defaultValue)?)+;(colName)* 
+id.2=(type colName (default defaultValue)?)+;(colName)* 
+
+***************************************************************************
+***************************************************************************
+Record: we will implement WritableComparable interface. 
+This is the value of SequenceInputFormat. 
+The key of SequenceInputFormat is the rownum(or NullWritable)
+
+- schema ID: int
+- schema Version: byte
+- data : array of genericValue
+
+- readFields: StreamIn
+- write: StreamOut
+
+- equlas: other sequenceRecord
+
+/* The following is not needed now, we will use ByteArrayWritable as projected key. casting back as neccessary
+- hashCode: for shuffle partition. Check GroupByKey.java HashCodeBuilder uses
+- compareTo: for sorting on reducer side.
+- toString
+*/
+
+***************************************************************************
+***************************************************************************
+Scanner: check spark interface
+- input: hdfs file location
+- getNext() 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
