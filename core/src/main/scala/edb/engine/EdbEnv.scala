@@ -17,7 +17,7 @@ object EdbEnv extends Logging {
           else System.getenv("MASTER"),
           "EDB::" + java.net.InetAddress.getLocalHost.getHostName,
           System.getenv("SPARK_HOME"),
-        List("/Users/mwu/edb/core/target/scala-2.9.3/engine.jar"),
+        List("/server/edb/core/target/scala-2.9.3/engine.jar"),
           executorEnvVars)
         sc.addSparkListener(new StatsReportListener())
       }
