@@ -42,28 +42,10 @@ object BuildSettings {
 object EDB_Build extends Build {
 import BuildSettings._
 
-/*lazy val root: Project = Project("root",
-file("core"),
-settings = buildSettings
-) aggregate(parser, core) */
-
 lazy val root: Project = Project("root",
 file("core"),
 settings = buildSettings
 )
-
-
-/*lazy val parser: Project = Project(
-"parser",
-file("parser"),
-settings = buildSettings
-) */
-
-/*lazy val core: Project = Project(
-"core",
-file("core"),
-settings = buildSettings
-) dependsOn(parser) */
 
 lazy val core: Project = Project(
 "core",
