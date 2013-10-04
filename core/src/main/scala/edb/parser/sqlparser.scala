@@ -19,6 +19,7 @@ case class AS_TABLE(iden: String, alias: IDENTIFIER) extends RELATION
 sealed abstract class EXPRESSION 
 case class IDENTIFIER (iden: String) extends EXPRESSION
 case class NUMBER(lit: Int) extends EXPRESSION
+case class STRING(slit: String) extends EXPRESSION
 case class STAR extends EXPRESSION
 case class ADD(e1: EXPRESSION, e2: EXPRESSION) extends EXPRESSION
 case class SUBTRACT(e1: EXPRESSION, e2: EXPRESSION) extends EXPRESSION 
@@ -77,7 +78,7 @@ object SQLParser extends StandardTokenParsers {
     "count")
 
   lexical.delimiters += ("+", "-","*","/", ",", "?", "(",")", 
-    ".", "=", ">", "<", ">=", "<=", "<>", "'")
+    ".", "=", ">", "<", ">=", "<=", "<>", "\'")
 
   /* for unit test */
   def buildAST (input:String ):String = {
@@ -100,9 +101,13 @@ object SQLParser extends StandardTokenParsers {
     }
   }
 
-  def compile(input:String ): Operator[SequenceRecord] = {
+  /**
+    * Pure parsing. Generate the AST tree if 
+    * syntax is correct
+    */
+  def parse(input:String): QUERYBLOCK= {
 
-    /* tokenize the input stream */
+  /* tokenize the input stream */
     val tokens = new lexical.Scanner(input)
 
     /* start parsing the query, query is the root of EBNF 
@@ -110,14 +115,25 @@ object SQLParser extends StandardTokenParsers {
      */
     val result = phrase(query)(tokens)
 
-    /* when parsing succeed to a AST tree, call the interpreter over the AST tree */
     result match {
-      case Success(tree, _) => new Optimizer(tree).optimize()
+      case Success(tree, _) => {
+        //dump the AST tree
+        println(tree)
+        tree 
+      }
       case e: NoSuccess => {
         Console.err.println(e)
         exit(100)
       }
     }
+  }
+
+  def compile(input:String ): Operator[SequenceRecord] = {
+
+    val qbAST: QUERYBLOCK = parse(input) 
+    //this will return an optimized 
+    //query physical plan
+    Optimizer.optimize(qbAST)
   }
 
   /* SQL EBNF production rules start */
@@ -279,10 +295,10 @@ object SQLParser extends StandardTokenParsers {
   /* chainl1 is chain left at least 1 */
   def term = chainl1(factor, "*"^^^MUL|"/"^^^DIV)
 
-  def factor = numeric_primary | "("~>expression<~")" 
+  def factor =  numeric_primary | "("~>expression<~")" 
 
   /* NUMERIC_PRIMARY ::= NUMERIC_LITERAL|COLUMN| '(' EXPRESSION ')' */
-  def numeric_primary: Parser[EXPRESSION] = agg|numeric_literal|column|
+  def numeric_primary: Parser[EXPRESSION] = agg|string_literal|numeric_literal|column
   "("~>expression<~")"
 
   def agg: Parser[EXPRESSION] =  "sum" ~ "(" ~ column ~ ")" ^^ 
@@ -301,6 +317,11 @@ object SQLParser extends StandardTokenParsers {
 
   def cnt_exp: Parser[EXPRESSION] = "*" ^^^ {CNT_EXP(IDENTIFIER("*"))}|
 column ^^ {c =>CNT_EXP(c)}
+
+/* STRING_LITERAL ::= STRING */
+def string_literal:Parser[EXPRESSION] =stringLit^^{s => STRING(s.toString)}
+
+def str:Parser[String] = stringLit
 
 /* NUMERIC_LITERAL ::= DIGIT */
 def numeric_literal:Parser[EXPRESSION] = digit^^{s => NUMBER(s.toInt)}

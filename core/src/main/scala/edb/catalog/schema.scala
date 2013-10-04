@@ -590,6 +590,11 @@ extends genericValue {
   def copy(): StringVal = new StringVal(getName(),getValue())
 
   def +(that: genericValue): genericValue = that match {
+    case a1: StringVal=> new StringVal("", this.getValue + a1.getValue)
+    case a2: IntVal=> new StringVal("", this.getValue + a2.getValue)
+    case a3: FloatVal=> new StringVal("", this.getValue + a3.getValue)
+    case a4: DoubleVal=> new StringVal("", this.getValue + a4.getValue)
+    case a5: LongVal=> new StringVal("", this.getValue + a5.getValue)
     case _ => throw new EdbException("not supported type" + that)
   }
 

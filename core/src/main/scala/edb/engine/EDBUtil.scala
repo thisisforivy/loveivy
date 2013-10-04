@@ -72,6 +72,7 @@ private object Utils extends Logging with Serializable {
     case IDENTIFIER (iden) => Catalog.getVal(t, iden, inSch)
     //number so far is only integer
     case NUMBER(lit)=> new IntVal("", lit)
+    case STRING(lit)=> new StringVal("", lit)
     case ADD(e1,e2) => eval(e1,t, inSch) + eval(e2,t, inSch)
     case SUBTRACT(e1,e2) => eval(e1,t, inSch) - eval(e2,t, inSch)
     case DIV(e1,e2)=> eval(e1,t, inSch) / eval(e2,t, inSch)

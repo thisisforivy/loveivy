@@ -21,6 +21,8 @@ object edbMain {
 
   def main(args: Array[String]) {
 
+
+    SQLParser.parse(args.reduceLeft[String](_ + '\n' + _))
     //init sc 
     EdbEnv.init()
     //compile query to an operator tree
@@ -30,7 +32,7 @@ object edbMain {
     opTree.initializeMasterOnAll
     //kicks off query
     val result = opTree.execute
-    result.collect.map(x=>println(x))
+    result.collect.map(x=>println(x))   
 
 
     /*

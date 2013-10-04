@@ -6,20 +6,14 @@ import scala.util.parsing.combinator.syntactical._
 import scala.util.parsing.combinator._
 import scala.util.parsing.combinator.token._
 import scala.io._
+import spark.{Logging}
 
-class Optimizer(tree: QUERYBLOCK) {
-
-  /**
-    * dump the AST tree
-    */
-  def printAST() {
-    println(tree)
-  }
+object Optimizer extends Logging {
 
   /**
     * Generate Query plan based on the parse tree
     */
-  def optimize(): Operator[SequenceRecord] = {
+  def optimize(tree: QUERYBLOCK): Operator[SequenceRecord] = {
 
     tree match {
       case qb: SELECT_QB => 
