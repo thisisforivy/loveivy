@@ -11,6 +11,7 @@ import spark.{Logging}
 object Optimizer extends Logging {
 
   /**
+    * public API of Optimizer
     * Generate Query plan based on the parse tree
     */
   def optimize(tree: QUERYBLOCK): Operator[SequenceRecord] = {
@@ -27,7 +28,7 @@ object Optimizer extends Logging {
     * Given an AST of select qb, 
     * generate an optimal operator tree
     */
-  def optimizeSelQB(qb: SELECT_QB): Operator[SequenceRecord] = {
+  private def optimizeSelQB(qb: SELECT_QB): Operator[SequenceRecord] = {
 
     val fromList = qb.fromlist.fromlist
     val predTree = if (qb.predtree.isEmpty) null 

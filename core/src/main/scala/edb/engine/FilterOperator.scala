@@ -33,5 +33,9 @@ UnaryOperator[SequenceRecord]{
     iter: Iterator[_]): Iterator[_] = { 
     iter.filter(filterFunc)
   }
+
+  override def toString(): String = 
+     "FILTER--predicate: " + pred 
+ 
 }
 

@@ -44,5 +44,9 @@ UnaryOperator[SequenceRecord] {
       iter: Iterator[_]): Iterator[_] = {
       iter.map(row => evalFunc(row))
     }
+
+  override def toString(): String = 
+     "PROJECTION--expression list: " + expList 
+ 
   }
 

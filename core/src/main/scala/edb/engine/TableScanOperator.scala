@@ -75,6 +75,10 @@ UnaryOperator[SequenceRecord]{
       classOf[SequenceRecord] ,minsplits) 
     hRdd.map(x=>x._2.copy())
   }
+
+  override def toString(): String = 
+     "TABLESCAN--table name: " + tableName
+      
 }
 
 

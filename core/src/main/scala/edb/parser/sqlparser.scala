@@ -61,6 +61,12 @@ case class SELECT_QB(
   ordbylist: Option[ORDERBYLIST]
 ) extends QUERYBLOCK
 
+case class XPLN_QB(
+  qb: QUERYBLOCK
+) extends QUERYBLOCK
+
+
+
 object SQLParser extends StandardTokenParsers {
 
   /* debugging tool e.g. def query = log(qb)("query") */
@@ -73,12 +79,12 @@ object SQLParser extends StandardTokenParsers {
     r
   }
 
-  lexical.reserved += ("select", "from","as", "where", "or", "and", 
+  lexical.reserved += ("explain", "select", "from","as", "where", "or", "and", 
     "group", "by", "having", "order", "sum", "avg", "min", "max", 
     "count")
 
   lexical.delimiters += ("+", "-","*","/", ",", "?", "(",")", 
-    ".", "=", ">", "<", ">=", "<=", "<>", "\'")
+    ".", "=", ">", "<", ">=", "<=", "<>")
 
   /* for unit test */
   def buildAST (input:String ):String = {
@@ -105,9 +111,9 @@ object SQLParser extends StandardTokenParsers {
     * Pure parsing. Generate the AST tree if 
     * syntax is correct
     */
-  def parse(input:String): QUERYBLOCK= {
+  private def parse(input:String): QUERYBLOCK= {
 
-  /* tokenize the input stream */
+    /* tokenize the input stream */
     val tokens = new lexical.Scanner(input)
 
     /* start parsing the query, query is the root of EBNF 
@@ -118,7 +124,11 @@ object SQLParser extends StandardTokenParsers {
     result match {
       case Success(tree, _) => {
         //dump the AST tree
+        println("***** AST tree starts ******")
         println(tree)
+        println("***** AST tree ends ******")
+        println()
+        println()
         tree 
       }
       case e: NoSuccess => {
@@ -128,16 +138,43 @@ object SQLParser extends StandardTokenParsers {
     }
   }
 
+  /**
+    * parser's external API (entrance point)
+    *
+    * Compile a input string into a physical plan 
+    * a.k.a operator tree
+    *
+    *
+    */
   def compile(input:String ): Operator[SequenceRecord] = {
 
     val qbAST: QUERYBLOCK = parse(input) 
+
     //this will return an optimized 
     //query physical plan
-    Optimizer.optimize(qbAST)
+    qbAST match {
+      //explain qb
+      case e1: XPLN_QB => {
+        Explain.explain(
+          Optimizer.optimize(e1.qb),
+          0)
+        null
+      }
+      //sel qb
+      case e2: SELECT_QB => Optimizer.optimize(qbAST)
+      case _ :  NoSuccess => {
+        Console.err.println("not known qb")
+        exit(100)
+      }
+    }
   }
 
   /* SQL EBNF production rules start */
-  def query = qb
+  def query = qb|xplqb
+
+  /* explain query */
+  def xplqb: Parser[XPLN_QB] = "explain" ~> qb ^^ {e => new XPLN_QB(e)}
+
 
   def qb: Parser[QUERYBLOCK] =( "select" ~ select_list ~ 
     "from" ~ from_list ~ (where_clause?) ~ (groupby_clause?) ~ (having_clause?) ~ 

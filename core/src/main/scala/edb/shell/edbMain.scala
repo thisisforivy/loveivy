@@ -21,18 +21,23 @@ object edbMain {
 
   def main(args: Array[String]) {
 
-
-    SQLParser.parse(args.reduceLeft[String](_ + '\n' + _))
     //init sc 
     EdbEnv.init()
     //compile query to an operator tree
     val opTree = 
     SQLParser.compile(args.reduceLeft[String](_ + '\n' + _))
+
+    //call explain plan
+    //Explain.explain(opTree,0)
+
     //init all operators
-    opTree.initializeMasterOnAll
-    //kicks off query
-    val result = opTree.execute
-    result.collect.map(x=>println(x))   
+    //not explain plan
+    if(opTree!= null){
+      opTree.initializeMasterOnAll
+      //kicks off query
+      val result = opTree.execute
+      result.collect.map(x=>println(x))   
+    }
 
 
     /*

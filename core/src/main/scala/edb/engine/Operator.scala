@@ -80,6 +80,9 @@ abstract class Operator[T] extends Logging with Serializable {
     parentOperators.map(p => (p.getTag, p.execute()))
   }
 
+  //print out the operator and related data
+  def toString: String
+
 }
 
 object Operator extends Logging {
