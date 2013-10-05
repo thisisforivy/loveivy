@@ -191,8 +191,8 @@ object SQLParser extends StandardTokenParsers {
 
   def show_table: Parser[SHOW_TABLE_QB] = "show" ~ "tables" ^^^{new SHOW_TABLE_QB}
 
-  def desc_table: Parser[DESC_TABLE_QB] =  "desc" ~> ident^^{
-    e => new DESC_TABLE_QB(e)
+  def desc_table: Parser[DESC_TABLE_QB] =  "desc" ~> relation ^^{
+    e => new DESC_TABLE_QB(e.iden)
   }
 
 
@@ -324,9 +324,9 @@ object SQLParser extends StandardTokenParsers {
     case r ~ Some(as) => AS_TABLE(r.iden,as)
   }
 
-  def relation: Parser[TABLE] = (ident~(("."~ident)?)^^{ 
+  def relation: Parser[TABLE] = (ident~(("."~>ident)?)^^{ 
       case r ~ None => TABLE(r) 
-      case r ~ Some(r2) => TABLE(r+ r2)
+      case r ~ Some(r2) => TABLE(r+ "." + r2)
     })
 
 
