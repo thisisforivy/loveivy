@@ -34,6 +34,40 @@ class Catalog (location: String) extends Serializable  {
 
 object Catalog extends Serializable {
 
+
+  /**
+    * Display catalog table name list
+    */
+  def showTables(){
+
+    println()
+    println()
+    println("EDB has " + getSchemaIDs().size + " tables:")
+    println("-------------------------------------")
+    println()
+    getSchemaIDs() map  {
+      i=> println("\n" +getTableName(i))
+    }
+
+    println()
+    println("-------------------------------------")
+
+    println()
+    println()
+  }
+
+  def descTable(name: String){
+    println()
+    println()
+    println("-------------------------------------")
+    println()
+    println(getTableSchema (name))
+    println()
+    println("-------------------------------------")
+    println()
+    println()
+  }
+
   //private var catalog: Properties = (new Catalog("test")).loadCatalog()
   private var catalog = new Catalog("/test")
 
@@ -89,7 +123,7 @@ object Catalog extends Serializable {
 
   def getTableSchema (name: String): Schema = 
   if (nameToSchema contains (name)) nameToSchema(name)
-  else null
+    else null
 
   /**
     * For the current record, we use identifier 

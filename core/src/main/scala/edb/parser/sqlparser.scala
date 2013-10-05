@@ -52,6 +52,11 @@ case class GROUPBYLIST(grpbylist: List[EXPRESSION])
 case class ORDERBYLIST(ordbylist: List[EXPRESSION])
 
 /* top level AST node */
+case class XPLN_QB(
+  qb: QUERYBLOCK
+) extends QUERYBLOCK
+
+
 case class SELECT_QB(
   sellist: SELECTLIST, 
   fromlist: FROMLIST,
@@ -61,9 +66,8 @@ case class SELECT_QB(
   ordbylist: Option[ORDERBYLIST]
 ) extends QUERYBLOCK
 
-case class XPLN_QB(
-  qb: QUERYBLOCK
-) extends QUERYBLOCK
+case class SHOW_TABLE_QB  extends QUERYBLOCK
+case class DESC_TABLE_QB(name: String)  extends QUERYBLOCK
 
 
 
@@ -79,7 +83,7 @@ object SQLParser extends StandardTokenParsers {
     r
   }
 
-  lexical.reserved += ("explain", "select", "from","as", "where", "or", "and", 
+  lexical.reserved += ("explain", "show", "tables", "desc", "select", "from","as", "where", "or", "and", 
     "group", "by", "having", "order", "sum", "avg", "min", "max", 
     "count")
 
@@ -162,6 +166,14 @@ object SQLParser extends StandardTokenParsers {
       }
       //sel qb
       case e2: SELECT_QB => Optimizer.optimize(qbAST)
+      case e3: SHOW_TABLE_QB => {
+        Catalog.showTables
+        null
+      }
+      case e4: DESC_TABLE_QB =>{
+         Catalog.descTable(e4.name) 
+         null
+      }
       case _ :  NoSuccess => {
         Console.err.println("not known qb")
         exit(100)
@@ -170,10 +182,18 @@ object SQLParser extends StandardTokenParsers {
   }
 
   /* SQL EBNF production rules start */
-  def query = qb|xplqb
+  def query = qb|xplqb|ddl
 
   /* explain query */
   def xplqb: Parser[XPLN_QB] = "explain" ~> qb ^^ {e => new XPLN_QB(e)}
+
+  def ddl: Parser[QUERYBLOCK]= show_table|desc_table
+
+  def show_table: Parser[SHOW_TABLE_QB] = "show" ~ "tables" ^^^{new SHOW_TABLE_QB}
+
+  def desc_table: Parser[DESC_TABLE_QB] =  "desc" ~> ident^^{
+    e => new DESC_TABLE_QB(e)
+  }
 
 
   def qb: Parser[QUERYBLOCK] =( "select" ~ select_list ~ 
