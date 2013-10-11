@@ -1,0 +1,140 @@
+This doc contains the operator test in interactive repl
+publish-local
+
+ADD_JARS=/Users/mwu/.ivy2/local/org.edb/parser_2.9.3/0.0.1/jars/*.jar,/Users/mwu/.ivy2/local/org.edb/core_2.9.3/0.0.1/jars/*.jar  ./spark-shell
+
+
+import org.apache.hadoop.io._
+import org.apache.hadoop.fs._
+import org.apache.hadoop.util._
+import spark.rdd._
+import org.apache.hadoop.mapred._
+import edb.catalog._
+import org.apache.hadoop.conf._
+import edb.parser._
+import edb.engine._
+
+
+val jconf =  new JobConf(new Configuration());
+val logFile = "hdfs://localhost:9000/edb/media_provider_adv_metadata"
+
+FileInputFormat.addInputPath(jconf, new Path(logFile));
+
+val c = sc.hadoopRDD(jconf,classOf[SequenceFileInputFormat[IntWritable,SequenceRecord]], classOf[IntWritable], classOf[SequenceRecord] ,1)
+
+//used for join
+val c = sc.hadoopRDD(jconf,classOf[SequenceFileInputFormat[EdbIntWritable,SequenceRecord]], classOf[EdbIntWritable], classOf[SequenceRecord] ,1)
+
+val d = new PRED_EQUAL(new IDENTIFIER("advertiser_id"), new NUMBER(3207))
+val sch = Catalog.getTableSchema("product_data_platform.media_provider_adv_metadata")
+//get pure SequenceRecord RDD.
+val rdd =c.map(x=>x._2.copy())
+val eRDD = new EdbRDD(sch,rdd)
+val m = RelAlg.Select(eRDD,d,null)
+m.getRdd().collect()
+
+val c = sc.hadoopRDD(jconf,classOf[SequenceFileInputFormat[EdbIntWritable,SequenceRecord]], classOf[EdbIntWritable], classOf[SequenceRecord] ,1)
+
+//map to a clone
+
+val d = c.map(x=>x._2.copy()).collect()
+
+//filter
+val d = c.map(x=>x._2.copy()).filter(y=>y.GT(10))collect()
+
+//flatMap
+val d = c.map(x=>x._2.copy()).filter(y=>y.GT(10)).flatMap(x=>x::Nil).collect()
+
+//cartesian
+val left = c.map(x=>x._2.copy())
+val right= c.map(x=>x._2.copy())
+val result= left.cartesian(right) 
+
+val r = result.collect()
+result.size
+
+//join can be done if we implement key serializable
+val right = c.map(x=>(x._1.copy(),x._2.copy()))
+val left = c.map(x=>(x._1.copy(),x._2.copy()))
+val result = left.join(right,2)
+
+//distinct
+var dleft = left.distinct()
+val  dleft = dleft.collect()
+
+//union
+val u = left.union(right)
+val ru = u.collect()
+ru.size
+
+//groupByKey
+result = left.groupByKey(3)
+
+//reduceByKey
+
+Action
+===========
+
+//first()
+val first = left.first()
+first
+
+//count()
+val a = left.count()
+
+//take(n)
+val b = left.take(4)
+
+//saveAsSequenceFile(), it will save under dir /firstS, it works
+c.saveAsSequenceFile("/firstS")
+
+//saveAsTextFile()
+
+c.saveAsTextFile("/firstT")
+
+//countByKey need serializable (k,v)
+val result = left.map(x=>(x._1.copy(),x._2.copy()))
+result.countByKey().collect()
+
+//reduce()
+
+//foreach()
+
+//takeSample()
+
+class a extends Function2 [Int, Int, Int] {  
+ def apply(x: Int, y: Int): Int = if (x < y) y else x
+}
+
+import org.apache.hadoop.io._
+import org.apache.hadoop.fs._
+import org.apache.hadoop.util._
+import spark.rdd._
+import org.apache.hadoop.mapred._
+import edb.catalog._
+import org.apache.hadoop.conf._
+import edb.parser._
+import edb.engine._
+
+
+val tsc: TableScanOperator = new TableScanOperator("product_data_platform.media_provider_adv_metadata",sc)
+val idx = Array(1,2)
+val outSch = new Schema(8,1)
+val inSch = new Schema(5,1)
+val p = new ProjectOperator(inSch,outSch,null, idx)
+p.addParent(tsc)
+val e = new PRED_EQUAL(new IDENTIFIER("advertiser_id"), new NUMBER(3207))
+val e1= new FilterOperator(outSch,outSch,e,null)
+e1.addParent(p)
+e1.initializeMasterOnAll
+val mm = e1.execute
+mm.collect
+
+val tsc: TableScanOperator2 = new TableScanOperator2("media_provider_adv_metadata",sc)
+
+val gbyExpLst = List(new IDENTIFIER("media_provider_id"), new IDENTIFIER("advertiser_id"))
+val aggExpLst = List (new SUM_EXP(IDENTIFIER("name")))
+val gbyPre: GroupByPreShuffleOperator = new GroupByPreShuffleOperator(inSch,outSch, gbyExpLst,aggExpLst)
+gbyPre.addParent(tsc)
+gbyPre.initializeMasterOnAll
+
