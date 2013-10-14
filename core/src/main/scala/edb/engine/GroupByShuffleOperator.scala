@@ -11,7 +11,7 @@ import scala.reflect.BeanProperty
 import scala.collection.mutable.ArrayBuffer
 
 class GroupByShuffleOperator(
-  inSchema: Schema, 
+  aggSchema: Schema, 
   outSchema: Schema, 
   numReducer: Int,
   gbyExpList: List[EXPRESSION],
@@ -29,7 +29,7 @@ extends UnaryOperator[SequenceRecord] {
     //for select count(*) we do not have
     //gby clause
     assert(!Option(gbyExpList).isEmpty)
-    setInSch(inSchema)
+    setInSch(aggSchema)
     setOutSch(outSchema)
 
     aggFuncs = aggExpList.map(

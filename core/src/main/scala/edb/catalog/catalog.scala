@@ -167,17 +167,22 @@ object Catalog extends Serializable {
     val vals: Array[genericValue]= t.getData()
 
 
-    colName2IdxMap.get(iden) match {
+    //for group by count(*) agg function, 
+    //we want to sent 1 to reducer
+    if (iden == "*")
+      new IntVal("",1)
+    else 
+      colName2IdxMap.get(iden) match {
       case Some(x)=> vals(x)
       case None => {
         Console.err.println("att was not found for "+ 
           iden + " in "+ sch.toString)
-     throw new EdbException("not supported")
+        throw new EdbException("not supported")
       }
     }
   }
 
- /**
+  /**
     * For the current record, we use identifier 
     * to find the col type
     * @param t SequenceRecord
@@ -221,12 +226,51 @@ object Catalog extends Serializable {
       case None => {
         Console.err.println("att was not found for "+ 
           iden + " in2 "+ sch.toString)
-     throw new EdbException("not supported")
- 
-        
+        throw new EdbException("not supported")
+
+
       }
     }
   }
+  def getAttIdx(
+    iden: String,
+    inSch: Schema): Int = { 
+
+    assert(inSch != null)
+    val sch = inSch
+
+    val schKey: String = sch.getId + "_" + sch.getVersion
+    var colName2IdxMap: MMap[String,Int] =
+    sch2ColIdxMap.get(schKey) match {
+      case Some(x)=> x
+      case None => null
+    }
+
+    //first time, build colName->idx map
+    if (colName2IdxMap == null){
+      //loop through schema atts,build map
+      colName2IdxMap = MMap[String,Int]()
+
+      var i =0;
+      for(att<- sch.getAtts()){
+        colName2IdxMap += att.getName()->i
+        i += 1
+      }
+      sch2ColIdxMap += schKey->colName2IdxMap
+    }
+
+    val atts: Array[Attribute]= inSch.getAtts 
+
+    colName2IdxMap.get(iden) match {
+      case Some(x)=> x
+      case None => {
+        Console.err.println("att was not found for "+ 
+          iden + " in2 "+ sch.toString)
+        throw new EdbException("not supported")
+      }
+    }
+  }
+
 
 }
 

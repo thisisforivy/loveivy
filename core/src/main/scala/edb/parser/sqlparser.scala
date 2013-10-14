@@ -26,11 +26,13 @@ case class SUBTRACT(e1: EXPRESSION, e2: EXPRESSION) extends EXPRESSION
 case class MUL(e1: EXPRESSION, e2: EXPRESSION) extends EXPRESSION
 case class DIV(e1: EXPRESSION, e2: EXPRESSION) extends EXPRESSION
 case class AS_EXP(e: EXPRESSION, alias: IDENTIFIER) extends EXPRESSION
-case class SUM_EXP(e: IDENTIFIER) extends EXPRESSION
-case class AVG_EXP(e: IDENTIFIER) extends EXPRESSION
-case class MIN_EXP(e: IDENTIFIER) extends EXPRESSION
-case class MAX_EXP(e: IDENTIFIER) extends EXPRESSION
-case class CNT_EXP(e: IDENTIFIER) extends EXPRESSION
+
+sealed abstract class AGG_EXPRESSION extends EXPRESSION
+case class SUM_EXP(e: IDENTIFIER) extends AGG_EXPRESSION
+case class AVG_EXP(e: IDENTIFIER) extends AGG_EXPRESSION
+case class MIN_EXP(e: IDENTIFIER) extends AGG_EXPRESSION
+case class MAX_EXP(e: IDENTIFIER) extends AGG_EXPRESSION
+case class CNT_EXP(e: IDENTIFIER) extends AGG_EXPRESSION
 
 /* PREDICATE is actually an PREDICATE tree, with 2 operators, AND and  OR */
 sealed abstract class PREDICATE 
