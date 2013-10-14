@@ -84,6 +84,29 @@ private object Utils extends Logging with Serializable {
       exit(100)
     }
   }
+//evaluate an expression type
+ def eval(
+    e: EXPRESSION, 
+    inSch: Schema): Attribute= 
+  e match {
+
+    //look up record att
+    case IDENTIFIER (iden) => Catalog.getAttType(iden, inSch)
+    //number so far is only integer
+    case NUMBER(lit)=> new IntAtt("")
+    case STRING(lit)=> new StringAtt("")
+    case ADD(e1,e2) => eval(e1,inSch) + eval(e2, inSch)
+    case SUBTRACT(e1,e2) => eval(e1,inSch) - eval(e2,inSch)
+    case DIV(e1,e2)=> eval(e1,inSch) / eval(e2,inSch)
+    case MUL(e1,e2)=> eval(e1,inSch) * eval(e2,inSch)
+    case AS_EXP(e, a)=> eval(e,inSch)
+    case _ =>  {
+      Console.err.println("Unsupported type evaluation on" +
+        " expression "+ e.toString)
+      exit(100)
+    }
+  }
+
 }
 
 

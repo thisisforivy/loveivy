@@ -143,6 +143,7 @@ object Catalog extends Serializable {
     assert(sch != null)
 
 
+
     val schKey: String = sch.getId + "_" + sch.getVersion
     var colName2IdxMap: MMap[String,Int] =
     sch2ColIdxMap.get(schKey) match {
@@ -165,15 +166,68 @@ object Catalog extends Serializable {
 
     val vals: Array[genericValue]= t.getData()
 
+
     colName2IdxMap.get(iden) match {
       case Some(x)=> vals(x)
       case None => {
         Console.err.println("att was not found for "+ 
           iden + " in "+ sch.toString)
-        exit(100)
+     throw new EdbException("not supported")
       }
     }
   }
+
+ /**
+    * For the current record, we use identifier 
+    * to find the col type
+    * @param t SequenceRecord
+    * @param iden column name
+    * @return the edb type for the column
+    *
+    */
+  def getAttType(
+    iden: String,
+    inSch: Schema): Attribute = { 
+
+    //val sch: Schema = t.getSch()
+    val sch = inSch
+    assert(sch != null)
+
+
+    val schKey: String = sch.getId + "_" + sch.getVersion
+    var colName2IdxMap: MMap[String,Int] =
+    sch2ColIdxMap.get(schKey) match {
+      case Some(x)=> x
+      case None => null
+    }
+
+    //first time, build colName->idx map
+    if (colName2IdxMap == null){
+      //loop through schema atts,build map
+      colName2IdxMap = MMap[String,Int]()
+
+      var i =0;
+      for(att<- sch.getAtts()){
+        colName2IdxMap += att.getName()->i
+        i += 1
+      }
+      sch2ColIdxMap += schKey->colName2IdxMap
+    }
+
+    val atts: Array[Attribute]= inSch.getAtts 
+
+    colName2IdxMap.get(iden) match {
+      case Some(x)=> atts(x)
+      case None => {
+        Console.err.println("att was not found for "+ 
+          iden + " in2 "+ sch.toString)
+     throw new EdbException("not supported")
+ 
+        
+      }
+    }
+  }
+
 }
 
 

@@ -113,14 +113,8 @@ class SequenceRecord extends  Writable with Serializable {
     o.getSch == this.getSch && o.getData.corresponds(this.getData){_ == _}
   }
 
-  override def hashCode: Int = 
-  41*(
-    41 *(
-      41 * (
-        41 + schId.hashCode
-      ) + schVersion.hashCode
-  ) + sch.hashCode
-    ) + data.hashCode
+  //we use data.toList since array.toHash is not deterministic
+  override def hashCode: Int = data.toList.hashCode
 
   override def toString = {
     var str = ""

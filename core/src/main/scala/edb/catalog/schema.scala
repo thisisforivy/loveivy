@@ -10,6 +10,11 @@ import com.google.common.base._
 sealed abstract class Attribute extends Serializable  {
   @BeanProperty var name: String = _
   def copy(): Attribute 
+
+  def +(that: Attribute): Attribute 
+  def -(that: Attribute): Attribute 
+  def *(that: Attribute): Attribute 
+  def /(that: Attribute): Attribute 
 }
 
 /* scala will generate equals and hashCode for 
@@ -20,6 +25,38 @@ case class IntAtt (_name: String) extends Attribute
   setName(_name)
   override def toString = "int " + name
   override def copy(): Attribute = new IntAtt(getName())
+
+  def +(that: Attribute): Attribute = that match {
+    case a1: IntAtt => new IntAtt("")
+    case a2: DoubleAtt => new DoubleAtt("")
+    case a3: LongAtt => new LongAtt("") 
+    case a4: FloatAtt => new FloatAtt("")
+    case _ => throw new EdbException("not supported type" + that)
+  }
+
+  def -(that: Attribute): Attribute = that match {
+    case a1: IntAtt => new IntAtt("")
+    case a2: DoubleAtt => new DoubleAtt("")
+    case a3: LongAtt => new LongAtt("") 
+    case a4: FloatAtt => new FloatAtt("")
+    case _ => throw new EdbException("not supported type" + that)
+  }
+
+  def *(that: Attribute): Attribute = that match {
+    case a1: IntAtt => new IntAtt("")
+    case a2: DoubleAtt => new DoubleAtt("")
+    case a3: LongAtt => new LongAtt("") 
+    case a4: FloatAtt => new FloatAtt("")
+    case _ => throw new EdbException("not supported type" + that)
+  }
+
+  def /(that: Attribute): Attribute = that match {
+    case a1: IntAtt => new DoubleAtt("")
+    case a2: DoubleAtt => new DoubleAtt("")
+    case a3: LongAtt => new DoubleAtt("") 
+    case a4: FloatAtt => new FloatAtt("")
+    case _ => throw new EdbException("not supported type" + that)
+  }
 }
 
 case class FloatAtt (_name: String) extends Attribute
@@ -27,6 +64,38 @@ case class FloatAtt (_name: String) extends Attribute
   setName(_name)
   override def toString = "float " + name
   override def copy(): Attribute = new FloatAtt(getName())
+
+  def +(that: Attribute): Attribute = that match {
+    case a1: IntAtt => new FloatAtt("")
+    case a2: DoubleAtt => new DoubleAtt("")
+    case a3: LongAtt => new FloatAtt ("")
+    case a4: FloatAtt => new FloatAtt("")
+    case _ => throw new EdbException("not supported type" + that)
+  }
+
+  def -(that: Attribute): Attribute = that match {
+    case a1: IntAtt => new FloatAtt("")
+    case a2: DoubleAtt => new DoubleAtt("")
+    case a3: LongAtt => new FloatAtt ("")
+    case a4: FloatAtt => new FloatAtt("")
+    case _ => throw new EdbException("not supported type" + that)
+  }
+
+  def *(that: Attribute): Attribute = that match {
+    case a1: IntAtt => new FloatAtt("")
+    case a2: DoubleAtt => new DoubleAtt("")
+    case a3: LongAtt => new FloatAtt ("")
+    case a4: FloatAtt => new FloatAtt("")
+    case _ => throw new EdbException("not supported type" + that)
+  }
+
+  def /(that: Attribute): Attribute = that match {
+    case a1: IntAtt => new FloatAtt("")
+    case a2: DoubleAtt => new DoubleAtt("")
+    case a3: LongAtt => new FloatAtt ("")
+    case a4: FloatAtt => new FloatAtt("")
+    case _ => throw new EdbException("not supported type" + that)
+  }
 }
 
 case class DoubleAtt (_name: String) extends Attribute
@@ -34,6 +103,38 @@ case class DoubleAtt (_name: String) extends Attribute
   setName(_name)
   override def toString = "double " + name
   override def copy(): Attribute = new DoubleAtt(getName())
+
+  def +(that: Attribute): Attribute = that match {
+    case a1: IntAtt => new DoubleAtt("")
+    case a2: DoubleAtt => new DoubleAtt("")
+    case a3: LongAtt => new DoubleAtt ("")
+    case a4: FloatAtt => new DoubleAtt("")
+    case _ => throw new EdbException("not supported type" + that)
+  }
+
+  def -(that: Attribute): Attribute = that match {
+    case a1: IntAtt => new DoubleAtt("")
+    case a2: DoubleAtt => new DoubleAtt("")
+    case a3: LongAtt => new DoubleAtt ("")
+    case a4: FloatAtt => new DoubleAtt("")
+    case _ => throw new EdbException("not supported type" + that)
+  }
+
+  def *(that: Attribute): Attribute = that match {
+    case a1: IntAtt => new DoubleAtt("")
+    case a2: DoubleAtt => new DoubleAtt("")
+    case a3: LongAtt => new DoubleAtt ("")
+    case a4: FloatAtt => new DoubleAtt("")
+    case _ => throw new EdbException("not supported type" + that)
+  }
+
+  def /(that: Attribute): Attribute = that match {
+    case a1: IntAtt => new DoubleAtt("")
+    case a2: DoubleAtt => new DoubleAtt("")
+    case a3: LongAtt => new DoubleAtt ("")
+    case a4: FloatAtt => new DoubleAtt("")
+    case _ => throw new EdbException("not supported type" + that)
+  }
 }
 
 case class LongAtt (_name: String) extends Attribute
@@ -41,6 +142,38 @@ case class LongAtt (_name: String) extends Attribute
   setName(_name)
   override def toString = "long " + name
   override def copy(): Attribute = new LongAtt(getName())
+
+  def +(that: Attribute): Attribute= that match {
+    case a1: IntAtt => new LongAtt("")
+    case a2: DoubleAtt => new DoubleAtt("")
+    case a3: LongAtt => new LongAtt ("")
+    case a4: FloatAtt => new FloatAtt("")
+    case _ => throw new EdbException("not supported type" + that)
+  }
+
+  def -(that: Attribute): Attribute= that match {
+    case a1: IntAtt => new LongAtt("")
+    case a2: DoubleAtt => new DoubleAtt("")
+    case a3: LongAtt => new LongAtt ("")
+    case a4: FloatAtt => new FloatAtt("")
+    case _ => throw new EdbException("not supported type" + that)
+  }
+
+  def *(that: Attribute): Attribute= that match {
+    case a1: IntAtt => new LongAtt("")
+    case a2: DoubleAtt => new DoubleAtt("")
+    case a3: LongAtt => new LongAtt ("")
+    case a4: FloatAtt => new FloatAtt("")
+    case _ => throw new EdbException("not supported type" + that)
+  }
+
+  def /(that: Attribute): Attribute= that match {
+    case a1: IntAtt => new LongAtt("")
+    case a2: DoubleAtt => new DoubleAtt("")
+    case a3: LongAtt => new LongAtt ("")
+    case a4: FloatAtt => new FloatAtt("")
+    case _ => throw new EdbException("not supported type" + that)
+  }
 }
 
 case class BooleanAtt (_name: String) extends Attribute
@@ -48,6 +181,22 @@ case class BooleanAtt (_name: String) extends Attribute
   setName(_name)
   override def toString = "boolean " + name
   override def copy(): Attribute = new BooleanAtt(getName())
+  def +(that: Attribute): Attribute = that match {
+    case _ => throw new EdbException("not supported type" + that)
+  }
+
+  def -(that: Attribute): Attribute = that match {
+    case _ => throw new EdbException("not supported type" + that)
+  }
+
+  def *(that: Attribute): Attribute = that match {
+    case _ => throw new EdbException("not supported type" + that)
+  }
+
+  def /(that: Attribute): Attribute = that match {
+    case _ => throw new EdbException("not supported type" + that)
+  }
+
 }
 
 case class StringAtt (_name: String) extends Attribute
@@ -55,6 +204,27 @@ case class StringAtt (_name: String) extends Attribute
   setName(_name)
   override def toString = "string " + name
   override def copy(): Attribute = new StringAtt(getName())
+
+  def +(that: Attribute): Attribute= that match {
+    case a1: StringAtt=> new StringAtt("")
+    case a2: IntAtt=> new StringAtt("")
+    case a3: FloatAtt=> new StringAtt("")
+    case a4: DoubleAtt=> new StringAtt("")
+    case a5: LongAtt=> new StringAtt("")
+    case _ => throw new EdbException("not supported att type" + that)
+  }
+
+  def -(that: Attribute): Attribute = that match {
+    case _ => throw new EdbException("not supported op " + that)
+  }
+
+  def *(that: Attribute): Attribute= that match {
+    case _ => throw new EdbException("not supported op " + that)
+  }
+
+  def /(that: Attribute): Attribute = that match {
+    case _ => throw new EdbException("not supported op " + that)
+  }
 }
 
 
@@ -63,6 +233,24 @@ case class DateAtt (_name: String) extends Attribute
   setName(_name)
   override def toString = "date" + name
   override def copy(): Attribute = new DateAtt(getName())
+
+  def +(that: Attribute): Attribute = that match {
+    case a: DateAtt => new DateAtt("")
+    case _ => throw new EdbException("not supported type" + that)
+  }
+
+  def -(that: Attribute): Attribute = that match {
+    case a: DateAtt => new DateAtt("")
+    case _ => throw new EdbException("not supported op " + that)
+  }
+
+  def *(that: Attribute): Attribute = that match {
+    case _ => throw new EdbException("not supported op " + that)
+  }
+
+  def /(that: Attribute ): Attribute= that match {
+    case _ => throw new EdbException("not supported op " + that)
+  }
 }
 
 
@@ -823,6 +1011,10 @@ class Schema (_id: Int=0, _version: Byte=0) extends Serializable {
     for (i<- 0 to this.getNumAtts()-1){
       this.atts(i)= (parentSch.getAtts()(attList(i))).copy()
     }
+    this.setId(0)
+    this.setVersion(0)
+    this.setKeys(null)
+    this.setNumKeyAtts(0)
   }
 
   override def equals (other: Any): Boolean = other.isInstanceOf[Schema] && {
