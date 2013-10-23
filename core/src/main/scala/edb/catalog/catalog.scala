@@ -193,7 +193,7 @@ object Catalog extends Serializable {
 
   //private var catalog: Properties = (new Catalog("test")).loadCatalog()
   private var catalog = new Catalog("/test")
-   catalog.initCache
+  catalog.initCache
 
   //sch is uniquely identified by id_version string
   //the colIdxMap is colName->colIdx

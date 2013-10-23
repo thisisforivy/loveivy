@@ -940,7 +940,7 @@ class Schema (_id: Int=0, _version: Byte=0) extends Serializable {
       var keyList:String = ""
 
       if(st.hasMoreTokens)
-       keyList = st.nextToken()
+        keyList = st.nextToken()
 
       //validity check. attList cannot be empty
       //keyList can be empty
