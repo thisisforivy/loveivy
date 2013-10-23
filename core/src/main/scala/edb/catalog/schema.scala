@@ -231,7 +231,7 @@ case class StringAtt (_name: String) extends Attribute
 case class DateAtt (_name: String) extends Attribute
 {
   setName(_name)
-  override def toString = "date" + name
+  override def toString = "date " + name
   override def copy(): Attribute = new DateAtt(getName())
 
   def +(that: Attribute): Attribute = that match {
@@ -911,7 +911,7 @@ class Schema (_id: Int=0, _version: Byte=0) extends Serializable {
   @BeanProperty var atts: Array[Attribute] = _ 
   @BeanProperty var numKeyAtts: Int = 0
   //store the key att index
-  @BeanProperty var keys: Array[Int] = _
+  @BeanProperty var keys: Array[Int] = null
 
   //see hashCode recipe in programming in scala 2nd ed
   override def hashCode: Int = 
@@ -937,7 +937,7 @@ class Schema (_id: Int=0, _version: Byte=0) extends Serializable {
     if (!Option(sch).isEmpty) {
       var st = new StringTokenizer(sch, ";")
       val attList = st.nextToken()
-      var keyList:String = ""
+      var keyList:String = null
 
       if(st.hasMoreTokens)
         keyList = st.nextToken()
@@ -1042,6 +1042,7 @@ class Schema (_id: Int=0, _version: Byte=0) extends Serializable {
     var str3 =""
 
     if(!Option(keys).isEmpty){ 
+
       for(i<-keys){
         str3 += atts(i).getName()+ ","
       }

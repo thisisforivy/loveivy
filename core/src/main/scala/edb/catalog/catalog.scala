@@ -39,6 +39,39 @@ class Catalog (location: String) extends Serializable  {
 
 object Catalog extends Serializable {
 
+  def dropTable(name: String){
+
+    val sch = getTableSchema(name)
+    if( sch != null) {
+      val id = sch.getId
+      println("dropping " + id)
+      catalog.catalogCache.remove(id+".1")
+      catalog.catalogCache.remove(id+"1.default")
+      catalog.catalogCache.remove(id+".hdfsStorage")
+      catalog.catalogCache.remove(id+".latestVersion")
+      catalog.catalogCache.remove(id+".name")
+      catalog.catalogCache.get(id+".name")
+
+      //remove the schema ID from global list
+      val newList = getSchemaIDs
+      newList.remove(id)
+ 
+      var idList: String = ""
+      for (i <- newList){
+        idList = idList +i + ","
+      }
+      idList = idList.substring(0, idList.length-1)
+      catalog.catalogCache.remove("SchemaIDs")
+      catalog.catalogCache.put("SchemaIDs", idList)
+
+      persistCatalog(catalog.catalogCache)
+      catalog.initCache
+      println("table " + name + " has been dropped")
+    }else 
+    println("table " + name + " does not exist!")
+
+  }
+
   //create a table schema in catalog
   def createTable(metaTable: CREATE_TABLE_QB) {
 

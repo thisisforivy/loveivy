@@ -72,7 +72,7 @@ case class STRING_TYPE extends COL_TYPE{
   override  def toString = "string"
 }
 case class BOOL_TYPE extends COL_TYPE{
-  override  def toString = "bool"
+  override  def toString = "boolean"
 }
 case class DATE_TYPE extends COL_TYPE{
   override  def toString = "date"
@@ -98,6 +98,7 @@ case class SELECT_QB(
 case class SHOW_TABLE_QB  extends QUERYBLOCK
 case class DESC_TABLE_QB(name: String)  extends QUERYBLOCK
 case class CREATE_TABLE_QB(name: String, elementList: List[TABLE_ELEMENT]) extends QUERYBLOCK
+case class DROP_TABLE_QB(name: String) extends QUERYBLOCK
 
 
 
@@ -113,10 +114,10 @@ object SQLParser extends StandardTokenParsers {
     r
   }
 
-  lexical.reserved += ("explain", "show", "create", "tables", "table",  "desc", "select", "from","as", "where", "or", "and", 
+  lexical.reserved += ("explain", "show", "drop", "create", "tables", "table",  "desc", "select", "from","as", "where", "or", "and", 
     "group", "by", "having", "order", "sum", "avg", "min", "max", 
     "count", "int", "float", "double", "long", "string",
-    "bool", "date")
+    "boolean", "date")
 
   lexical.delimiters += ("+", "-","*","/", ",", "?", "(",")", 
     ".", "=", ">", "<", ">=", "<=", "<>")
@@ -210,6 +211,10 @@ object SQLParser extends StandardTokenParsers {
         Catalog.createTable(e5)
         null
       }
+      case e6: DROP_TABLE_QB =>{
+        Catalog.dropTable(e6.name)
+        null
+      }
       case _ :  NoSuccess => {
         Console.err.println("not known qb")
         exit(100)
@@ -223,9 +228,11 @@ object SQLParser extends StandardTokenParsers {
   /* explain query */
   def xplqb: Parser[XPLN_QB] = "explain" ~> qb ^^ {e => new XPLN_QB(e)}
 
-  def ddl: Parser[QUERYBLOCK]= show_table|desc_table|create_table
+  def ddl: Parser[QUERYBLOCK]= show_table|desc_table|create_table|drop_table
 
   def show_table: Parser[SHOW_TABLE_QB] = "show" ~ "tables" ^^^{new SHOW_TABLE_QB}
+
+  def drop_table: Parser[DROP_TABLE_QB] = "drop" ~> "table" ~> ident ^^{ e => new DROP_TABLE_QB(e)}
 
   def desc_table: Parser[DESC_TABLE_QB] =  "desc" ~> relation ^^{
     e => new DESC_TABLE_QB(e.iden)
@@ -248,7 +255,7 @@ object SQLParser extends StandardTokenParsers {
   def ctype: Parser[COL_TYPE] = "int"^^^{new INT_TYPE } |
   "float"^^^{new FLOAT_TYPE} | "double"^^^{new DOUBLE_TYPE} |
   "long"^^^{new LONG_TYPE} | "string"^^^{new STRING_TYPE} |
-  "bool"^^^{new BOOL_TYPE} | "date"^^^{new DATE_TYPE}
+  "boolean"^^^{new BOOL_TYPE} | "date"^^^{new DATE_TYPE}
 
 
 
