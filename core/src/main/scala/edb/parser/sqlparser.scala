@@ -53,6 +53,33 @@ case class GROUPBYLIST(grpbylist: List[EXPRESSION])
 /* HAVING predicate tree */
 case class ORDERBYLIST(ordbylist: List[EXPRESSION])
 
+sealed abstract class COL_TYPE{
+  def toString ():String
+}
+case class INT_TYPE  extends COL_TYPE{
+  override def toString = "int"
+}
+case class FLOAT_TYPE extends COL_TYPE{
+  override  def toString = "float"
+}
+case class DOUBLE_TYPE extends COL_TYPE{
+  override  def toString = "double"
+}
+case class LONG_TYPE extends COL_TYPE{
+  override  def toString = "long"
+}
+case class STRING_TYPE extends COL_TYPE{
+  override  def toString = "string"
+}
+case class BOOL_TYPE extends COL_TYPE{
+  override  def toString = "bool"
+}
+case class DATE_TYPE extends COL_TYPE{
+  override  def toString = "date"
+}
+
+case class TABLE_ELEMENT(name: String, coltype: COL_TYPE)
+
 /* top level AST node */
 case class XPLN_QB(
   qb: QUERYBLOCK
@@ -70,6 +97,7 @@ case class SELECT_QB(
 
 case class SHOW_TABLE_QB  extends QUERYBLOCK
 case class DESC_TABLE_QB(name: String)  extends QUERYBLOCK
+case class CREATE_TABLE_QB(name: String, elementList: List[TABLE_ELEMENT]) extends QUERYBLOCK
 
 
 
@@ -85,9 +113,10 @@ object SQLParser extends StandardTokenParsers {
     r
   }
 
-  lexical.reserved += ("explain", "show", "tables", "desc", "select", "from","as", "where", "or", "and", 
+  lexical.reserved += ("explain", "show", "create", "tables", "table",  "desc", "select", "from","as", "where", "or", "and", 
     "group", "by", "having", "order", "sum", "avg", "min", "max", 
-    "count")
+    "count", "int", "float", "double", "long", "string",
+    "bool", "date")
 
   lexical.delimiters += ("+", "-","*","/", ",", "?", "(",")", 
     ".", "=", ">", "<", ">=", "<=", "<>")
@@ -173,8 +202,13 @@ object SQLParser extends StandardTokenParsers {
         null
       }
       case e4: DESC_TABLE_QB =>{
-         Catalog.descTable(e4.name) 
-         null
+        Catalog.descTable(e4.name) 
+        null
+      }
+      case e5: CREATE_TABLE_QB =>{
+
+        Catalog.createTable(e5)
+        null
       }
       case _ :  NoSuccess => {
         Console.err.println("not known qb")
@@ -189,13 +223,33 @@ object SQLParser extends StandardTokenParsers {
   /* explain query */
   def xplqb: Parser[XPLN_QB] = "explain" ~> qb ^^ {e => new XPLN_QB(e)}
 
-  def ddl: Parser[QUERYBLOCK]= show_table|desc_table
+  def ddl: Parser[QUERYBLOCK]= show_table|desc_table|create_table
 
   def show_table: Parser[SHOW_TABLE_QB] = "show" ~ "tables" ^^^{new SHOW_TABLE_QB}
 
   def desc_table: Parser[DESC_TABLE_QB] =  "desc" ~> relation ^^{
     e => new DESC_TABLE_QB(e.iden)
   }
+  //CREATE_TABLE_QB(name: String, elementList: List[TABLE_ELEMENT]) 
+  def create_table: Parser[CREATE_TABLE_QB] = "create" ~ "table" ~ ident ~ 
+  "(" ~ elelist ~ ")" ^^{
+    case _ ~ _ ~ e ~ _ ~ collist ~ _  => new CREATE_TABLE_QB(e, collist)
+  }
+
+  def elelist: Parser[List[TABLE_ELEMENT]] = ele_sublist ~ (("," ~>ele_sublist)*) ^^
+  {
+    case e ~ l => e::l
+  }
+
+  def ele_sublist: Parser[TABLE_ELEMENT] = ident ~ ctype ^^{
+    case e ~ l => TABLE_ELEMENT(e, l)
+  }
+
+  def ctype: Parser[COL_TYPE] = "int"^^^{new INT_TYPE } |
+  "float"^^^{new FLOAT_TYPE} | "double"^^^{new DOUBLE_TYPE} |
+  "long"^^^{new LONG_TYPE} | "string"^^^{new STRING_TYPE} |
+  "bool"^^^{new BOOL_TYPE} | "date"^^^{new DATE_TYPE}
+
 
 
   def qb: Parser[QUERYBLOCK] =( "select" ~ select_list ~ 

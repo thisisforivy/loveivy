@@ -927,7 +927,7 @@ class Schema (_id: Int=0, _version: Byte=0) extends Serializable {
     ) + numAtts.hashCode
 ) + atts.hashCode
     ) + numKeyAtts.hashCode
-) + keys.hashCode
+) + (if (!Option(keys).isEmpty) keys.hashCode else 0)
 
 
   //creating schema
@@ -937,7 +937,10 @@ class Schema (_id: Int=0, _version: Byte=0) extends Serializable {
     if (!Option(sch).isEmpty) {
       var st = new StringTokenizer(sch, ";")
       val attList = st.nextToken()
-      val keyList = st.nextToken()
+      var keyList:String = ""
+
+      if(st.hasMoreTokens)
+       keyList = st.nextToken()
 
       //validity check. attList cannot be empty
       //keyList can be empty

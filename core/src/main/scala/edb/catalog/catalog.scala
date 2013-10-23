@@ -1,11 +1,15 @@
 package edb.catalog
-import scala._
+
+import edb.parser._
+import scala.{List=>MList,Iterator=>MIterator}
 import scala.io._
 import scala.reflect.BeanProperty
 import scala.util.control.Breaks._
 import scala.collection.mutable.{Map => MMap,Set=>MSet}
+import scala.collection.JavaConversions._
 
 import java.util._
+import java.io.OutputStream
 import org.apache.hadoop.fs._
 import org.apache.hadoop.conf._
 import org.apache.hadoop.io._
@@ -13,13 +17,15 @@ import org.apache.hadoop.util._
 
 class Catalog (location: String) extends Serializable  { 
 
-  val DEFAULT_LOCATION = "hdfs://localhost:9000/edb/Catalog"
+  val DEFAULT_LOCATION = "hdfs://localhost:9000/edb/catalog"
   val conf = new Configuration()
   conf.addResource(new Path("/server/hadoop/conf/core-site.xml"))
   val fs = FileSystem.get(conf)
 
   //init cache
-  val catalogCache = {
+  var catalogCache: Properties = null
+
+  def initCache() {
     var loc = new Path(location)
 
     if (!fs.exists(loc)) {
@@ -27,13 +33,130 @@ class Catalog (location: String) extends Serializable  {
     }
     val cache = new Properties()
     cache.load(fs.open(loc))
-    cache
+    catalogCache =cache
   }
-
 }
 
 object Catalog extends Serializable {
 
+  //create a table schema in catalog
+  def createTable(metaTable: CREATE_TABLE_QB) {
+
+    val name = metaTable.name
+    val eItr: MIterator[TABLE_ELEMENT] = 
+    metaTable.elementList.iterator 
+
+    //table name should not be used
+    if (getTableSchema (name) != null) {
+      throw new 
+      EdbException("table name exists in the catalog")
+    }
+
+    val newSchemaID = getSchemaIDs.toList.sorted.last + 1
+    val iter = getSchemaIDs.toList.sorted.iterator
+
+    var schIDs = ""
+    while (iter.hasNext){
+      schIDs = schIDs + iter.next + ","
+    }
+
+    schIDs = schIDs + newSchemaID
+    catalog.catalogCache.setProperty("SchemaIDs", schIDs)
+
+    //set name
+    var key = newSchemaID + ".name"
+    var value = name
+    catalog.catalogCache.setProperty(key, value)
+
+    //set version
+    key = newSchemaID + ".latestVersion"
+    value = "1"
+    catalog.catalogCache.setProperty(key, value)
+
+    //set storage 
+    key = newSchemaID + ".hdfsStorage"
+    value = "/edb/" + name + "/"
+    catalog.catalogCache.setProperty(key, value)
+
+    //set schema
+    key = newSchemaID + ".1"
+    value =""
+    var default = ""
+
+    while(eItr.hasNext){
+
+      val ele = eItr.next
+      val colName = ele.name
+      val colType = ele.coltype
+
+      if (eItr.hasNext) {
+        value = value + colType + " " + colName+ "," 
+
+        if (colType.toString.equals("string"))
+          default = default + "Unknown" + ","
+        else 
+          default = default + "-1" + ","
+      }
+      else {
+        value = value + colType + " " + colName 
+        if (colType.toString.equals("string"))
+          default = default + "Unknown" 
+        else 
+          default = default + "-1" 
+      }
+    }
+    catalog.catalogCache.setProperty(key, value)
+
+    //set default 
+    key = newSchemaID + ".1.default"
+
+    persistCatalog(catalog.catalogCache)
+    //reset cache
+    catalog.initCache
+
+  }//end create table
+
+  /**
+    * persist catalog to a hdfs file
+    */
+  def persistCatalog(cache: Properties) {
+
+    val DEFAULT_LOCATION = 
+    "hdfs://localhost:9000/edb/catalog1"
+    val CATALOG_LOCATION = 
+    "hdfs://localhost:9000/edb/catalog"
+
+    val conf = new Configuration()
+    conf.addResource(
+      new Path("/server/hadoop/conf/core-site.xml"))
+    val fs = FileSystem.get(conf)
+    val loc = new Path(DEFAULT_LOCATION)
+
+    if (fs.exists(loc)){
+      fs.delete(loc)
+    }
+    val out= fs.create(loc)
+    // out.writeUTF(kvlist)
+    val kvMap: scala.collection.mutable.Map[String, String]= cache
+
+    val sortedKVs = kvMap.toSeq.sortBy(_._1)
+
+    //add line break to bypass utf prefix, utf always have a len 
+    //of string written first 
+    var kvList: String = "\n"
+    for (x <- sortedKVs) {
+      kvList = kvList + x._1 + "="+ x._2 + "\n"
+    }
+
+    out.writeUTF(kvList)
+    out.close()
+
+    val catalogLoc = new Path(CATALOG_LOCATION)
+    if (fs.exists(catalogLoc)){
+      fs.delete(catalogLoc)
+    }
+    fs.rename(loc, catalogLoc)
+  }
 
   /**
     * Display catalog table name list
@@ -70,6 +193,7 @@ object Catalog extends Serializable {
 
   //private var catalog: Properties = (new Catalog("test")).loadCatalog()
   private var catalog = new Catalog("/test")
+   catalog.initCache
 
   //sch is uniquely identified by id_version string
   //the colIdxMap is colName->colIdx
