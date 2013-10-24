@@ -54,7 +54,7 @@ private object Utils extends Logging with Serializable {
 
   /**
     * This function evalute a given expression (computable
-    * expression) on the given tuple, it returns a 
+      * expression) on the given tuple, it returns a 
     *  genericValue so that all comparison will 
     * be in the
     * EDB type system. EDB type (genericValue) has 
@@ -67,6 +67,10 @@ private object Utils extends Logging with Serializable {
     t: SequenceRecord,
     inSch: Schema):genericValue= 
   e match {
+
+    //for select count(xx) process, we project the second col,
+    //which is always the agg col
+    case CNT_EXP(e1) =>Catalog.getVal(t,1)
 
     //look up record att
     case IDENTIFIER (iden) => Catalog.getVal(t, iden, inSch)
@@ -84,8 +88,8 @@ private object Utils extends Logging with Serializable {
       exit(100)
     }
   }
-//evaluate an expression type
- def eval(
+  //evaluate an expression type
+  def eval(
     e: EXPRESSION, 
     inSch: Schema): Attribute= 
   e match {

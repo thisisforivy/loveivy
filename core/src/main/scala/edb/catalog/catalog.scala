@@ -58,7 +58,7 @@ object Catalog extends Serializable {
       //remove the schema ID from global list
       val newList = getSchemaIDs
       newList.remove(id)
- 
+
       var idList: String = ""
       for (i <- newList){
         idList = idList +i + ","
@@ -157,8 +157,6 @@ object Catalog extends Serializable {
     */
   def persistCatalog(cache: Properties) {
 
-    val DEFAULT_LOCATION = 
-    "hdfs://localhost:9000/edb/catalog1"
     val CATALOG_LOCATION = 
     "hdfs://localhost:9000/edb/catalog"
 
@@ -166,11 +164,7 @@ object Catalog extends Serializable {
     conf.addResource(
       new Path("/server/hadoop/conf/core-site.xml"))
     val fs = FileSystem.get(conf)
-    val loc = new Path(DEFAULT_LOCATION)
 
-    if (fs.exists(loc)){
-      fs.delete(loc)
-    }
     // out.writeUTF(kvlist)
     val kvMap: scala.collection.mutable.Map[String, String]= cache
 
@@ -193,19 +187,10 @@ object Catalog extends Serializable {
     val file = new File(tmpFileLoc);
 
     val catalogLoc = new Path(CATALOG_LOCATION)
-   if (fs.exists(catalogLoc)){
-      fs.delete(catalogLoc)
-    }
-    FileUtil.copy(file, fs, catalogLoc, true, conf) 
-    /*
-    val out= fs.create(loc)
-    out.writeUTF(kvList)
-    out.close()
-
     if (fs.exists(catalogLoc)){
       fs.delete(catalogLoc)
     }
-    fs.rename(loc, catalogLoc)*/
+    FileUtil.copy(file, fs, catalogLoc, true, conf) 
   }
 
   /**
@@ -298,6 +283,18 @@ object Catalog extends Serializable {
   def getTableSchema (name: String): Schema = 
   if (nameToSchema contains (name)) nameToSchema(name)
     else null
+
+  /**
+    * For the current record, we use idx (start from 0)
+    * to find the value of the column
+    * @param t SequenceRecord
+    * @param idx column idx 
+    */
+  def getVal(
+    t: SequenceRecord, 
+    idx: Int): genericValue= t.getData()(idx)
+
+
 
   /**
     * For the current record, we use identifier 

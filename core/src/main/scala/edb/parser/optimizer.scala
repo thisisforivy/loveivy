@@ -71,6 +71,50 @@ object Optimizer extends Logging {
         if(selList.size == 1 && 
           selList(0).isInstanceOf[STAR]){
           ret = filterOperator
+        }
+        //select count(xxx) case
+        else if (selList.size == 1 && 
+          selList(0).isInstanceOf[CNT_EXP]){
+
+          //get aggExp list from select list
+          for(exp <-selList) {
+            if (exp.isInstanceOf[AGG_EXPRESSION])
+              aggExpList = aggExpList :+ exp 
+          } 
+          //create fake group by attribute const
+          gbyExpList = new NUMBER(1)::Nil
+          //create grpbyPreShuffleOperator 
+          val gbyPreOp = new 
+          GroupByPreShuffleOperator(sch,
+            sch, gbyExpList,aggExpList)
+          gbyPreOp.addParent(filterOperator)
+
+          //create grpbyShuffleOperator
+          val aggSch = sch.copy()
+          val aggExpList2= aggExpList.filter(x=> x match {
+              case a1: CNT_EXP=> false
+              case _ => true 
+            })
+
+          var aggColList = aggExpList2.map(x=>x match{
+              case a1: SUM_EXP=>a1.e.iden
+              case a2: AVG_EXP=>a2.e.iden
+              case a3: MIN_EXP=>a3.e.iden
+              case a4: MAX_EXP=>a4.e.iden
+              case _ => 
+              throw new EdbException("not supported table type" )
+            })
+          val aggColIdx = aggColList.map(x=>
+            Catalog.getAttIdx(x,sch))
+          aggSch.setSchema(aggColIdx.toArray, sch)
+          val gbyOp = new GroupByShuffleOperator(aggSch,sch,2, gbyExpList, aggExpList)
+          gbyOp.addParent(gbyPreOp)
+
+          val projectOperator = new 
+          ProjectOperator (sch,sch,selList)
+          projectOperator.addParent(gbyOp)
+          ret = projectOperator 
+
         } else {
 
           if (grpbyList != null) {
@@ -92,14 +136,14 @@ object Optimizer extends Logging {
                 case a1: CNT_EXP=> false
                 case _ => true 
               })
-              
+
             var aggColList = aggExpList2.map(x=>x match{
                 case a1: SUM_EXP=>a1.e.iden
                 case a2: AVG_EXP=>a2.e.iden
                 case a3: MIN_EXP=>a3.e.iden
                 case a4: MAX_EXP=>a4.e.iden
                 case _ => 
-        throw new EdbException("not supported table type" )
+                throw new EdbException("not supported table type" )
               })
             val aggColIdx = aggColList.map(x=>
               Catalog.getAttIdx(x,sch))
@@ -125,6 +169,49 @@ object Optimizer extends Logging {
         if(selList.size == 1 && 
           selList(0).isInstanceOf[STAR]){
           ret = tscOperator 
+        }//select count(xx) from xxx case
+        else if (selList.size == 1 && 
+          selList(0).isInstanceOf[CNT_EXP]){
+
+          //get aggExp list from select list
+          for(exp <-selList) {
+            if (exp.isInstanceOf[AGG_EXPRESSION])
+              aggExpList = aggExpList :+ exp 
+          } 
+          //create fake group by attribute const
+          gbyExpList = new NUMBER(1)::Nil
+          //create grpbyPreShuffleOperator 
+          val gbyPreOp = new 
+          GroupByPreShuffleOperator(sch,
+            sch, gbyExpList,aggExpList)
+          gbyPreOp.addParent(tscOperator)
+
+          //create grpbyShuffleOperator
+          val aggSch = sch.copy()
+          val aggExpList2= aggExpList.filter(x=> x match {
+              case a1: CNT_EXP=> false
+              case _ => true 
+            })
+
+          var aggColList = aggExpList2.map(x=>x match{
+              case a1: SUM_EXP=>a1.e.iden
+              case a2: AVG_EXP=>a2.e.iden
+              case a3: MIN_EXP=>a3.e.iden
+              case a4: MAX_EXP=>a4.e.iden
+              case _ => 
+              throw new EdbException("not supported table type" )
+            })
+          val aggColIdx = aggColList.map(x=>
+            Catalog.getAttIdx(x,sch))
+          aggSch.setSchema(aggColIdx.toArray, sch)
+          val gbyOp = new GroupByShuffleOperator(aggSch,sch,2, gbyExpList, aggExpList)
+          gbyOp.addParent(gbyPreOp)
+
+          val projectOperator = new 
+          ProjectOperator (sch,sch,selList)
+          projectOperator.addParent(gbyOp)
+          ret = projectOperator 
+
         } else {
 
           if (grpbyList != null) {
@@ -153,7 +240,7 @@ object Optimizer extends Logging {
                 case a3: MIN_EXP=>a3.e.iden
                 case a4: MAX_EXP=>a4.e.iden
                 case _ => 
-        throw new EdbException("not supported agg type" )
+                throw new EdbException("not supported agg type" )
               })
             aggColList= aggColList.filter(_!= None)
             val aggColIdx = aggColList.map(x=>
@@ -176,6 +263,5 @@ object Optimizer extends Logging {
     }//end one table case
     ret
   } //end optimizeSelQB
-
 }
 
