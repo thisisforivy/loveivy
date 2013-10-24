@@ -9,11 +9,14 @@ import scala.collection.mutable.{Map => MMap,Set=>MSet}
 import scala.collection.JavaConversions._
 
 import java.util._
+import java.io.{FileWriter, PrintWriter, File}
 import java.io.OutputStream
 import org.apache.hadoop.fs._
 import org.apache.hadoop.conf._
 import org.apache.hadoop.io._
 import org.apache.hadoop.util._
+
+import com.google.common.io.Files
 
 class Catalog (location: String) extends Serializable  { 
 
@@ -168,7 +171,6 @@ object Catalog extends Serializable {
     if (fs.exists(loc)){
       fs.delete(loc)
     }
-    val out= fs.create(loc)
     // out.writeUTF(kvlist)
     val kvMap: scala.collection.mutable.Map[String, String]= cache
 
@@ -181,14 +183,29 @@ object Catalog extends Serializable {
       kvList = kvList + x._1 + "="+ x._2 + "\n"
     }
 
+    //save to local tmp file
+    val tempDir = Files.createTempDir()
+    val tmpFileLoc: String = tempDir + "/newCatalog"
+    val outTmp = new FileWriter(tmpFileLoc)
+    outTmp.write(kvList)
+    println(tempDir + "/input")
+    outTmp.close()
+    val file = new File(tmpFileLoc);
+
+    val catalogLoc = new Path(CATALOG_LOCATION)
+   if (fs.exists(catalogLoc)){
+      fs.delete(catalogLoc)
+    }
+    FileUtil.copy(file, fs, catalogLoc, true, conf) 
+    /*
+    val out= fs.create(loc)
     out.writeUTF(kvList)
     out.close()
 
-    val catalogLoc = new Path(CATALOG_LOCATION)
     if (fs.exists(catalogLoc)){
       fs.delete(catalogLoc)
     }
-    fs.rename(loc, catalogLoc)
+    fs.rename(loc, catalogLoc)*/
   }
 
   /**
