@@ -32,7 +32,7 @@ case class SUM_EXP(e: IDENTIFIER) extends AGG_EXPRESSION
 case class AVG_EXP(e: IDENTIFIER) extends AGG_EXPRESSION
 case class MIN_EXP(e: IDENTIFIER) extends AGG_EXPRESSION
 case class MAX_EXP(e: IDENTIFIER) extends AGG_EXPRESSION
-case class CNT_EXP(e: IDENTIFIER) extends AGG_EXPRESSION
+case class CNT_EXP(e: EXPRESSION) extends AGG_EXPRESSION
 
 /* PREDICATE is actually an PREDICATE tree, with 2 operators, AND and  OR */
 sealed abstract class PREDICATE 
@@ -436,7 +436,7 @@ object SQLParser extends StandardTokenParsers {
   }|"count" ~> "(" ~> cnt_exp <~ ")" 
 
   def cnt_exp: Parser[EXPRESSION] = "*" ^^^ {CNT_EXP(IDENTIFIER("*"))}|
-column ^^ {c =>CNT_EXP(c)}
+column ^^ {c =>CNT_EXP(c)}| numeric_literal ^^ {c => CNT_EXP(c)}
 
 /* STRING_LITERAL ::= STRING */
 def string_literal:Parser[EXPRESSION] =stringLit^^{s => STRING(s.toString)}
