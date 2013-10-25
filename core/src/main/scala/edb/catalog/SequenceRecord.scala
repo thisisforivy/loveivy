@@ -66,6 +66,8 @@ class SequenceRecord extends  Writable with Serializable {
         case a4: FloatAtt => new FloatVal(a4.getName(),in.readFloat)
         case a5: StringAtt => new StringVal(a5.getName(), in.readUTF)
         case a6: DateAtt => new DateVal(a6.getName(), in.readLong)
+        case a7: BooleanAtt => new BooleanVal(a7.getName(), 
+          in.readBoolean)
         case _ => {
           Console.err.println("Unsupported attribute type "+ atts(i).toString)
           exit(100)
@@ -93,6 +95,7 @@ class SequenceRecord extends  Writable with Serializable {
           case a4: FloatVal => out.writeFloat(a4.getValue())
           case a5: StringVal => out.writeUTF(a5.getValue())
           case a6: DateVal => out.writeLong(a6.getValue())
+          case a7: BooleanVal => out.writeBoolean(a7.getValue())
           case _ => {
             Console.err.println("Unsupported attribute type "+ data(i).toString)
             exit(100)
@@ -173,6 +176,7 @@ class SequenceRecord extends  Writable with Serializable {
         case a4: FloatVal => a4.copy()
         case a5: StringVal => a5.copy()
         case a6: DateVal => a6.copy()
+        case a7: BooleanVal => a7.copy()
         case _ => {
           Console.err.println("Unsupported attribute type "+ atts(i).toString)
           exit(100)
@@ -214,6 +218,7 @@ class SequenceRecord extends  Writable with Serializable {
         case a4: FloatVal => a4.copy()
         case a5: StringVal => a5.copy()
         case a6: DateVal => a6.copy()
+        case a7: BooleanVal => a7.copy()
         case _ => {
           Console.err.println("Unsupported attribute type "+ atts(i).toString)
           exit(100)

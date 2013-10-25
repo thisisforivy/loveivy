@@ -1,0 +1,11 @@
+- Add the following to .bashrc_profile
+
+PATH=$PATH:/Users/mwu/Applications/sbt/bin/:$SCALA_HOME/bin
+SCALA_HOME=/server/scala/
+
+# added by Anaconda 1.7.0 installer
+export PATH="/server/ipython/anaconda/bin:$PATH"
+#this is to avoid OOM error in sbt
+export SBT_OPTS=-XX:MaxPermSize=256m
+~                                                                                                                                               
+~                                        

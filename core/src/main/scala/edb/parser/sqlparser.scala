@@ -19,6 +19,7 @@ case class AS_TABLE(iden: String, alias: IDENTIFIER) extends RELATION
 sealed abstract class EXPRESSION 
 case class IDENTIFIER (iden: String) extends EXPRESSION
 case class NUMBER(lit: Int) extends EXPRESSION
+case class BOOLVAL(lit: Boolean) extends EXPRESSION
 case class STRING(slit: String) extends EXPRESSION
 case class STAR extends EXPRESSION
 case class ADD(e1: EXPRESSION, e2: EXPRESSION) extends EXPRESSION
@@ -119,7 +120,7 @@ object SQLParser extends StandardTokenParsers {
   lexical.reserved += ("explain", "show", "drop", "create", "tables", "table",  "desc", "select", "from","as", "where", "or", "and", 
     "group", "by", "having", "order", "sum", "avg", "min", "max", 
     "count", "int", "float", "double", "long", "string",
-    "boolean", "date", "generate")
+    "boolean", "date", "generate", "true", "false")
 
   lexical.delimiters += ("+", "-","*","/", ",", "?", "(",")", 
     ".", "=", ">", "<", ">=", "<=", "<>")
@@ -218,8 +219,7 @@ object SQLParser extends StandardTokenParsers {
         null
       }
       case e7: GENERATE_TABLE_QB=>{
-        //Catalog.generateTable(e7.name, e7.count)
-        println("aloha")
+        Catalog.generateTable(e7.name, e7.count)
         null
       }
       case _ :  NoSuccess => {
@@ -429,7 +429,7 @@ object SQLParser extends StandardTokenParsers {
   def factor =  numeric_primary | "("~>expression<~")" 
 
   /* NUMERIC_PRIMARY ::= NUMERIC_LITERAL|COLUMN| '(' EXPRESSION ')' */
-  def numeric_primary: Parser[EXPRESSION] = agg|string_literal|numeric_literal|column
+  def numeric_primary: Parser[EXPRESSION] = agg|string_literal|numeric_literal|column|boolval
   "("~>expression<~")"
 
   def agg: Parser[EXPRESSION] =  "sum" ~ "(" ~ column ~ ")" ^^ 
@@ -461,6 +461,9 @@ def digit:Parser[String] = numericLit
 
 /* COLUMN ::= IDENTIFIER */
 def column:Parser[IDENTIFIER] = ident^^{e => IDENTIFIER(e)}
+
+def boolval:Parser[BOOLVAL] = "true"^^^{new BOOLVAL(true)}|
+"false"^^^{new BOOLVAL(false)}
 
 }
 

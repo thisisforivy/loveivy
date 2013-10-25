@@ -7,6 +7,8 @@ import scala.reflect.BeanProperty
 import scala.util.control.Breaks._
 import scala.collection.mutable.{Map => MMap,Set=>MSet}
 import scala.collection.JavaConversions._
+import scala.compat._
+import scala.util.{Random=>SRandom}
 
 import java.util._
 import java.io.{FileWriter, PrintWriter, File}
@@ -42,9 +44,20 @@ class Catalog (location: String) extends Serializable  {
 
 object Catalog extends Serializable {
 
+  val conf = new Configuration()
+  conf.addResource(new Path("/server/hadoop/conf/core-site.xml"))
+  val fs = FileSystem.get(conf)
+
+
+
+  def getCache = catalog.catalogCache
+
+
   def dropTable(name: String){
 
     val sch = getTableSchema(name)
+    val loc = getTableLocation(name)
+    val file = new Path(loc)
     if( sch != null) {
       val id = sch.getId
       println("dropping " + id)
@@ -69,6 +82,10 @@ object Catalog extends Serializable {
 
       persistCatalog(catalog.catalogCache)
       catalog.initCache
+
+      if (fs.exists(file))
+        fs.delete(file)
+
       println("table " + name + " has been dropped")
     }else 
     println("table " + name + " does not exist!")
@@ -111,7 +128,7 @@ object Catalog extends Serializable {
 
     //set storage 
     key = newSchemaID + ".hdfsStorage"
-    value = "/edb/" + name + "/"
+    value = "hdfs://localhost:9000/edb/" + name
     catalog.catalogCache.setProperty(key, value)
 
     //set schema
@@ -260,10 +277,6 @@ object Catalog extends Serializable {
     catalog.catalogCache.getProperty(id+".name") 
   }
 
-  def getTableLatestVersion(id: Int):Int = {
-    (catalog.catalogCache.getProperty(id+".latestVersion")).toInt
-  }
-
   def getTableLocation(id: Int):String = {
     catalog.catalogCache.getProperty(id+".hdfsStorage") 
   }
@@ -273,8 +286,9 @@ object Catalog extends Serializable {
     val loc = catalog.catalogCache.getProperty(id+".hdfsStorage") 
     loc
   }
-
-
+  def getTableLatestVersion(id: Int):Int = {
+    (catalog.catalogCache.getProperty(id+".latestVersion")).toInt
+  }
 
   def getTableSchema (id: Int, version: Byte):String= {
     catalog.catalogCache.getProperty(id+"." + version) 
@@ -442,8 +456,92 @@ object Catalog extends Serializable {
     }
   }
 
+  /**
+    * generate a random string of given size
+    */
+  def randString(size: Int) = {
 
-}
+    assert(size >0)
+    var result: String = ""
+    for (i <- 1 to size)
+      result = result + SRandom.nextPrintableChar 
+    result
+  }
 
+  /**
+    * generate a random table based on schema
+    * and cnt, store it in hdfs table location
+    */
+  def generateTable(name: String, cnt: Int) {
 
+    val sch = getTableSchema (name)
+    assert(sch != null)
+    println(sch)
 
+    val loc = getTableLocation(name)
+    val hdfsPath = new Path(loc)
+
+    if ( fs.exists(hdfsPath)){
+      fs.delete(hdfsPath)
+    }
+
+    var key:EdbIntWritable  = new EdbIntWritable()
+    var value:SequenceRecord  = new SequenceRecord()
+
+    var writer:SequenceFile.Writer  = null
+    val gen = new SRandom(Platform.currentTime)
+
+    try{
+
+      writer = SequenceFile.createWriter(fs, 
+        conf, hdfsPath, key.getClass(),value.getClass())
+      val schId = sch.getId
+      val schV = sch.getVersion
+      val attNum = sch.getNumAtts
+
+      //generate cnt number of record
+      for (i <- 1 to cnt){
+        key.setValue(i)
+        value.setSchId(schId)
+        value.setSchVersion(schV)
+        value.setSch(new Schema(schId, schV))
+        var data: Array[genericValue] = new Array[genericValue](attNum)
+
+        for (j <- 0 to attNum-1){
+          data(j)= sch.getAtts()(j) match {
+            case e1: IntAtt=> new 
+            IntVal(e1.getName,gen.nextInt(100))
+            case e2: DoubleAtt=> new DoubleVal(e2.getName, 
+              gen.nextDouble*100000)
+            case e3: FloatAtt=>new FloatVal(e3.getName,
+              gen.nextFloat*1000000)
+            case e4: LongAtt=> new LongVal(e4.getName,
+              gen.nextInt(100000))
+            case e5: StringAtt=> new StringVal(e5.getName,
+              randString(gen.nextInt(20)+1))
+            case e6: BooleanAtt=> new BooleanVal(e6.getName,
+              gen.nextBoolean)
+            case e7: DateAtt=> new DateVal(e7.getName,
+              gen.nextInt(1000000))
+            case _ => {
+              Console.err.println(
+                "unknow att ")               
+              exit(100) } 
+            }
+          }
+          value.setData(data)
+          println(value.toString)
+          writer.append(key,value)
+        }//end cnt loop
+
+      } catch {
+        case e: Exception => { 
+          Console.err.println(
+            "exception throwed " + e)               
+          exit(100)  
+        }
+      } finally {
+        IOUtils.closeStream(writer)
+      } 
+    }//end generateTable
+  }
