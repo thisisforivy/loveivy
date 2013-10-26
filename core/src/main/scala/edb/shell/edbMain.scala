@@ -8,6 +8,7 @@ import edb.enviroment._
 import spark.SparkContext
 import SparkContext._
 import scala.io._
+import scala.Console._
 import scala.util.Random
 
 import org.apache.hadoop.io._
@@ -23,23 +24,48 @@ object edbMain {
 
     //init sc 
     EdbEnv.init()
-    //compile query to an operator tree
-    val opTree = 
-    SQLParser.compile(args.reduceLeft[String](_ + '\n' + _))
 
+    var ok = true
+
+    print("edb> ")
+    while( ok ) {
+      val ln = readLine()
+      ok = ln != "quit" 
+      if( ok ) {
+        val input: Array[String]= Array(ln)
+        try{
+          val opTree = 
+          SQLParser.compile(input.reduceLeft[String](_ + '\n' + _))
+          if(opTree!= null){
+
+            opTree.initializeMasterOnAll
+            //kicks off query
+            val result = opTree.execute
+            val b = result.collect()
+
+            //clear screen
+            for (i <-1 to 100)
+              println()
+            b.map(x=>println(x))   
+          }
+          println()
+          print("edb> ")
+        }
+        catch {
+          case e: Exception => { 
+            println("hey, watch out!")
+            print("edb> ")
+          }
+        }
+
+      }//end ok
+    }//end while
+    //compile query to an operator tree
     //call explain plan
     //Explain.explain(opTree,0)
 
     //init all operators
     //not explain plan
-    if(opTree!= null){
-      opTree.initializeMasterOnAll
-      //kicks off query
-      val result = opTree.execute
-      result.collect.map(x=>println(x))   
-    }
-
-
     /*
      //offline_media(int adv_id,date day,int zip_code, String media_type,double media_spend
        // val DEFAULT_LOCATION = "hdfs://localhost:9000/edb/offline_media"
