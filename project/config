@@ -40,10 +40,32 @@ To run spark  example:
 ========================
 ./run-example org.apache.spark.examples.SparkPi spark://127.0.0.1:7077
 
-Installed assembly plugin for sbt
-==================================
-~/.sbt/built.sbt
+
+To package edb into a jar
+=============================
+1. Installed assembly plugin for sbt
+~/.sbt/plugins/built.sbt
 add 
 
 addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.9.2")
-addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.9.2")
+
+2. In Build.scala, add conflict merge strategy
+
+def extraAssemblySettings() = Seq(test in assembly := {}) ++ Seq(
+mergeStrategy in assembly := {
+case m if m.toLowerCase.endsWith("manifest.mf") => MergeStrategy.discard
+case m if m.toLowerCase.matches("meta-inf.*\\.sf$") => MergeStrategy.discard
+case "reference.conf" => MergeStrategy.concat
+case _ => MergeStrategy.last
+}
+)
+
+3. Make sure we also have spark-core-assembly-0.7.2.jar under /server/edb/core/lib/
+we can generate and copy it from /server/spark/sbt/sbt assembly, then copy
+
+4. Then run sbt assembly and it will generate 
+/server/edb/core/target/scala-2.9.3/core-assembly-0.0.1.jar
+
+5. Then, go to that folder do, java -cp ./core-assembly-0.0.1.jar edb.shell.edbMain //you need to start spark first
+
+
