@@ -169,33 +169,7 @@ class testSuite extends FunSuite {
     ************************************************************************/
   //engine test suite starts
 
-  /**
-  * In this test, we use local fs to test save sequencefile
-  * b/c we found use sbt/test has slow connection with hdfs
-  * so, sometime it hangs. If we call save to hdfs uri in 
-  * edbMain(), it works
-  *
-  */
-  test("DBFile: the class"){
-
-    val file = new DBFile()
-    val sch = new Schema(5,1)
-    file.init("hdfs://localhost:9000/edb/file1", sch, new SequenceDBFile(), sc)
-    val r = file.link(true)
-
-    //google io library. test save()
-    val tempDir = Files.createTempDir()
-    val outputDir = new File(tempDir, "output").getAbsolutePath
-    println("outputDir: " + outputDir)
-    file.save(outputDir)
-
-    //test getRdd()
-    val result=  file.getRdd.collect() 
-    assert(result(0).toString.equals("(0,[null:long 0],[null:long 3097],[null:string adv_63])"))
-    assert(result(1).toString.equals("(1,[null:long 1],[null:long 3207],[null:string adv_1])"))
-  }
-
-  test("type operator "){
+   test("type operator "){
       val a = new IntVal("abc", 1)
       val a2 = new IntVal("abce",2)
       val a3 = a + a2

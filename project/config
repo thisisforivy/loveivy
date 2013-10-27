@@ -7,5 +7,43 @@ SCALA_HOME=/server/scala/
 export PATH="/server/ipython/anaconda/bin:$PATH"
 #this is to avoid OOM error in sbt
 export SBT_OPTS=-XX:MaxPermSize=256m
-~                                                                                                                                               
-~                                        
+
+-ADD_JARS=/Users/mwu/.ivy2/local/org.edb/core_2.9.3/0.0.1/jars/core_2.9.3.jar  ./spark-shell
+
+#clean cache
+rm -r /Users/mwu/.ivy2/cache/*
+rm -r /Users/mwu/.ivy2/local/*
+
+To publish
+1. what ever is put into /server/edb/core/lib will be include
+2. make sure use the right spark.jar there. e.g. , copy the following to the above folder
+make sure before you assembly spark jar , the /server/spark/project/Spark.build contains 
+
+def extraAssemblySettings() = Seq(test in assembly := {}) ++ Seq(
+mergeStrategy in assembly := {
+case m if m.toLowerCase.endsWith("manifest.mf") => MergeStrategy.discard
+case m if m.toLowerCase.matches("meta-inf.*\\.sf$") => MergeStrategy.discard
+case "reference.conf" => MergeStrategy.concat
+case _ => MergeStrategy.first
+}
+)
+
+/server/spark-0.7.2/streaming/target/scala-2.9.3/spark-streaming-assembly-0.7.2.jar
+
+To launch spark 0.7.3
+=======================
+./run spark.deploy.master.Master 
+./run spark.deploy.worker.Worker spark://127.0.0.1:7077 -p 7080 --webui-port 8082
+./run spark.deploy.worker.Worker spark://127.0.0.1:7077 -p 7081 --webui-port 8083
+
+To run spark  example:
+========================
+./run-example org.apache.spark.examples.SparkPi spark://127.0.0.1:7077
+
+Installed assembly plugin for sbt
+==================================
+~/.sbt/built.sbt
+add 
+
+addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.9.2")
+addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.9.2")

@@ -12,16 +12,17 @@ object EdbEnv extends Logging {
 @transient  var sc: SparkContext = _
 
   def init(): SparkContext = {
-    if (sc == null) {
+    //if (sc == null) {
       sc = new SparkContext(
-        if (System.getenv("MASTER") == null) "local" 
-          else System.getenv("MASTER"),
+        "spark://127.0.0.1:7077",
+//        if (System.getenv("MASTER") == null) "local" 
+ //         else System.getenv("MASTER"),
           "EDB::" + java.net.InetAddress.getLocalHost.getHostName,
-          System.getenv("SPARK_HOME"),
-        List("/server/edb/core/target/scala-2.9.3/engine.jar"),
+          "/server/spark",
+        List("/server/edb/core/target/scala-2.9.3/core_2.9.3.jar"),
           executorEnvVars)
-        sc.addSparkListener(new StatsReportListener())
-      }
+       // sc.addSparkListener(new StatsReportListener())
+      //}
       sc
     }
 

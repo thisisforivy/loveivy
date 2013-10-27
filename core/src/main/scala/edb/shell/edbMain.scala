@@ -22,22 +22,21 @@ object edbMain {
 
   def main(args: Array[String]) {
 
-    //init sc 
-    EdbEnv.init()
-
     var ok = true
-
     print("edb> ")
+
     while( ok ) {
       val ln = readLine()
       ok = ln != "quit" 
       if( ok ) {
         val input: Array[String]= Array(ln)
         try{
+          //init sc for each query
           val opTree = 
           SQLParser.compile(input.reduceLeft[String](_ + '\n' + _))
           if(opTree!= null){
 
+            EdbEnv.init()
             opTree.initializeMasterOnAll
             //kicks off query
             val result = opTree.execute
@@ -47,13 +46,19 @@ object edbMain {
             for (i <-1 to 100)
               println()
             b.map(x=>println(x))   
+
+            EdbEnv.stop()
           }
           println()
           print("edb> ")
         }
         catch {
           case e: Exception => { 
-            println("hey, watch out!")
+            println("hey, watch out!" + e)
+            print("edb> ")
+          }
+          case e2: RuntimeException => {
+            println("hey, watch out!" + e2)
             print("edb> ")
           }
         }

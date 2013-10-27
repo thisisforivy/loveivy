@@ -163,11 +163,13 @@ object SQLParser extends StandardTokenParsers {
     result match {
       case Success(tree, _) => {
         //dump the AST tree
-        println("***** AST tree starts ******")
+     /* println("***** AST tree starts ******")
         println(tree)
         println("***** AST tree ends ******")
         println()
         println()
+        */
+
         tree 
       }
       case e: NoSuccess => {

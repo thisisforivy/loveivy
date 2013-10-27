@@ -1,5 +1,7 @@
 import sbt._
 import Keys._
+import sbtassembly.Plugin._
+import AssemblyKeys._
 
 /*
 
@@ -11,6 +13,7 @@ import Keys._
  */
 
 object BuildSettings {
+
   val HADOOP_VERSION = "0.20.2-cdh3u4"
   val HADOOP_MAJOR_VERSION = "1"
   val buildSettings = Defaults.defaultSettings ++ Seq(
@@ -28,29 +31,41 @@ object BuildSettings {
       "org.easymock" % "easymock" % "3.1" % "test",
       "org.spark-project" %% "spark-core" % "0.7.3",
       "org.apache.hadoop" % "hadoop-core" % HADOOP_VERSION excludeAll( ExclusionRule(organization = "org.codehaus.jackson") )
-    ),
-  resolvers ++= Seq(
-    "Akka Repository" at "http://repo.akka.io/releases/",
-    "Spray Repository" at "http://repo.spray.cc/")
+  ),
+resolvers ++= Seq(
+  "Akka Repository" at "http://repo.akka.io/releases/",
+  "Spray Repository" at "http://repo.spray.cc/")
 )
   unmanagedBase <<= baseDirectory { base => base / "lib" }
 }
 
 /**
-* root build
-*/
+  * root build
+  */
 object EDB_Build extends Build {
-import BuildSettings._
+  import BuildSettings._
 
-lazy val root: Project = Project("root",
-file("core"),
-settings = buildSettings
-)
+  lazy val root: Project = Project("root",
+    file("core"),
+    settings = buildSettings ++ assemblySettings ++ extraAssemblySettings 
+    //settings = buildSettings
+  )
 
 lazy val core: Project = Project(
-"core",
-file("core"),
-settings = buildSettings
+  "core",
+  file("core"),
+  settings = buildSettings ++ assemblySettings ++  extraAssemblySettings 
+  //settings = buildSettings
 )
+
+
+  def extraAssemblySettings() = Seq(test in assembly := {}) ++ Seq(
+    mergeStrategy in assembly := {
+      case m if m.toLowerCase.endsWith("manifest.mf") => MergeStrategy.discard
+      case m if m.toLowerCase.matches("meta-inf.*\\.sf$") => MergeStrategy.discard
+      case "reference.conf" => MergeStrategy.concat
+      case _ => MergeStrategy.last
+    }
+  )
 
 }
