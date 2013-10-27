@@ -28,7 +28,6 @@ case _ => MergeStrategy.first
 }
 )
 
-/server/spark-0.7.2/streaming/target/scala-2.9.3/spark-streaming-assembly-0.7.2.jar
 
 To launch spark 0.7.3
 =======================
@@ -49,7 +48,12 @@ add
 
 addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.9.2")
 
-2. In Build.scala, add conflict merge strategy
+2. In Build.scala, import assembly lib, and add conflict merge strategy
+
+import sbtassembly.Plugin._
+import AssemblyKeys._
+
+++assemblySettings 
 
 def extraAssemblySettings() = Seq(test in assembly := {}) ++ Seq(
 mergeStrategy in assembly := {
@@ -62,6 +66,7 @@ case _ => MergeStrategy.last
 
 3. Make sure we also have spark-core-assembly-0.7.2.jar under /server/edb/core/lib/
 we can generate and copy it from /server/spark/sbt/sbt assembly, then copy
+
 
 4. Then run sbt assembly and it will generate 
 /server/edb/core/target/scala-2.9.3/core-assembly-0.0.1.jar
