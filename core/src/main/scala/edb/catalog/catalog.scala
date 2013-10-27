@@ -195,8 +195,10 @@ object Catalog extends Serializable {
     }
 
     //save to local tmp file
-    val tempDir = Files.createTempDir()
-    val tmpFileLoc: String = tempDir + "/newCatalog"
+    val tempDir = "/tmp/edb/" 
+    val tmpFileLoc: String = tempDir + 
+    "/newCatalog" + Platform.currentTime
+
     val outTmp = new FileWriter(tmpFileLoc)
     outTmp.write(kvList)
     println(tempDir + "/input")
@@ -208,6 +210,8 @@ object Catalog extends Serializable {
       fs.delete(catalogLoc)
     }
     FileUtil.copy(file, fs, catalogLoc, true, conf) 
+    //delete tmp file
+    file.delete()
   }
 
   /**
@@ -253,7 +257,7 @@ object Catalog extends Serializable {
   MMap[String, MMap[String,Int]]()
 
   //create tableName->latestSchema map 
-  private var nameToSchema = (getSchemaIDs() map 
+  def nameToSchema = (getSchemaIDs() map 
     { i=> getTableName(i)-> new Schema(i, getTableLatestVersion(i).toByte)}).toMap
 
   /* return a set containing all schema IDs in the catalog */
