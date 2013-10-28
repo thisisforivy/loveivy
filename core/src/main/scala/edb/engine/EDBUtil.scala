@@ -3,12 +3,12 @@ package edb.engine
 import edb.catalog._
 import edb.parser._
 
-import spark.SparkContext
-import SparkContext._
-import spark.{RDD}
-import spark.{Logging}
-
 import scala.reflect.BeanProperty
+
+import org.apache.spark.SparkContext
+import org.apache.spark.rdd.{RDD}
+import org.apache.spark.{Logging}
+
 import org.apache.hadoop.io._
 import org.apache.hadoop.conf._
 import org.apache.hadoop.mapred._

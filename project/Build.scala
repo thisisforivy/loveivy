@@ -29,7 +29,8 @@ object BuildSettings {
       "org.scalatest" %% "scalatest" % "1.9.1" % "test",
       "org.scalacheck" %% "scalacheck" % "1.10.0" % "test",
       "org.easymock" % "easymock" % "3.1" % "test",
-      "org.spark-project" %% "spark-core" % "0.7.3",
+      "org.apache.spark" %% "spark-core" % "0.8.0-incubating",
+      "org.apache.hadoop" % "hadoop-client" % "0.20.2-cdh3u4",
       "org.apache.hadoop" % "hadoop-core" % HADOOP_VERSION excludeAll( ExclusionRule(organization = "org.codehaus.jackson") )
   ),
 resolvers ++= Seq(

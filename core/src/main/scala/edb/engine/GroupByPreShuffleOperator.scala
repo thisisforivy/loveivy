@@ -2,12 +2,11 @@ package edb.engine
 
 import edb.parser._
 import edb.catalog._
-import spark.SparkContext
-import SparkContext._
-import spark.{RDD}
-import spark.{Logging}
 import scala.reflect.BeanProperty
+
 import scala.collection.mutable.ArrayBuffer
+import org.apache.spark.SparkContext
+import org.apache.spark.rdd.{RDD}
 
 class GroupByPreShuffleOperator(
   inSchema: Schema, 

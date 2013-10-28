@@ -522,7 +522,7 @@ object Catalog extends Serializable {
             case e4: LongAtt=> new LongVal(e4.getName,
               gen.nextInt(100000))
             case e5: StringAtt=> new StringVal(e5.getName,
-              randString(gen.nextInt(20)+1))
+              randString(10))
             case e6: BooleanAtt=> new BooleanVal(e6.getName,
               gen.nextBoolean)
             case e7: DateAtt=> new DateVal(e7.getName,

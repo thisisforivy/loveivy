@@ -2,9 +2,10 @@ package edb.enviroment
 
 import edb.engine._
 import scala.collection.mutable.{HashMap, HashSet}
-import spark.SparkContext
-import spark.scheduler.StatsReportListener
-import spark.{Logging}
+import org.apache.spark.SparkContext
+import org.apache.spark.scheduler.StatsReportListener
+import org.apache.spark.{Logging}
+import org.apache.spark.serializer.{KryoSerializer => SparkKryoSerializer}
 
 /** A singleton object for the master program. The slaves should not access this. */
 object EdbEnv extends Logging {
@@ -12,24 +13,20 @@ object EdbEnv extends Logging {
 @transient  var sc: SparkContext = _
 
   def init(): SparkContext = {
-    //if (sc == null) {
       sc = new SparkContext(
         "spark://127.0.0.1:7077",
-//        if (System.getenv("MASTER") == null) "local" 
- //         else System.getenv("MASTER"),
           "EDB::" + java.net.InetAddress.getLocalHost.getHostName,
           "/server/spark",
-        List("/server/edb/core/target/scala-2.9.3/core_2.9.3.jar"),
+          List("/server/edb/core/target/scala-2.9.3/core_2.9.3-0.0.1.jar"),
           executorEnvVars)
-       // sc.addSparkListener(new StatsReportListener())
-      //}
       sc
     }
 
     logInfo("Initializing EdbEnv")
 
-    System.setProperty("spark.serializer", 
-      classOf[spark.KryoSerializer].getName)
+    System.setProperty("spark.KryoSerializer", 
+      classOf[SparkKryoSerializer].getName)
+
 
     val executorEnvVars = new HashMap[String, String]
     executorEnvVars.put("SCALA_HOME", getEnv("SCALA_HOME"))

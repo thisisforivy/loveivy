@@ -2,13 +2,18 @@ package edb.engine
 
 import edb.parser._
 import edb.catalog._
-import spark.HashPartitioner
-import spark.SparkContext
-import SparkContext._
-import spark.{RDD}
-import spark.{Logging}
+
 import scala.reflect.BeanProperty
 import scala.collection.mutable.ArrayBuffer
+
+import org.apache.spark.HashPartitioner
+import org.apache.spark.SparkContext
+import org.apache.spark.SparkContext._
+import org.apache.spark.{Aggregator, HashPartitioner}
+import org.apache.spark.rdd.{RDD, ShuffledRDD,PairRDDFunctions}
+import org.apache.spark.rdd._
+import org.apache.spark.{Logging}
+
 
 class GroupByShuffleOperator(
   aggSchema: Schema, 
@@ -62,12 +67,16 @@ extends UnaryOperator[SequenceRecord] {
     */
   override def preprocessRdd(rdd: RDD[_]): RDD[_] = {
 
+//    val partitioner = new ReduceKeyPartitioner(numReducer)
+//    val   partitioner  = new HashPartitioner(numReducer)
+ //   val repartitionedRDD = new ShuffledRDD[Any, Any, (Any, Any)](rdd.asInstanceOf[RDD[(Any, Any)]], partitioner)
+  //  repartitionedRDD 
+
     rdd.asInstanceOf[RDD[(Any, Any)]].combineByKey(
       GroupByAggregator.createCombiner _,
       GroupByAggregator.mergeValue _,
       null,
-      new HashPartitioner(numReducer),
-      false)
+      new HashPartitioner(numReducer), false) 
   }
 
   /**

@@ -6,7 +6,7 @@ import scala.util.parsing.combinator.syntactical._
 import scala.util.parsing.combinator._
 import scala.util.parsing.combinator.token._
 import scala.io._
-import spark.{Logging}
+import org.apache.spark.{Logging}
 
 /**
   * Singleton class doing explain plan

@@ -5,12 +5,11 @@ import edb.catalog._
 import edb.engine._
 import edb.enviroment._
 
-import spark.SparkContext
-import SparkContext._
 import scala.io._
 import scala.Console._
 import scala.util.Random
 
+import org.apache.spark.SparkContext._
 import org.apache.hadoop.io._
 import org.apache.hadoop.conf._
 import org.apache.hadoop.fs._

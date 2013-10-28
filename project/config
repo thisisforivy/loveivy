@@ -73,4 +73,77 @@ we can generate and copy it from /server/spark/sbt/sbt assembly, then copy
 
 5. Then, go to that folder do, java -cp ./core-assembly-0.0.1.jar edb.shell.edbMain //you need to start spark first
 
+10/27/2013
 
+Migrate edb to spark 0.8
+
+1. download 0.8 tar, compile by sbt/sbt compile
+2. assembly by sbt/sbt assembly
+- cp server/spark-0.8.0-incubating/assembly/target/scala-2.9.3/spark-assembly-0.8.0-incubating-hadoop0.20.2-cdh3u4.jar /server/edb/core/lib/
+Note: remove the old spark-assmebly there
+
+- create soft link to java , since spark is looking at /bin/java
+sudo ln /bin/java /usr/bin/java
+
+-cp from shark 0.8 ReduceKeyMapSide.scala to engine/ReduceKeyPartitioner.scala
+modify ReduceKeyPartition class with 
+case k1: SequenceRecord =>{
+        val mod = k1.hashCode % partitions
+        // Guard against negative hash codes.
+        if (mod < 0) mod + partitions else mod
+      }
+
+
+3. #clean cache
+rm -r /Users/mwu/.ivy2/cache/*
+rm -r /Users/mwu/.ivy2/local/*
+
+4. change code import , rdd folder has changed, so change its package
+as well. RDD.scala has been moved to rdd/
+- optimizer.scala:import org.apache.spark.{Logging}
+- edbMain.scala:import org.apache.spark.SparkContext._
+- EdbEnv.scala: import org.apache.spark.SparkContext._
+import org.apache.spark.spark.scheduler.StatsReportListener
+import org.apache.spark.{Logging}
+
+- engine/ all files header
+
+Note: in GroupbyShuffled.scala , add
+import org.apache.spark.SparkContext._
+For using implicity conversion of pairedRDD functions. This is documented in the RDD.scala comments
+
+5. Change Build.scala with the new spark maven location
+groupId = org.apache.spark
+artifactId = spark-core_2.9.3
+version = 0.8.0-incubating 
+Note: if you use double % like , remove the version suffix, it will use scala version as suffix
+  "org.apache.spark" %% "spark-core" % "0.8.0-incubating",
+
+For hadoop client to compile, add
+
+      "org.apache.hadoop" % "hadoop-client" % "0.20.2-cdh3u4",
+
+6. compile, and do publish-local to generate core_2.9.3.jar for EdbEnv.scala to use
+        List("/server/edb/core/target/scala-2.9.3/core_2.9.3-0.0.1.jar"),
+
+Then, 
+assembly to put the package to run stand alone java under 
+/server/edb/core/target/scala-2.9.3/core-assembly_2.9.3.jar
+
+7. Then, launch spark 
+
+-modify config/spark-env.sh
+
+cd /server/spark-0.8_incubator
+
+
+-./bin/start-master.sh 
+-./spark-class org.apache.spark.deploy.worker.Worker spark://127.0.0.1:7077
+-./spark-class org.apache.spark.deploy.worker.Worker spark://127.0.0.1:7077
+
+Then, check 
+localhost://127.0.0.1:8080
+
+It fails with 1M record group by  on string
+
+result exceeded Akka frame size
