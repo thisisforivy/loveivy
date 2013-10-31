@@ -147,3 +147,20 @@ localhost://127.0.0.1:8080
 It fails with 1M record group by  on string
 
 result exceeded Akka frame size
+
+8. disable log4j. Cp /server/spark/conf/log4j.properties.template  to log4j.properties
+
+Then, edit it to OFF as below.
+log4j.rootCategory=OFF
+log4j.appender.console=org.apache.log4j.ConsoleAppender
+log4j.appender.console.layout=org.apache.log4j.PatternLayout
+log4j.appender.console.layout.ConversionPattern=%d{yy/MM/dd HH:mm:ss} %p %c{1}: %m%n
+# Ignore messages below warning level from Jetty, because it's a bit verbose
+log4j.logger.org.eclipse.jetty=OFF
+
+Next, in command line under 
+
+/server/edb/core/target/scala-2.9.3
+run, let the log4j pointing to the new property file 
+
+java -cp core-assembly-0.0.1.jar -Dspark.akka.frameSize=2000 -Dspark.shuffle.compress=true -Dlog4j.configuration=/server/spark/conf/log4j.properties edb.shell.edbMain
