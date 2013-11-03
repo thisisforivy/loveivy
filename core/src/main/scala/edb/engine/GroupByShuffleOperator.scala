@@ -84,11 +84,6 @@ extends UnaryOperator[SequenceRecord] {
     */
   override def preprocessRdd(rdd: RDD[_]): RDD[_] = {
 
-//    val partitioner = new ReduceKeyPartitioner(numReducer)
-//    val   partitioner  = new HashPartitioner(numReducer)
- //   val repartitionedRDD = new ShuffledRDD[Any, Any, (Any, Any)](rdd.asInstanceOf[RDD[(Any, Any)]], partitioner)
-  //  repartitionedRDD 
-
     rdd.asInstanceOf[RDD[(Any, Any)]].combineByKey(
       GroupByAggregator.createCombiner _,
       GroupByAggregator.mergeValue _,
