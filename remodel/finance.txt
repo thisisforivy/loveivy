@@ -22,7 +22,9 @@ and garden window
 
 11/28/2013 LG LDG3036ST 30-inch self-cleaning freestanding double over gas convection range- stainless steel $1195 
 
-tot: $5807.24
+11/29/2013 Samsung 65" Class UN65F7100 (64.50" Diag.) 7100 Series LED TV  $1,860.04 from tvsuperstores.com
+
+tot: $11163.18
 
 two baths tile: $1000
 4 rooms floor: $5000
@@ -42,7 +44,7 @@ sub tot: $6100
 =====================
 tot: $15300
 
-Total estimate: $21107 + $1500 (TV)=$22607
+Total estimate: $9200+$6100+ $11163.18= $26463.19
 
 Permit
 ==========
@@ -59,6 +61,6 @@ Labor
 11/22/2013 $10000 first pay cash to Larry
 
 
-total estimate: $29620+$59000 = $88620
+total estimate: $26463.19+$4013.65+$3000 +$5900 = $92476.84
 
-remainder from $100K is $11380
+remainder from $100K is $7523
