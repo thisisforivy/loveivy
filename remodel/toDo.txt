@@ -3,4 +3,5 @@
 3. decide whether we need pot filler for plumbing.
 4. print dimension of sink and cooktop. 
 5. ask for dimensions of kitchen and height.
+6. confirm there is light and outlet in attic
 
