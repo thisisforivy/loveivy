@@ -1,0 +1,6 @@
+1. return amazon pot filler.
+2. check filter pot filler
+3. decide whether we need pot filler for plumbing.
+4. print dimension of sink and cooktop. 
+5. ask for dimensions of kitchen and height.
+
