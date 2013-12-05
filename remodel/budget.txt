@@ -37,6 +37,7 @@ SubTotal: $6759
 - $200 water filter
 - $350 kitchen sink
 - $200 sink disposal 
+- $400 water heater
 
 SubTotal: $26543   (including 0.9 tax)
 
