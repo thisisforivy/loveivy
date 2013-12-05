@@ -1,11 +1,12 @@
-1. return amazon pot filler. (done)
-2. check filter pot filler (no need any more)
-3. decide whether we need pot filler for plumbing. (ivy said no)
-4. print dimension of sink and cooktop. (done) 
+1. find water filter
+2. Check water heater for 4 usage concurrently
+4. print dimension of sink and cooktop. (done)
 5. ask for dimensions of kitchen and height. (done)
 6. confirm there is light and outlet in attic
 7. Buy toilet cover using printed coupon (in my bag) or online promotion code
 8. Buy Fernoco Inc. FTS-3 3-Inch Wax Free toilet seal (ask Steve it's 3" or 4"), home depot $4.7.
-9. Check water heater for 4 usage concurrently
 10. Check Water filter with hot water line
 11. tell mei water heater, and for disposal, water filter, and microwave we need three outlet.
+
+12. get Toto toilet from sincere HomeDepot
+13. get sky tub and buy fan from Homedepot
