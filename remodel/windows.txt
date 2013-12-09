@@ -165,7 +165,7 @@ Overall, I need to replace 11 windows, and 1 sliding door. And add one new Garde
 - Lock type= Wen-Locks (or similar auto locking)
   - Hardware Finish- interior = White
 
-+ Window 11: laundry room (operation outside looking OX)
++ Window 11: laundry room (operation outside looking T shape, the bottom part is OX, or small enough) 
   - size (width x height)= 37.3125" x 38.375"
   - material= Vinyl
   - Frame type= Flush Fin
