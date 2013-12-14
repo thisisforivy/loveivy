@@ -13,12 +13,16 @@ Quote4: Brothershomeimp.com
 
 Quote5: wholesalewindowco.com  (yelp 48 reviews 5 star)
 
+
 Here is my windows and door measurement, please see attached pdf file for how I took the measurement (the interior dimension of existing frame). You can subtract standard 3/8" for the final size on width and height. I did not do the subtraction. 
+
+
+Window installation instruction: http://www.youtube.com/watch?v=eBQq3YjJn-4
 
 Overall, I need to replace 11 windows, and 1 sliding door. And add one new Garden window, and one out-swing French door. My budget is tight (around $3500). Can you please give me the best quote based on your sale now ? (maximizing the quality of the material). I only need the material since my contractor can install them for me.  Many thanks! 
 
 + Window 1: Living room  (operation outside looking XOX)
-  - size (width x height)= 93.25" x 46.375" 
+  - size (width x height)= 93.25" x 46.375" , (subtract 0.5"): 92.75" x 45.875" 
   - material= Vinyl
   - Frame type= Flush Fin
   - Exterial and Interior color= White
@@ -34,7 +38,7 @@ Overall, I need to replace 11 windows, and 1 sliding door. And add one new Garde
 - Lock type= Wen-Locks (or similar auto locking)
   - Hardware Finish- interior = White
 + Window 2: Bedroom 1 (operation outside looking OX)
-  - size (width x height)= 69.25" x 46.25" 
+  - size (width x height)= 69.25" x 46.25", (subtract 0.5"): 68.75" x 45.75"
   - material= Vinyl
   - Frame type= Flush Fin
   - Exterial and Interior color= White
@@ -50,7 +54,7 @@ Overall, I need to replace 11 windows, and 1 sliding door. And add one new Garde
 - Lock type= Wen-Locks (or similar auto locking)
   - Hardware Finish- interior = White
 + Window 3: Bedroom 2 (operation outside looking OX)
-  - size (width x height)= 69.25" x 46.375" 
+  - size (width x height)= 69.25" x 46.375", (subtract 0.5"): 68.75" x 45.875"
   - material= Vinyl
   - Frame type= Flush Fin
   - Exterial and Interior color= White
@@ -66,7 +70,7 @@ Overall, I need to replace 11 windows, and 1 sliding door. And add one new Garde
 - Lock type= Wen-Locks (or similar auto locking)
   - Hardware Finish- interior = White
 + Window 4: Bathroom (operation outside looking OX)
-  - size (width x height)= 57.375" x 34.375" 
+  - size (width x height)= 57.375" x 34.375" , (subtract 0.5"): 56.875" x 33.875"
   - material= Vinyl
   - Frame type= Flush Fin
   - Exterial and Interior color= White
@@ -83,7 +87,7 @@ Overall, I need to replace 11 windows, and 1 sliding door. And add one new Garde
   - Hardware Finish- interior = White
 
 + Window 5: Livingroom (operation Direct set, picture window)
-  - size (width x height)= 22.5" x 52.437" 
+  - size (width x height)= 22.5" x 52.437", (subtract 0.5"): 22" x 51.937"
   - material= Vinyl
   - product to match = Single hung/slider/casement
   - Frame type= Flush Fin 
@@ -97,7 +101,7 @@ Overall, I need to replace 11 windows, and 1 sliding door. And add one new Garde
   - Glass thickness = standard
 
 + Window 6: Livingroom (operation Direct set, picture window)
-  - size (width x height)= 35.3125"x 52.437" 
+  - size (width x height)= 35.3125"x 52.437", (subtract 0.5"): 34.8125" x 51.937"  
   - material= Vinyl
   - product to match = Single hung/slider/casement
   - Frame type= Flush Fin 
@@ -110,7 +114,7 @@ Overall, I need to replace 11 windows, and 1 sliding door. And add one new Garde
   - Customer elevation = 0-3500 feet
   - Glass thickness = standard
 + Window 7: Livingroom (operation Direct set, picture window)
-  - size (width x height)= 53.75"x 52.56" 
+  - size (width x height)= 53.75"x 52.56", (subtract 0.5"): 53.25" x 52.06"  
   - material= Vinyl
   - product to match = Single hung/slider/casement
   - Frame type= Flush Fin 
@@ -123,7 +127,7 @@ Overall, I need to replace 11 windows, and 1 sliding door. And add one new Garde
   - Customer elevation = 0-3500 feet
   - Glass thickness = standard
 + Window 8: Livingroom (operation Direct set, picture window)
-  - size (width x height)= 35.25"x 52.4375" 
+  - size (width x height)= 35.25"x 52.4375", (subtract 0.5"): 34.75" x 51.9375" 
   - material= Vinyl
   - product to match = Single hung/slider/casement
   - Frame type= Flush Fin 
@@ -136,7 +140,7 @@ Overall, I need to replace 11 windows, and 1 sliding door. And add one new Garde
   - Customer elevation = 0-3500 feet
   - Glass thickness = standard
 + Window 9: Livingroom (operation Direct set, picture window)
-  - size (width x height)= 22.56"x 52.4375" 
+  - size (width x height)= 22.56"x 52.4375", (subtract 0.5"): 22.06" x 51.9375" 
   - material= Vinyl
   - product to match = Single hung/slider/casement
   - Frame type= Flush Fin 
@@ -149,7 +153,7 @@ Overall, I need to replace 11 windows, and 1 sliding door. And add one new Garde
   - Customer elevation = 0-3500 feet
   - Glass thickness = standard
 + Window 10: living room (operation outside looking OX)
-  - size (width x height)= 45.25" x 52.0625" 
+  - size (width x height)= 45.25" x 52.0625", (subtract 0.5"): 44.75" x 51.5625" 
   - material= Vinyl
   - Frame type= Flush Fin
   - Exterial and Interior color= White
@@ -166,7 +170,7 @@ Overall, I need to replace 11 windows, and 1 sliding door. And add one new Garde
   - Hardware Finish- interior = White
 
 + Window 11: laundry room (operation outside looking T shape, the bottom part is OX, or small enough) 
-  - size (width x height)= 37.3125" x 38.375"
+  - size (width x height)= 37.3125" x 38.375", (subtract 0.5"): 36.8125" x 37.875"
   - material= Vinyl
   - Frame type= Flush Fin
   - Exterial and Interior color= White
