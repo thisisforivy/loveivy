@@ -30,6 +30,8 @@ waiting for Claim # on Monday. CustomerID# 34103, Order number is 49401, placed 
 12/15/2013 $154.76 electric panel , give to Mr. Mei
 12/15/2013 $1112.04, french door from homedepot, brand Jeld-Wen
 12/15/2013 $2502.38, windows and garden window from homedepot, brand Jeld-Wen
+12/15/2013 $16.57, 4 CFL bulb 1500 lumens, life is 5K hours, similar to LED. equivalent to 75w bulb, consumes 13w
+12/15/2013 $256.21, electric panel related, paid to Mr. Mei
 
 SubTotal: $6759
 
