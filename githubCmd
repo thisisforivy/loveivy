@@ -7,3 +7,13 @@ https://help.github.com/articles/fork-a-repo
 
 c) the upstream author just merge the pull request similar to 
 https://help.github.com/articles/using-pull-requests
+
+2. My fork of spark master is under github/mingxiwu, the clone is in local
+
+/server/sparkclone/incubator-spark
+I have done 
+
+sbt/sbt assembly
+
+And run 
+./run-example org.apache.spark.examples.SparkPi local
