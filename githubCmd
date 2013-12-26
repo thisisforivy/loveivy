@@ -13,7 +13,10 @@ https://help.github.com/articles/using-pull-requests
 /server/sparkclone/incubator-spark
 I have done 
 
-sbt/sbt assembly
+- changed .profile two export to point to scala-2.10.3
+- sbt/sbt assembly
 
 And run 
 ./run-example org.apache.spark.examples.SparkPi local
+
+./spark-shell
