@@ -32,9 +32,10 @@ waiting for Claim # on Monday. CustomerID# 34103, Order number is 49401, placed 
 12/15/2013 $2502.38, windows and garden window from homedepot, brand Jeld-Wen
 12/15/2013 $16.57, 4 CFL bulb 1500 lumens, life is 5K hours, similar to LED. equivalent to 75w bulb, consumes 13w
 12/15/2013 $256.21, electric panel related, paid to Mr. Mei
+12/16/2013 $36, electric wires, paid to Steven
 01/05/2013 $109.07 primer 
 01/05/2013 $64.27  ceiling paint and semi-glosss door paint
-
+=======
 SubTotal: $6759
 
 2. To buy
