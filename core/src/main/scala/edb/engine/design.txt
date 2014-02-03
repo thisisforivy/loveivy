@@ -41,8 +41,7 @@ We have the following rules for pushing predicate down
 a left deep tree
 
 a) If current node is OR, and it has join predicate, we cannot push it down. e.g A.a = B.b or A.c=3, we cannot push A.c=3 
-   to below (A join B). {return this }. However, if the curernt OR  is a disjunct of a single table predicate, we can push it down
-   to access path.
+   to below (A join B). {return this }. However, if the curernt OR  is a disjunct of a unique single table predicate, we can push it down to access path.
 
 b) If current root node is AND, we call left = PUSH(left sub-tree), and right = PUSH(right sub-tree). 
 IF left == null, and right == null, THEN return null.
