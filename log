@@ -12,6 +12,9 @@ This trimester goal is to
 
 04/08/2014	Downloaded and read Scala quick tutorial http://www.scala-lang.org/docu/files/ScalaTutorial.pdf
 		Found this useful book http://www.scala-lang.org/docu/files/ScalaByExample.pdf
+
+04/14/2014      Found explaination of self:BaseType =>, it basically means an alias of a specified type.
+                See http://www.scala-lang.org/old/node/8194.html
 		
 
 
