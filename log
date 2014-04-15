@@ -14,7 +14,8 @@ This trimester goal is to
 		Found this useful book http://www.scala-lang.org/docu/files/ScalaByExample.pdf
 
 04/14/2014      Found explaination of self:BaseType with Product =>, it basically means an alias of a specified type, and the 
-                class extends this trait must mix in the Product trait. 
+                class extends this trait must mix in the Product trait. So, case class extends the abstract class, 
+                will auto-generate the product interface method
                 See goog example here http://dcsobral.blogspot.com/2009/06/case-classes-and-product.html
                 See http://www.scala-lang.org/old/node/8194.html
 		
