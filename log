@@ -1,7 +1,14 @@
 This trimester goal is to 
+----1.
 	- understand catalyst tree framework
 	- expression numbering and advanced SQL building block
 	- side effect: know more about scala
+----2.
+	- define edb algebra 
+----3.
+	- take akka event program class 
+
+
 
 04/08/2014	Downloaded and read Scala quick tutorial http://www.scala-lang.org/docu/files/ScalaTutorial.pdf
 		Found this useful book http://www.scala-lang.org/docu/files/ScalaByExample.pdf
