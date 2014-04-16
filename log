@@ -26,6 +26,7 @@ This trimester goal is to
 		2. Overview of Turn Data Management Platform for Digital Advertising. PVLDB 6(11): 1138-1149 (2013)
 
 		3. catalyst by Spark team. (A rule based query optimization tree framework). There are some slides on spark summit 2013. I also took a look of their source code. 
+		4. *** First order calculus**** (SQL) means quantifiers and variable are range over set elements, not over calculus formula.
 		
 
 
