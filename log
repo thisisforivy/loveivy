@@ -26,7 +26,14 @@ This trimester goal is to
 		2. Overview of Turn Data Management Platform for Digital Advertising. PVLDB 6(11): 1138-1149 (2013)
 
 		3. catalyst by Spark team. (A rule based query optimization tree framework). There are some slides on spark summit 2013. I also took a look of their source code. 
-		4. *** First order calculus**** (SQL) means quantifiers and variable are range over set elements, not over calculus formula.
+		4. *** First order calculus**** (SQL) means quantifiers and variable are range over set elements, not over calculus formula. Union, difference, catesian product,
+			projection, selection---total 5 oeprators.
+		5. NF^2 (non-first normal form), allow set attribute with nest and unnest operator extension.
+
+04/17/2014	Seems OO on hadoop meets the market requirement in modern age. "OO systems have not focused on bread-and-butter traditional business-data processing 
+		applications where high performance, reliability, and scalability are crucial," Stonebraker said. 
+		"This is a large market where relational systems excel and have enjoyed wide adoption. In Hadoop/spark, high performance, reliability and scalability is not an
+		issue.
 		
 
 
