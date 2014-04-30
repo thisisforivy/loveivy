@@ -1,0 +1,18 @@
+1. Correlation query: find top 10 correlated category_id for a given beacon_id.
+
+select dmp.impression.beacon_id, top10(dmp.data.category_id)
+from dmp
+where co-reach(dmp.impression.beacon_id,dmp.data.cateory_id) >1000000 AND
+reach(dmp.data.category_id)>5000000
+
+The query plan would be
+
+a. scan dmp.data table to find the candidate satify inter-entity-level filter 
+reach(dmp.data.category_id)>5000000
+
+b. catesian product of a's result with dmp.impression.beacon_id intra-entity level
+and add a Seed (signature) for each row, pipeline to c.
+
+c. group by signature, and apply inter-entity-level filter co-reach(dmp.impression.beacon_id,dmp.data.cateory_id) >1000000 
+
+d. apply top10 aggregate function. 
