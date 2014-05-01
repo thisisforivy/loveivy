@@ -16,3 +16,10 @@ and add a Seed (signature) for each row, pipeline to c.
 c. group by signature, and apply inter-entity-level filter co-reach(dmp.impression.beacon_id,dmp.data.cateory_id) >1000000 
 
 d. apply top10 aggregate function. 
+
+2. Old CQL 
+
+select sum(distinct case when list_has(dmp.data.turn_category_id,12296581, 12296609) then 1 else 0 end) segment1,
+       sum(distinct case when list_has(dmp.data.turn_category_id,12296581, 12296609) then 1 else 0 end) segment2...
+from dmp
+dates [2012_10_01,2012_10_10]
