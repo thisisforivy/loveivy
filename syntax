@@ -19,7 +19,30 @@ d. apply top10 aggregate function.
 
 2. Old CQL 
 
+Q1. SegmentUU: select sum(distinct case when list_has(dmp.data.turn_category_id,12296581, 12296609) then 1 else 0 end) segment1,
+       sum(distinct case when list_has(dmp.data.turn_category_id,12296581, 12296609) then 1 else 0 end) segment2...
+from dmp
+dates [2012_10_01,2012_10_10]
+
+Q2. AttributeUU: 
 select sum(distinct case when list_has(dmp.data.turn_category_id,12296581, 12296609) then 1 else 0 end) segment1,
        sum(distinct case when list_has(dmp.data.turn_category_id,12296581, 12296609) then 1 else 0 end) segment2...
 from dmp
 dates [2012_10_01,2012_10_10]
+
+Q3. (Adv, Attribute)UU:
+select advertiser_id,sum(distinct case when list_has(dmp.data.turn_category_id,12296581, 12296609) then 1 else 0 end) segment1,
+       sum(distinct case when list_has(dmp.data.turn_category_id,12296581, 12296609) then 1 else 0 end) segment2...
+from dmp
+dates [2012_10_01,2012_10_10]
+where advertiser_id in (1,2,3)
+
+
+new syntax
+
+
+Q2. select segmentID, reach(dmp.data.turn_category_id)
+    from dmp
+    where segment
+
+
