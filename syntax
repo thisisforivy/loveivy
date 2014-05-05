@@ -47,10 +47,11 @@ where advertiser_id in (1,2,3)
 
 3. new syntax
 
-select co-reach(advertiser_id, reach(
-       reach(exists (select count(*) from dmp.data where dmp.data.turn_category_id in (123, 456))) as segment1_UU,
-       reach(exists (select count(*) from dmp.data where dmp.data.turn_category_id in (211,121) or dmp.data.turn_category_id in (345,678) )) as attribute1_UU,
+select co-reach (dmp.impressions.advertiser_id, exists (select count(*) from dmp.data where dmp.data.turn_category_id in (123, 456))),
+       reach (exists (select count(*) from dmp.data where dmp.data.turn_category_id in (123, 456))) as segment1_UU,
+       reach (exists (select count(*) from dmp.data where dmp.data.turn_category_id in (211,121) or dmp.data.turn_category_id in (345,678) )) as attribute1_UU,
 from dmp
+where dmp.impression.advertiser_id in (1,2,3)
 
  
 
