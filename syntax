@@ -37,12 +37,25 @@ from dmp
 dates [2012_10_01,2012_10_10]
 where advertiser_id in (1,2,3)
 
+Q4. (Adv, Segment)UU:
+select advertiser_id,sum(distinct case when list_has(dmp.data.turn_category_id,12296581, 12296609) then 1 else 0 end) segment1,
+       sum(distinct case when list_has(dmp.data.turn_category_id,12296581, 12296609) then 1 else 0 end) segment2...
+from dmp
+dates [2012_10_01,2012_10_10]
+where advertiser_id in (1,2,3)
 
-new syntax
+
+3. new syntax
+
+select co-reach(advertiser_id, reach(
+       reach(exists (select count(*) from dmp.data where dmp.data.turn_category_id in (123, 456))) as segment1_UU,
+       reach(exists (select count(*) from dmp.data where dmp.data.turn_category_id in (211,121) or dmp.data.turn_category_id in (345,678) )) as attribute1_UU,
+from dmp
+
+ 
 
 
-Q2. select segmentID, reach(dmp.data.turn_category_id)
-    from dmp
-    where segment
+
+
 
 
