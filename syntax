@@ -17,7 +17,7 @@ c. group by signature, and apply inter-entity-level filter co-reach(dmp.impressi
 
 d. apply top10 aggregate function. 
 
-2. Old CQL 
+2. Old CQL  for Skew
 
 Q1. SegmentUU: select sum(distinct case when list_has(dmp.data.turn_category_id,12296581, 12296609) then 1 else 0 end) segment1,
        sum(distinct case when list_has(dmp.data.turn_category_id,12296581, 12296609) then 1 else 0 end) segment2...
@@ -45,7 +45,7 @@ dates [2012_10_01,2012_10_10]
 where advertiser_id in (1,2,3)
 
 
-3. new syntax
+Q5 new syntax
 
 select co-reach (dmp.impressions.advertiser_id, exists (select count(*) from dmp.data where dmp.data.turn_category_id in (123, 456))),
        reach (exists (select count(*) from dmp.data where dmp.data.turn_category_id in (123, 456))) as segment1_UU,
@@ -54,6 +54,13 @@ from dmp
 where dmp.impression.advertiser_id in (1,2,3)
 
  
+3. Old CQL for reach 
+
+select provider_user_id, count(distinct user_id)
+from dmp.provider_user_ids
+dates [2013_01_01, 2014_05_01]
+where provider_user_id in ('007002006890000145313', '013003011370000902322')
+and provider_id =3310169
 
 
 
