@@ -1,1 +1,70 @@
 09/2013 EDB 0.8 released
+
+05/04/2014 spark demo 
+
+Demo steps. 
+Reference of mingxiwu/edb/blob/edb0.8/project/config
+
+Launch Hadoop
+===============
+cd /server/hadoop/bin/
+tart-all.sh
+hadoop fs -ls /
+To see hdfs and job tracker in browser.
+
+http://127.0.0.1:50070
+http://127.0.0.1:50030
+
+Launch Spark
+==============
+cd /server/spark-0.8_incubator
+check  config/spark-env.sh
+
+./bin/start-all.sh //this will start 3 workers.
+
+check:
+http://127.0.0.1:8080/
+we should see 3 workers.
+
+Launch EDB
+============
+cd /server/edb/core/target/scala-2.9.3
+
+java -cp core-assembly-0.0.1.jar -Dspark.akka.frameSize=2000 -Dspark.shuffle.compress=true 
+-Dlog4j.configuration=/server/spark/conf/log4j.properties edb.shell.edbMain
+
+This will start edb shell.
+
+- show tables //show all tables
+- desc abc //describe table named abc
+- select count(*) from abc
+- select * from abc
+- create table test2 (a int, b string)
+- generate table test2 10 //this will genearte 10 records
+- select * from test2
+- select m, sum(id) from abc group by m
+
+//I have done the following
+
+create a tmp catalog folder
+cd /tmp/ 
+mkdir /tmp/edb
+chmod 777 /tmp/edb
+
+
+Shut down demo
+===============
+-stop hadoop
+-ps -u mwu, kill spark, a java process
+
+
+
+
+05/05/2014 spark study note 
+http://www.cnblogs.com/hseagle/category/569175.html
+
+
+
+
+
+
