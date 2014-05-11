@@ -5,6 +5,16 @@ from dmp
 where co-reach(dmp.impression.beacon_id,dmp.data.cateory_id) >1000000 AND
 reach(dmp.data.category_id)>5000000
 
+
+//co-rearch
+select co-reach(dmp.impression.beacon_id, dmp.data.category_id) co-r
+from dmp
+where co-reach(dmp.impression.beacon_id,dmp.data.cateory_id) >1000000 AND
+reach(dmp.data.category_id)>5000000
+order by co-r 
+limited by 10
+
+
 The query plan would be
 
 a. scan dmp.data table to find the candidate satify inter-entity-level filter 
