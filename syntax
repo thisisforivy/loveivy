@@ -63,6 +63,27 @@ select co-reach (dmp.impressions.advertiser_id, exists (select count(*) from dmp
 from dmp
 where dmp.impression.advertiser_id in (1,2,3)
 
+New syntax
+
+select count_entity(exits(select dmp.data.turn_category_id from dmp.data where dmp.data.turn_category_id in (xxx1,xxx2) )) A1,
+       count_entity(exits(select dmp.data.turn_category_id from dmp.data where dmp.data.turn_category_id in (xxx3,xxx4) )) A2
+from dmp
+
+??? yet to be defined.
+
+select adv_id, count_entity(*)
+from dmp.impression, dmp.data
+where dmp.data.turn_category_id in (xxx1,xxx2)
+
+select count_entity(*) 
+from dmp.data
+where dmp.data.turn_category_id in (xxx1, xxx2) 
+
+
+
+
+
+
  
 3. Old CQL for reach 
 
@@ -71,6 +92,97 @@ from dmp.provider_user_ids
 dates [2013_01_01, 2014_05_01]
 where provider_user_id in ('007002006890000145313', '013003011370000902322')
 and provider_id =3310169
+
+
+
+The CQL introduces unnest and fetch operators.
+
+select adv_id, count(case when list_has (dmp.data.category_id, 123) 1 else 0)
+from dmp.impressions
+dates[]
+where adv_id = 123
+
+The query plan is 
+
+0. fetch dmp.data.category_id
+
+1. while(unnest dmp.impressions is true)
+    evaluate(list_function) to a scala value.
+
+2. stream up to group by. 
+
+Note1: we only support scala subquery. That is, all list function will evaluate to 1 scala.
+The correlated subquery is ok too. That is, the list function will take a parameter from the outer 
+query, and evaluate the list function.
+
+Note2:  we support two level deep unnest on the outer query's table. However, it is hard coded for the second level.
+
+Note3: One query may have 1 scanner (including unnest) and multiple list fetch operators. The fetch is always independent. We first maintain a list of nested table we want to fetch. And fetch them, then share the results.
+
+Note4: agg(distinct col) means we de-dup within user.
+
+The shortcomming of above, is that we do not support cartesian product(join) between two nested table. So, we cannot 
+do frequent patten mining  between two tables. 
+See UniversalProfileQueryMapper.java
+See NestedColumnOperator.java. It actually supports ListLong, ListString, ListFloat type in database generic type (see Value.java).
+
+
+
+A new query engine support within entity nested-tables relational algebra.
+
+
+-- catesian product mining, entity level aggregate
+select dmp.impression.beacon_id, dmp.data.category_id, count_entity(*) as A
+from dmp.impression, dmp.data
+where count_entity(dmp.data.category_id)>200000
+group by  dmp.impression.beacon_id, dmp.data.category_id
+having A >10000
+order by dmp.impression.beacon_id, count(distinct user_id), dmp.data.category_id
+limited by 10 each group
+
+
+-- join mining, entity level aggregate
+select dmp.impression.beacon_id, dmp.data.category_id, count_entity(*) as A
+from dmp.impression, dmp.data
+where count_entity(dmp.data.category_id)>200000 AND dmp.impression.contract_id = dmp.data.contract_id
+group by  dmp.impression.beacon_id, dmp.data.category_id
+having A >10000
+order by dmp.impression.beacon_id, count(distinct user_id), dmp.data.category_id
+limited by 10 each group
+
+-- record level aggregate, still witin user.
+select dmp.impression.beacon_id, dmp.data.category_id, count(*) as A
+from dmp.impression, dmp.data
+where count_entity(dmp.data.category_id)>200000 AND dmp.impression.contract_id = dmp.data.contract_id
+group by  dmp.impression.beacon_id, dmp.data.category_id
+having A >10000
+order by dmp.impression.beacon_id, count(distinct user_id), dmp.data.category_id
+limited by 10 each group
+
+-- old correlated query
+select adv_id, count(distinct case when list_has(dmp.data.adv_id, adv_id) then 1 else 0)
+from dmp.impressions
+date[]
+
+-- new syntax
+select dmp.impression.adv_id, count_entity(*) as A
+from dmp.impression, dmp.data
+where   dmp.impression.adv_id = dmp.data.adv_id
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
