@@ -65,9 +65,26 @@ where dmp.impression.advertiser_id in (1,2,3)
 
 New syntax
 
-select count_entity(exits(select dmp.data.turn_category_id from dmp.data where dmp.data.turn_category_id in (xxx1,xxx2) )) A1,
-       count_entity(exits(select dmp.data.turn_category_id from dmp.data where dmp.data.turn_category_id in (xxx3,xxx4) )) A2
-from dmp
+select (select count_entity(*) from dmp.data where dmp.data.turn_category_id in (xxx1,xxx2) )) S1
+       (select dmp.adv_id, count_entity(*) 
+        from dmp.impression, dmp.data 
+        where dmp.data.turn_category_id in (xxx3, xxx4)) AdvS1,
+       (select dmp.adv_id, count_entity(*) 
+        from dmp.impression, dmp.data 
+        where dmp.data.turn_category_id in (xxx3, xxx4, xxx5, xxx6, xxx7)) AdvA1
+from flatten
+
+select (select count_entity(*) from dmp.data where dmp.data.turn_category_id in (xxx1,xxx2) )) S1
+       (select dmp.adv_id, count_entity(*) 
+        from dmp.impression, dmp.data 
+        where dmp.data.turn_category_id in (xxx3, xxx4)) AdvS1,
+       (select dmp.adv_id, count_entity(*) 
+        from dmp.impression, dmp.data 
+        where dmp.data.turn_category_id in (xxx3, xxx4, xxx5, xxx6, xxx7)) AdvA1
+from as_is
+
+
+
 
 ??? yet to be defined.
 
@@ -138,7 +155,7 @@ where count_entity(dmp.data.category_id)>200000
 group by  dmp.impression.beacon_id, dmp.data.category_id
 having A >10000
 order by dmp.impression.beacon_id, count(distinct user_id), dmp.data.category_id
-limited by 10 each group
+limited dmp.data.category_id by 10 each group
 
 
 -- join mining, entity level aggregate
@@ -165,9 +182,51 @@ from dmp.impressions
 date[]
 
 -- new syntax
-select dmp.impression.adv_id, count_entity(*) as A
+select dmp.impression.adv_id, dmp.data.adv_id, count_entity(*) as A
 from dmp.impression, dmp.data
 where   dmp.impression.adv_id = dmp.data.adv_id
+
+MTA
+
+select (select dmp.clicks.impression_id, 
+               dmp.impressions.impression_id, 
+               count_entity(*),
+                POPULATION - count_entity(*)
+        from dmp.clicks as c, dmp.impression as i
+        where c.impression_id in (123,456,789) and
+              c.ts > i.ts and i.impression_id in ('abc', 'efg', 'hij')
+       ) as 1st_order,
+
+       (select dmp.clicks.impression_id, 
+               i1.impression_id, 
+               i2.impression_id,  
+               count_entity(*), 
+               POPULATION-count_entity(*)
+        from   dmp.clicks as c, 
+               dmp.impression as i1, 
+               dmp.impression as i2
+        where  c.impression_id in (123,456,789) and
+               c.ts > i1.ts and c.ts >i2.ts and 
+               i1.impression_id in ('abc', 'efg', 'hij') and
+               i1.impression_id <> i2.impression_id and 
+               i2.impression_id in ('abc', 'efg','hij')
+        )as 2nd_order,
+from  CONCAT
+
+1, t1, 12,13         1,t1,t2, 123, 121
+1, t2, 1121,121      1,t1,t3, 1231,231
+1, t3, 23,23         1,t2,t3, 23234,2342
+2, t1, 12,13         2,t1,t2, 232,232
+2, t2, 1121,121      2,t1,t3, 234,232
+2, t3, 23,23         3,t2,t3,2342,2342
+
+
+
+
+
+
+
+
 
 
 
