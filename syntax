@@ -331,7 +331,7 @@ select (select adv_id from dmp.impression where adv_id =123) A, (select count(*)
 from dmp
 group by A, B
 
-3. Using independent subqueries sharing one scan of entity profile to query nested table and present nested results. (MQO)
+3. Using independent subqueries sharing one scan of entity profile to query nested table and present nested results. (MQO). Note here CONCAT indicate we do not have any correlation on the sub queries in select list. So, they do not indicates they are group by attribute or aggregate attributes.
 
 select (select dmp.clicks.impression_id, 
                dmp.impressions.impression_id, 
@@ -377,3 +377,5 @@ select (select dmp.impression.adv_id, count_entity(*), count(*)
         where i1.adv_id =123 and i2.adv_id = 456
         group by i1.adv_id, i2.adv_id ) A3
 from CONCAT
+
+
