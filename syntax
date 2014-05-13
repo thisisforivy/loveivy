@@ -210,7 +210,7 @@ select (select dmp.clicks.impression_id,
                i1.impression_id in ('abc', 'efg', 'hij') and
                i1.impression_id <> i2.impression_id and 
                i2.impression_id in ('abc', 'efg','hij')
-        )as 2nd_order,
+        ) as 2nd_order,
 from  CONCAT
 
 1, t1, 12,13         1,t1,t2, 123, 121
@@ -223,8 +223,6 @@ from  CONCAT
 New syntax
 
 Here is a refined query syntax. Much more generic and intuitive. Aggregate function is suffixed with _within_entity, or _entity to indicate the level. Without suffix, it is record level.
-
-
 
 select  weight_bucket(avg_within_entity(weight)) as A1, 
         blood_bucket(avg_within_entity(blood_pressure)) as A2,
@@ -240,31 +238,142 @@ having co_occurence >1000
 order by A1, co_occurence, A2
 limited A2 by 10 per A1
 
+The following one is good. The outer from clause determine what to scan, the subquery is ALWAYS 
+within entity, so we can evaluate the sub query on entity fed from outer query.
+
+select   (select weight_bucket(avg_within_entity(weight) 
+          from mup.weight_time_series 
+          where mup.weight_time_series.ts <=180 and 
+                mup.weight_time_series.ts >90) A1,
+         (select blood_bucket(avg_within_entity(blood_pressure)
+          from mup.blood_pressure_time_series
+          where mup.blood_pressure_time_series.ts<= 180 and
+                mup.blood_pressure_times_series.ts >90) A2,
+        count_entity(*) as co_occurence
+from mup
+group by A1, co_occurence, A2
+having co_occurence >1000
+order by A1, co_occurence, A2
+limited A2 by 10 per A1
+
+Use case
+============
+Verify  frequency cap is enforced for a given advertiser
+
+select adv_id, list_count(dmp.impression.adv_id, adv_id), count(distinct user_id) uu
+from dmp.impressions
+dates last_week
+where adv_id =123
+
+
+This answer the question, what is the frequency map of advtiser 123. the result looks like:
+123, 0, 1000
+123, 1, 4000
+123, 2, 2000
+
+This clearly show we cap at 2 per user for last week.
+
+
+Using new syntax, we have
+
+select (select adv_id from dmp.impression where adv_id =123) A, (select count(*) from dmp.impressions where dmp.impressions.ts within last 7 days) B, count_entity(*)
+from dmp
+group by A, B
 
 
 
 
 
 
+Summary
+==========
+Key question to address.
+
+Q1. Why will relational model not work in big data? Isn't relational model supporting partition join, which is equalivlant to Entity partition concept?
+
+A: there is a significant difference between these two. Entity model (2 or 3 level nested relation model) will partition user data, the join is within user. And the key 
+is the co-location of the entire entity object data. Relation model cannot do this. To have two relational table colocated, we must pre-partition the data. The logical to
+stich corresponding entity's row is complex. 
 
 
+Key query syntax we support
+
+1. Directly query nested table and record or entity level.
+
+select dmp.impression.beacon_id, dmp.data.category_id, count_entity(*) as A, count(*) as B
+from dmp.impression, dmp.data
+where count_entity(dmp.data.category_id)>200000 AND dmp.impression.contract_id = dmp.data.contract_id
+group by  dmp.impression.beacon_id, dmp.data.category_id
+having A >10000
+order by dmp.impression.beacon_id, count(distinct user_id), dmp.data.category_id
+limited by 10 each group
+
+2. Using scalar subquery to compute group by attributes, and group by on them.
+
+select   (select weight_bucket(avg_within_entity(weight) 
+          from mup.weight_time_series 
+          where mup.weight_time_series.ts <=180 and 
+                mup.weight_time_series.ts >90) A1,
+         (select blood_bucket(avg_within_entity(blood_pressure)
+          from mup.blood_pressure_time_series
+          where mup.blood_pressure_time_series.ts<= 180 and
+                mup.blood_pressure_times_series.ts >90) A2,
+        count_entity(*) as co_occurence
+from mup
+group by A1, co_occurence, A2
+having co_occurence >1000
+order by A1, co_occurence, A2
+limited A2 by 10 per A1
+
+Frequency cap analysis example. 
+
+select (select adv_id from dmp.impression where adv_id =123) A, (select count(*) from dmp.impressions where dmp.impressions.ts within last 7 days) B, count_entity(*)
+from dmp
+group by A, B
+
+3. Using independent subqueries sharing one scan of entity profile to query nested table and present nested results. (MQO)
+
+select (select dmp.clicks.impression_id, 
+               dmp.impressions.impression_id, 
+               count_entity(*),
+                POPULATION - count_entity(*)
+        from dmp.clicks as c, dmp.impression as i
+        where c.impression_id in (123,456,789) and
+              c.ts > i.ts and i.impression_id in ('abc', 'efg', 'hij')
+       ) as 1st_order,
+
+       (select dmp.clicks.impression_id, 
+               i1.impression_id, 
+               i2.impression_id,  
+               count_entity(*), 
+               POPULATION-count_entity(*)
+        from   dmp.clicks as c, 
+               dmp.impression as i1, 
+               dmp.impression as i2
+        where  c.impression_id in (123,456,789) and
+               c.ts > i1.ts and c.ts >i2.ts and 
+               i1.impression_id in ('abc', 'efg', 'hij') and
+               i1.impression_id <> i2.impression_id and 
+               i2.impression_id in ('abc', 'efg','hij')
+        ) as 2nd_order,
+from  CONCAT
+
+1, t1, 12,13 1,t1,t2, 123, 121
+1, t2, 1121,121 1,t1,t3, 1231,231
+1, t3, 23,23 1,t2,t3, 23234,2342
+2, t1, 12,13 2,t1,t2, 232,232
+2, t2, 1121,121 2,t1,t3, 234,232
+2, t3, 23,23 3,t2,t3,2342,2342
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+select (select dmp.impression.adv_id, count_entity(*), count(*)
+        from dmp.impression
+        where dmp.impression.adv_id =123) A1,
+       (select dmp.impression.adv_id, count_entity(*), count(*)
+        from dmp.impression
+        where dmp.impression.adv_id =456) A2,
+       (select i1.adv_id, i2.adv_id, count_entity(*)
+        from dmp.impression as i1, dmp.impression as i2
+        where i1.adv_id =123 and i2.adv_id = 456
+        group by i1.adv_id, i2.adv_id ) A3
+from CONCAT
