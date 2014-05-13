@@ -1,0 +1,31 @@
+.topspace_line .logo {
+	width: 25px;
+}
+
+#topspaces_holder {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	position: relative;	
+}
+
+#topspaces_holder fieldset {
+	border: 1px solid #757575;
+	width: auto;
+	padding: 5px;
+}
+
+#header .subspaces-quicksearch {
+	float: right;
+}
+
+#search-container fieldset {
+	border: none;
+}
+
+* + html .subspaces-quicksearch .subspaces-quick-search-query {
+	display: block;
+}
+
+.subspaces-quicksearch .aui-dd-parent .aui-dropdown-right  {
+	right: auto;
+}

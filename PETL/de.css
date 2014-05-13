@@ -1,0 +1,219 @@
+/* basics */
+div.subspaces-menu  {
+	font-size: 12px;
+	font-weight: bold;
+	color:#666; 
+}
+
+div.subspaces-menu ul,
+div.subspaces-list ul.level_0 {
+	list-style-type:none;
+	display:block;
+	margin:0;
+	padding:0;
+	background-color:white;
+}
+
+div.subspaces-menu ul.level_0 {
+
+	background: url(images/bg_menu.png) repeat-x;
+	height:27px;
+	vertical-align:middle;
+}
+
+div.subspaces-menu ul.level_0 > li {
+
+	border-right: 1px solid #CCC;
+	border-left: 1px solid white;
+	background: url(images/bg_menu.png) repeat-x;
+}
+
+div.subspaces-menu ul li {
+	line-height:27px;
+	float:left;
+	position:relative;
+}
+
+div.subspaces-menu ul ul {
+
+	display:none;
+	position:absolute;
+	left:-1px;
+	border-left:1px solid #CCC;
+	border-bottom:1px solid #CCC;
+	border-right:1px solid #CCC;
+}
+
+div.subspaces-menu ul ul ul {
+
+	border:1px solid #CCC;
+	left:100%;
+	top:-1px;
+}
+
+* + html div.subspaces-menu ul.level_1 {
+	
+	top:27px;
+}
+
+div.subspaces-menu ul li a,
+div.subspaces-menu ul li a:visited,
+div.subspaces-menu ul li a:link,
+div.subspaces-menu ul li span {
+
+	display:block;
+	padding:0 20px;
+	height:27px;
+	color:#666;
+	
+	text-decoration:none;
+	white-space:nowrap;
+}
+
+div.subspaces-menu ul ul li {
+
+	float:none;
+}
+
+div.subspaces-menu li:hover > ul {
+
+	display:block;
+}
+
+div.subspaces-menu ul ul li + li {
+	
+	border-top:1px dotted #CCC;
+}
+
+/* markers */
+div.subspaces-menu a:hover,
+#com-atlassian-confluence div.subspaces-menu li.isExternalLink a:hover {
+
+	background-color:#DDD;
+}
+
+div.subspaces-menu ul ul li.hasChildren{
+	
+	/* there are children */
+	background: #fff url(images/arrow_grey_r.gif) no-repeat right;
+}
+
+div.subspaces-menu ul ul li.hasChildren > a:hover {
+	background: #DDD url(images/arrow_grey_r.gif) no-repeat right;
+}
+
+div.subspaces-menu li.hasChildInContext > a,
+div.subspaces-menu li.hasChildInContext > span {
+
+	/* one of my children is the currently active space*/
+	font-style:italic;	
+}
+
+div.subspaces-menu li.active > a {
+
+	/* i am the currently active space */
+	color:#f78e31;
+}
+
+div.subspaces-menu li.isExternalLink a,
+div.subspaces-menu li.isExternalLink a:visited,
+div.subspaces-menu li.isExternalLink a:link {
+	
+	background:url(images/link.png) no-repeat 10px center;
+	padding-left:30px;
+}
+
+div.subspaces-menu img.space_icon {
+	height: 15px;
+	vertical-align: middle;
+	margin: 0 5px 0 -10px;
+}
+
+div.subspaces-menu img.home_button {
+	vertical-align: middle;	
+}
+
+
+/*subspaces list*/
+
+.subspaces-list .tabnav .tabs a {
+    background: #FFF;
+    border-top: 1px solid #FFF;
+    border-left: 1px solid #FFF;
+    border-right: 1px solid #FFF;
+    margin: 0;
+    padding: 5px 8px 3px 8px;
+}
+
+.subspaces-list .tabnav .tabs a:hover {
+    background: #FFF;
+    border-top: 1px solid #EEE;
+    border-left: 1px solid #EEE;
+    border-right: 1px solid #EEE;
+}
+
+.subspaces-list .tabnav .tabs a.current:link,
+.subspaces-list .tabnav .tabs a.current {
+    border-top: 1px solid #BBB;
+    border-left: 1px solid #BBB;
+    border-right: 1px solid #BBB;
+    border-bottom: 1px solid white;
+    color: #000;
+}
+
+.subspaces-list .tabnav, .comment .tabnav, ul.tabnav {
+    border-bottom-color: #BBB;
+}
+
+.subspaces-list .tabnav, .comment .tabnav {
+    font-weight: normal;
+}
+
+.subspaces-list .tabnav .tabs a:link,
+.subspaces-list .tabnav .tabs a:visited {
+    color: #326CA6;
+}
+
+.subspaces-list #spacesLabel {
+    padding: 4px 6px 2px;
+    float: left;
+    margin-top: 3px;
+    font-weight: bold;
+}
+
+.subspaces-list .spaceList td {
+	overflow: hidden;	
+}
+
+#com-atlassian-confluence .subspace_cloak {
+	display: none;
+}
+
+.subspace_clear_float {
+	clear: both;	
+}
+
+.subspace_dashboard_container .subspace_dashboard_footer .sublink {
+	float: right;
+	padding-top: 4px;
+}
+
+.subspace_dashboard_container {
+	margin: 20px 0;
+}
+
+/* Bugfix for the plain subspace macro view CSSP-86 */
+
+ #main #main-header {
+     position: relative;
+     z-index: 10;
+ }
+
+ #main #content {
+    position: relative;
+    z-index: 5;
+ }
+
+.success {
+	background-color: green;
+}

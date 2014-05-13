@@ -1,0 +1,3854 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	
+            <title>Overview and DataMine Parallel ETL - Engineering - Intranet</title>
+    
+        
+
+                        
+    
+                        
+    
+    
+            
+        
+    
+            <meta http-equiv="X-UA-Compatible" content="IE=8">
+<meta charset="UTF-8">
+
+<!-- Deprecated since 3.4. To be removed in a future version of Confluence; use AJS.Confluence.getContextPath() -->
+<meta id="confluence-context-path" name="confluence-context-path" content="">
+<meta name="ajs-context-path" content="">
+<meta name="ajs-version-number" content="3.5.13">
+<meta name="ajs-build-number" content="2171">
+<meta id="atlassian-token" name="atlassian-token" content="ac05f16125f8f3058c5b80c998d8ec83920f2bdf">
+<meta id="confluence-space-key" name="confluence-space-key" content="ENG">
+<meta name="ajs-remote-user" content="mwu">
+<meta name="ajs-static-resource-url-prefix" content="/s/en/2171/43/_">
+
+<script type="text/javascript">
+    // Deprecated global variables. To be removed in a future version of Confluence.
+    var contextPath = '';
+</script>
+
+    
+
+<!-- include system css resources -->
+<link type="text/css" rel="stylesheet" href="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/batch_002.css" media="all">
+<!--[if IE]>
+<link type="text/css" rel="stylesheet" href="/s/en/2171/43/28/_/download/superbatch/css/batch.css?ieonly=true" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/batch.css" media="print">
+<link type="text/css" rel="stylesheet" href="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/com_002.css" media="print">
+<link type="text/css" rel="stylesheet" href="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/confluence-forms.css" media="all">
+<!--[if IE]>
+<link type="text/css" rel="stylesheet" href="/s/en/2171/43/1.0/_/download/batch/confluence.web.resources:aui-forms/confluence.web.resources:aui-forms.css?ieonly=true" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/com_004.css" media="all">
+<link type="text/css" rel="stylesheet" href="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/confluence.css" media="all">
+<!--[if IE]>
+<link type="text/css" rel="stylesheet" href="/s/en/2171/43/1.0/_/download/batch/confluence.web.resources:view-comment/confluence.web.resources:view-comment.css?ieonly=true" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/confluence_003.css" media="all">
+<link type="text/css" rel="stylesheet" href="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/com_009.css" media="all">
+<link type="text/css" rel="stylesheet" href="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/com_003.css" media="all">
+<link type="text/css" rel="stylesheet" href="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/com_005.css" media="all">
+<link type="text/css" rel="stylesheet" href="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/confluence_002.css" media="all">
+<link type="text/css" rel="stylesheet" href="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/com.css" media="all">
+<link type="text/css" rel="stylesheet" href="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/com_008.css" media="all">
+<link type="text/css" rel="stylesheet" href="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/com_006.css" media="all">
+<link type="text/css" rel="stylesheet" href="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/de.css" media="all">
+<link type="text/css" rel="stylesheet" href="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/de_002.css" media="all">
+<link type="text/css" rel="stylesheet" href="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/com_007.css" media="all">
+
+<!-- end system css resources -->
+
+    <link rel="stylesheet" href="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/combined.css" type="text/css">
+
+    <meta name="confluence-request-time" content="1400017614165">
+
+<meta name="loggedInUsername" content="mwu">
+            <meta name="ajs-keyboardshortcut-hash" content="df0c70cf1c3ea1c59d27653cbbef0731">
+    <!-- Deprecated since 3.4. To be removed in a future version of Confluence; use atl.header -->
+            <script type="text/x-template" title="gliffy-footer-webpanel">
+    <div class="gliffy-footer-webpanel"><span></span></div>
+</script>
+
+<meta name="gliffy-license-type" content="COMMERCIAL">
+<meta name="gliffy-license-quantity" content="2000">
+
+
+            <script type="text/x-template" title="share-content-popup">
+    <form action="#" method="post" class="aui share-content-popup">
+        <fieldset>
+            <label for="users">User name or email</label>
+            <div class="autocomplete-user-target">
+                <input class="text autocomplete-sharepage" id="users" data-max="10" data-dropdown-target=".autocomplete-user-target" data-none-message="No matching user or email found"/>
+            </div>
+            <ol class="recipients">
+            </ol>
+            <div><label for="note">Note</label></div>
+            <textarea class="textarea" id="note" placeholder="Add an optional note"/>
+        </fieldset>
+        <div class="button-panel">
+            <div class="progress-messages-icon"></div>
+            <div class="progress-messages">
+            </div>
+            <input class="button submit" type="submit" value="Share" disabled/>
+            <a class="close-dialog" href="#">Cancel</a>
+        </div>
+    </form>
+</script>
+
+<script type="text/x-template" title="share-content-popup-recipient-username">
+    <li data-username="{username}" style="display: none">
+        <span>
+            <img src="{thumbnailLink.href}" title="{title}">
+            <span>{title}</span>
+            <span class="remove-recipient"/>
+        </span>
+    </li>
+</script>
+
+<script type="text/x-template" title="share-content-popup-recipient-email">
+    <li data-email="{email}" style="display: none">
+        <span>
+            <img src="{icon}" title="{email}">
+            <span>{email}</span>
+            <span class="remove-recipient"/>
+        </span>
+    </li>
+</script>
+            <meta name="ajs-use-keyboard-shortcuts" content="true">
+    
+    <link rel="shortcut icon" href="http://intranet/favicon.ico">
+    <link rel="icon" type="image/png" href="http://intranet/s/en/2171/43/_/images/logo/confluence_16.png">
+
+<link rel="search" type="application/opensearchdescription+xml" href="http://intranet/opensearch/osd.action" title="Intranet">
+
+        <!-- include system javascript resources -->
+                        
+    
+    <script type="text/javascript" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/batch.js"></script>
+<script type="text/javascript" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/com_012.js"></script>
+<script type="text/javascript" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/confluence.js"></script>
+<script type="text/javascript" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/confluence_004.js"></script>
+<script type="text/javascript" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/com_010.js"></script>
+<script type="text/javascript" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/com_011.js"></script>
+<script type="text/javascript" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/com_009.js"></script>
+<script type="text/javascript" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/com_006.js"></script>
+<script type="text/javascript" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/confluence_002.js"></script>
+<script type="text/javascript" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/confluence_003.js"></script>
+<script type="text/javascript" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/com.js"></script>
+<script type="text/javascript" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/com_008.js"></script>
+<script type="text/javascript" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/com_005.js"></script>
+<script type="text/javascript" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/com_004.js"></script>
+<script type="text/javascript" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/com_003.js"></script>
+<script type="text/javascript" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/legacy.js"></script>
+<script type="text/javascript" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/de_002.js"></script>
+<script type="text/javascript" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/de_003.js"></script>
+<script type="text/javascript" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/de.js"></script>
+<script type="text/javascript" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/com_007.js"></script>
+<script type="text/javascript" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/com_002.js"></script>
+
+    
+    <!-- end system javascript resources -->
+
+    
+		
+
+
+<script>
+	
+			if (typeof originalTheme === 'undefined') {
+    	var originalTheme = {};
+	}
+	
+		originalTheme.searchTitle = 'Search';
+	
+			var contextPath = '';
+	
+		originalTheme.notLoggedIn = 'Not Logged In';
+	
+				originalTheme.categoryDropDownEnabled = true;
+				originalTheme.categoryDropDownLayout = 'single_column';
+		
+				originalTheme.scrollSearchActive = true;
+		
+</script>
+
+
+
+<!--[if !IE]><!-->
+ 	<style type="text/css">
+		.rw_toolbar_menu li .rw_toolbar_dropdown li a:hover
+		{
+			color: #ffffff;	
+			background: #6699cc;
+		}
+		
+		/* Scroll office fix */
+		#com-k15t-confluence-scroll-pdf-launcher:hover
+		{
+			color: #ffffff;	
+			background: #6699cc;
+		}
+	</style>
+<!--<![endif]-->
+
+<!--[if IE 6]>
+	<link type="text/css" rel="stylesheet" href="/download/resources/com.refinedwiki.confluence.plugins.theme.original/styles/ie6-fix.css" media="all"/>
+<![endif]-->
+
+<!--[if IE 7]>
+	<link type="text/css" rel="stylesheet" href="/download/resources/com.refinedwiki.confluence.plugins.theme.original/styles/ie7-fix.css" media="all"/>
+<![endif]-->
+
+
+
+
+
+
+
+
+
+
+	
+				
+				<link type="text/css" rel="stylesheet" href="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/style.css" media="all">
+		
+				
+							
+<style type="text/css">
+
+	body 
+	{
+		background:#C9D9F5;
+	}
+
+	body #rw_wrapper 
+	{
+		
+					background:#C9D9F5 url(/download/resources/com.refinedwiki.confluence.plugins.theme.original/images/designs/fade_light_point.png) repeat-x;
+			}
+	
+	#rw_category_menu li a span.rw_item_left, #rw_breadcrumb li span, #rw_breadcrumb li a  
+	{
+		color:#091d40;
+	}
+	
+	#rw_category_menu a:hover span.rw_item_left, #rw_breadcrumb li a:hover 
+	{
+					color:#1151db;
+			}
+</style>
+		
+	
+
+
+
+
+
+		
+	
+	
+	
+    <link rel="canonical" href="http://intranet/display/ENG/Overview+and+DataMine+Parallel+ETL">
+    <link rel="shortlink" href="http://intranet/x/SCXx">
+    <meta name="wikilink" content="[ENG:Overview and DataMine Parallel ETL]">
+    <meta name="page-version" content="3">
+
+</head>
+
+<body onload="placeFocus()" id="com-atlassian-confluence" class="">
+
+<ul id="assistive-skip-links" class="assistive">
+    <li><a href="#title-heading">Skip to content</a></li>
+    <li><a href="#breadcrumbs">Skip to breadcrumbs</a></li>
+    <li><a href="#header-menu-bar">Skip to header menu</a></li>
+    <li><a href="#navigation">Skip to action menu</a></li>
+    <li><a href="#quick-search-query">Skip to quick search</a></li>
+</ul>
+<div id="page">
+
+
+
+
+
+<fieldset class="hidden parameters">
+    <input id="statusDialogHeading" value="What are you working on?" type="hidden">
+    <input id="statusDialogAccessibilityLabel" value="Enter your status (140 character limit)" type="hidden">
+    <input id="statusDialogLatestLabel" value="Last update:" type="hidden">
+    <input id="statusDialogUpdateButtonLabel" value="Update" type="hidden">
+    <input id="statusDialogCancelButtonLabel" value="Cancel" type="hidden">
+</fieldset>
+
+<fieldset class="hidden parameters">
+    <input id="globalSettingsAttachmentMaxSize" value="157286400" type="hidden">
+    <input id="userLocale" value="en_GB" type="hidden">
+    <input id="staticResourceUrlPrefix" value="/s/en/2171/43/_" type="hidden">
+    <input id="contextPath" value="" type="hidden">
+</fieldset>
+
+    
+
+
+
+
+
+
+<div id="rw_wrapper">
+	<div id="rw_main">
+		
+					
+
+	
+				<div id="rw_sticky_bar" class="show_on_scroll rw_no_print" style="display: block;">
+		<div id="rw_sticky_bar_top">
+			
+						<div id="rw_search_container_sticky_bar"></div>	
+		
+		</div>
+		<div id="rw_sticky_bar_bottom">
+			<div class="rw_show_hide_sticky">
+				<a id="rw_sticky_bar_show" class="rw_sticky_bar_button" title="Show ( Type '/' )">
+					<span class="rw_icon_container_20 rw_sticky_bar"></span>
+				</a>
+				<a id="rw_sticky_bar_hide" class="rw_sticky_bar_button_active" style="display:none;" title="Hide ( Type 'esc' )">
+					<span class="rw_icon_container_20 rw_sticky_bar"></span>
+				</a>
+			</div>
+		</div>	
+	</div>
+
+
+<div class="rw_box rw_no_print" id="point_banner">	
+	
+		<div id="point_search_wrapper">
+			<div id="rw_search_container">
+		<div id="rw_search">
+			
+						<form style="width:0px; height:0px; overflow:hidden; "><input name="hack" onfocus="this.blur()" type="text"></form>
+			    
+			<form id="rw_search_form" class="rw_search_form" method="get" action="/dosearchsite.action">
+		   		<input value="Search" class="rw_search_query" id="rw_search_query" accesskey="q" autocomplete="off" name="queryString" size="25" type="text">
+		    
+		   		<div style="clear:both;"></div>
+		        <div id="rw_search_result_container" class="rw_search_result_container" style="display:none;">
+		        	
+		        </div>
+		
+		        <fieldset class="hidden parameters">
+		            <input id="quickNavEnabled" value="true" type="hidden">
+		            		        </fieldset>
+		    </form>	
+		    
+		    			<script type="text/x-template" id="rw_search_item">
+			    <li>
+					<a>
+						<span class="rw_search_item_title"></span>
+						<span class="rw_search_item_space"></span>
+					</a>
+				</li>
+			</script>
+			
+						<script type="text/x-template" id="rw_search_section">
+			    <ul>
+				</ul>
+			</script>
+		
+		</div>
+	</div>
+	</div>
+	
+			
+			
+				
+	<ul id="rw_top_menu_classic" class="rw_small_menu">
+			
+						
+		
+						
+	</ul>
+	
+			
+	 	<div id="rw_breadcrumb">	
+		<table style="padding-left: 8px;" height="40px"><tbody><tr><td>
+			
+	
+	
+    <ol id="breadcrumbs">
+                    
+        <li class="first">
+                                    <span><a title=" ( Type 'g' then 'd' )" href="http://intranet/dashboard.action">Dashboard</a></span>
+                </li>
+		
+		
+		
+							<li><span><a href="http://intranet/category/sub-dashboard.action?categoryKey=teams">Turn Intranet</a></span></li>
+					
+		
+	                
+        <li>
+                                    <span><a href="http://intranet/display/ENG">Engineering</a></span>
+                </li>
+		
+		
+		
+					
+		
+	                                    <li id="ellipsis" title="    …
+                    Engineering home
+             &gt;         Platform Data Team
+        …
+"><span><strong>…</strong></span></li>
+                                    
+        <li class="hidden-crumb">
+                                    <span><a href="http://intranet/display/ENG/Engineering+home">Engineering home</a></span>
+                </li>
+		
+		
+		
+					
+		
+	                            
+        <li class="hidden-crumb">
+                                    <span><a href="http://intranet/display/ENG/Platform+Data+Team">Platform Data Team</a></span>
+                </li>
+		
+		
+		
+					
+		
+	                
+        <li>
+                                    <span><a href="http://intranet/display/ENG/Data_Team_Knowledge_Base">Data_Team_Knowledge_Base</a></span>
+                </li>
+		
+		
+		
+					
+		
+	                
+        <li>
+                                    <span>Overview and DataMine Parallel ETL</span>
+                </li>
+		
+		
+		
+					
+		
+		</ol>
+
+
+		</td></tr></tbody></table>
+	</div>	
+	
+</div>
+
+
+<div id="rw_top" class="rw_no_print">
+	<table class="top_table" border="0" cellpadding="0" cellspacing="0">
+		<tbody><tr>
+									<td style="width:100%;vertical-align:bottom;">		
+				
+										<div id="rw_category_menu">
+		<ul>
+																			
+				<li class="rw_first">
+					<a href="http://intranet/dashboard.action" onclick="window.location='/dashboard.action';return false;" title="Dashboard">
+						<span class="rw_item_left">
+							<span>Dashboard</span>
+													</span>
+						<span class="rw_item_right"></span>
+					</a>
+				</li>
+																			
+				<li id="rw_category_teams" class="rw_active rw_last">
+					<a href="http://intranet/display/IN/Turn+Intranet" onclick="window.location='/display/IN/Turn+Intranet';return false;" title="Turn Intranet">
+						<span class="rw_item_left">
+							<span>Turn Intranet</span>
+															<span class="rw_icon_container_16 rw_dropdown_btn"></span>
+													</span>
+						<span class="rw_item_right"></span>
+					</a>
+				</li>
+					</ul>		
+	</div>
+	
+		<div id="rw_category_dropdown_wrapper" class="rw_popup" style="display:none;">
+		<div id="rw_category_dropdown_container" class="rw_popup_container"></div>
+		<div id="rw_category_dropdown_loader" class="rw_popup_loader">
+			<img src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/ajax-loader-gray.gif">
+		</div>
+	</div>
+				
+			</td>
+		</tr>
+	</tbody></table>
+</div> <!-- top -->
+
+
+<div id="rw_main_top_left" class="rw_no_print">
+<div id="rw_main_top_right" class="rw_no_print">
+</div> <!-- rw_main_top_right -->
+</div> <!-- rw_main_top_left -->
+
+<div id="rw_main_middle_left">
+<div id="rw_main_middle_right">
+
+					
+				<div id="rw_menu_bar">
+			<div id="rw_toolbar">
+		
+								
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				
+				<ul id="browse_and_user_menu" class="rw_toolbar_menu">
+					
+											
+        
+            <li class="toolbar-dropdown-menu-item">
+        <a id="browse-menu-link" class="rw_toolbar_dropdown_button browse" href="#"><span>Browse</span></a>         <div style="clear: both;"></div>
+        <div class="ajs-drop-down rw_toolbar_dropdown browse">
+        		            <ul id="browse-menu-link-leading" class="section-leading first "><li><a href="http://intranet/display/ENG/Frequently+asked+questions">&nbsp; All FAQ</a></li><ul></ul>
+	                	                        <li>    
+    
+    
+    <a id="space-pages-link" href="http://intranet/pages/listpages.action?key=ENG" title="Browse pages in the Engineering space ( Type 'g' then 's' )">
+    	<span class=""><nobr>Pages</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="space-blogposts-link" href="http://intranet/pages/viewrecentblogposts.action?key=ENG" title="Browse blogs in the Engineering space">
+    	<span class=""><nobr>Blog</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="space-labels-link" href="http://intranet/labels/listlabels-heatmap.action?key=ENG" title="Browse labels in the Engineering space">
+    	<span class=""><nobr>Labels</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="space-attachments-link" href="http://intranet/spaces/listattachmentsforspace.action?key=ENG" title="Browse attachments in the Engineering space">
+    	<span class=""><nobr>Attachments</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="space-mail-link" href="http://intranet/spaces/viewmailarchive.action?key=ENG" title="Browse mail in the Engineering space">
+    	<span class=""><nobr>Mail</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a href="http://intranet/spaces/forums/spaceForums.action?key=ENG" title="">
+    	<span class=""><nobr>Forums</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="space-advanced-link" href="http://intranet/spaces/viewspacesummary.action?key=ENG" title="Browse additional space functions in the Engineering space">
+    	<span class=""><nobr>Advanced</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a href="http://intranet/bubbles/community-members.action?key=ENG" title="">
+    	<span class=""><nobr>Community Members</nobr></span>    </a>
+    
+</li>
+	                	                
+	            </ul>
+            	            <ul id="browse-menu-link-global" class="section-global  section_rw_border_top">
+	                	                        <li>    
+    
+    
+    <a id="whats-new-menu-link" href="http://docs.atlassian.com/confluence/docs-35/whatsnew/iframe" title="">
+    	<span class=""><nobr>What’s New</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="people-directory-link" href="http://intranet/peopledirectory.action" title="Browse the Confluence people directory">
+    	<span class=""><nobr>People Directory</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="space-directory-link" href="http://intranet/spacedirectory/view.action" title="Browse the Confluence space directory">
+    	<span class=""><nobr>Space Directory</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="keyboard-shortcuts-link" title="View available keyboard shortcuts ( Type '?' )">
+    	<span class=""><nobr>Keyboard Shortcuts</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="gadget-directory-link" title="Browse gadgets provided by Confluence">
+    	<span class="user-item administration-link"><nobr>Confluence Gadgets</nobr></span>    </a>
+    
+</li>
+	                	                
+	            </ul>
+                    </div>
+              
+    </li>
+        
+										                                                
+            <li class="toolbar-dropdown-menu-item">
+        <a id="user-menu-link" class="rw_toolbar_dropdown_button user" href="#"><span>Mingxi Wu</span></a>         <div style="clear: both;"></div>
+        <div class="ajs-drop-down rw_toolbar_dropdown user" style="right: 0px; left: auto;">
+        		            <ul id="user-menu-link-user-preferences" class="section-user-preferences first ">
+	                	                        <li>    
+    
+    
+    <a id="create-personal-space-link" href="http://intranet/spaces/createpersonalspace.action" title="">
+    	<span class="user-item personal-space"><nobr>Create Personal Space</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="view-user-history-link" href="http://intranet/users/viewuserhistory.action" title="">
+    	<span class="user-item user-history popup-link"><nobr>Recently Viewed</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a href="http://intranet/users/bubbles/user-community-profile.action" title="">
+    	<span class=""><nobr>My Communities</nobr></span>    </a>
+    
+</li>
+	                	                
+	            </ul>
+            	            <ul id="user-menu-link-user-content" class="section-user-content  section_rw_border_top">
+	                	                        <li>    
+    
+    
+    <a id="view-user-profile-link" href="http://intranet/users/viewmyprofile.action" title="">
+    	<span class="user-item user-profile"><nobr>Profile</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a href="http://intranet/users/viewfollow.action?username=mwu" title="">
+    	<span class="follow-link"><nobr>Network</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="user-labels-link" href="http://intranet/users/viewmylabels.action" title="">
+    	<span class="user-item"><nobr>Labels</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="user-watches-link" href="http://intranet/users/viewnotifications.action" title="">
+    	<span class="user-item"><nobr>Watches</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="user-drafts-link" href="http://intranet/users/viewmydrafts.action" title="">
+    	<span class="user-item"><nobr>Drafts</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="user-settings-link" href="http://intranet/users/viewmysettings.action" title="">
+    	<span class="user-item"><nobr>Settings</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="upm-requests-link" href="http://intranet/plugins/servlet/upm/requests?source=header_user" title="">
+    	<span class=""><nobr>Atlassian Marketplace</nobr></span>    </a>
+    
+</li>
+	                	                
+	            </ul>
+            	            <ul id="user-menu-link-user-operations" class="section-user-operations  section_rw_border_top">
+	                	                        <li>    
+    
+    
+    <a id="logout-link" href="http://intranet/logout.action" title="">
+    	<span class="user-item logout-link"><nobr>Log Out</nobr></span>    </a>
+    
+</li>
+	                	                
+	            </ul>
+                    </div>
+              
+    </li>
+                					
+				</ul>
+				
+								
+    <div id="navigation" class="content-navigation view">
+        <fieldset class="hidden parameters">
+            <input id="pageId" value="15803720" type="hidden">
+        </fieldset>
+        <ul class="rw_toolbar_menu">
+                                <li class="ajs-button normal">    
+    
+    
+    <a id="editPageLink" href="http://intranet/pages/editpage.action?pageId=15803720" accesskey="e" title="Edit ( Type 'e' )">
+    	<span class="edit"><nobr><u>E</u>dit</nobr></span>    </a>
+    
+</li>
+                    <li class="ajs-button normal">    
+    
+    
+    <a id="shareContentLink" accesskey="e" title="Share this content by emailing other users">
+    	<span class="share"><nobr>Share</nobr></span>    </a>
+    
+</li>
+                    
+            <li class="toolbar-dropdown-menu-item">
+        <a id="add-menu-link" class="rw_toolbar_dropdown_button add" href="#"><span>Add</span></a>         <div style="clear: both;"></div>
+        <div class="ajs-drop-down rw_toolbar_dropdown add">
+        		            <ul id="add-menu-link-space" class="section-space first ">
+	                	                        <li>    
+    
+    
+    <a id="createPageLink" href="http://intranet/pages/createpage.action?spaceKey=ENG&amp;fromPageId=15803720" accesskey="p" title="Add a Page ( Type 'c' )">
+    	<span class="add-page"><nobr>Page</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="createBlogpostLink" href="http://intranet/pages/createblogpost.action?spaceKey=ENG" title="Add a Blog Post ( Type 'b' )">
+    	<span class="add-news"><nobr>Blog Post</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a href="http://intranet/plugins/gliffy/launch.action?pageId=15803720" title="">
+    	<span class="" style="padding-left:30px; background:7px 5px url(/download/resources/com.gliffy.integration.confluence:gliffy-macro-key/icons/add_diagram_16.gif) no-repeat;"><nobr>Gliffy Diagram</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a href="http://intranet/plugins/lucidchart/insertDiagram.action?pageId=15803720" title="">
+    	<span class="" style="padding-left:30px; background:7px 5px url(/download/resources/com.lucidchart.confluence.plugins.lucid-confluence:lucid-images/images/lucid.png) no-repeat;"><nobr>Lucidchart Diagram</nobr></span>    </a>
+    
+</li>
+	                	                
+	            <ul></ul><li><a href="http://intranet/pages/createpage-name.action?templateId=7602184&amp;parentPageString=FAQ&amp;spaceKey=ENG&amp;live=true&amp;templateName=FAQ">&nbsp;&nbsp;<img src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/faq-small.png"> FAQ</a></li><li><a href="http://intranet/pages/createpage-name.action?parentPageString=Processes&amp;spaceKey=ENG">&nbsp;&nbsp;<img src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/process-small.png"> Process</a></li><li><a href="http://intranet/pages/createpage-name.action?parentPageString=Templates&amp;spaceKey=ENG">&nbsp;&nbsp;<img src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/document-small.png"> Templates</a></li></ul>
+            	            <ul id="add-menu-link-page" class="section-page  section_rw_border_top">
+	                	                        <li>    
+    
+    
+    <a id="add-comment-menu-link" href="http://intranet/display/ENG/Overview+and+DataMine+Parallel+ETL?showComments=true&amp;showCommentArea=true#addcomment" title="Add a Comment ( Type 'm' )">
+    	<span class="add-comment"><nobr>Comment</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="add-attachment-link" href="http://intranet/pages/viewpageattachments.action?pageId=15803720" accesskey="a" title="">
+    	<span class="add-attachment"><nobr>Attachment</nobr></span>    </a>
+    
+</li>
+	                	                
+	            </ul>
+                    </div>
+              
+    </li>
+                    
+            <li class="toolbar-dropdown-menu-item">
+        <a id="action-menu-link" class="rw_toolbar_dropdown_button action" href="#"><span>Tools</span></a>         <div class="most-right-menu-item" style="clear: both; margin: 0px; right: auto; left: 0px;"></div>
+        <div class="ajs-drop-down rw_toolbar_dropdown action">
+        		            <ul id="action-menu-link-primary" class="section-primary first ">
+	                	                        <li>    
+    
+    
+    <a id="view-attachments-link" href="http://intranet/pages/viewpageattachments.action?pageId=15803720" accesskey="a" title="View Attachments ( Type 't' )">
+    	<span class="action-view-attachments"><nobr><u>A</u>ttachments (1)</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="action-view-history-link" href="http://intranet/pages/viewpreviousversions.action?pageId=15803720" title="">
+    	<span class="action-view-history"><nobr>Page History</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="mailPageLink" href="http://intranet/pages/mailpage/mailpage.action?pageId=15803720" title="">
+    	<span class="" style="padding-left:30px; background:7px 5px url(/images/icons/mail_content_16.gif) no-repeat;"><nobr>E-mail</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="action-page-permissions-link" href="http://intranet/pages/viewinfo.action?pageId=15803720" title="Edit restrictions">
+    	<span class="action-page-permissions"><nobr>Restrictions</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="edit-in-word" href="http://intranet/plugins/servlet/confluence/editinword/15803720/content/Overview%20and%20DataMine%20Parallel%20ETL.doc" title="">
+    	<span class="" style="padding-left:30px; background:7px 5px url(/download/resources/com.atlassian.confluence.extra.officeconnector:editinworditem3/editinwordblue.png) no-repeat;"><nobr>Edit in Word</nobr></span>    </a>
+    
+</li>
+	                	                
+	            </ul>
+            	            <ul id="action-menu-link-marker" class="section-marker  section_rw_border_top">
+	                	                        <li>    
+    
+    
+    <a id="page-favourite" href="http://intranet/labels/addfavourite.action?entityId=15803720&amp;atl_token=ac05f16125f8f3058c5b80c998d8ec83920f2bdf" title="">
+    	<span class="action-page-favourite"><nobr>Favourite</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="page-watch" href="http://intranet/pages/addpagenotification.action?pageId=15803720&amp;atl_token=ac05f16125f8f3058c5b80c998d8ec83920f2bdf" title="">
+    	<span class="action-page-watching"><nobr>Watch</nobr></span>    </a>
+    
+</li>
+	                	                        <li class="hidden">    
+    
+    
+    <a id="page-unwatch" href="http://intranet/pages/removepagenotification.action?pageId=15803720&amp;atl_token=ac05f16125f8f3058c5b80c998d8ec83920f2bdf" title="">
+    	<span class="action-page-watching selected ie-page-watching-selected inactive"><nobr>Stop Watching</nobr></span>    </a>
+    
+</li>
+	                	                
+	            </ul>
+            	            <ul id="action-menu-link-secondary" class="section-secondary  section_rw_border_top">
+	                	                        <li>    
+    
+    
+    <a id="view-page-info-link" href="http://intranet/pages/viewinfo.action?pageId=15803720" title="">
+    	<span class="action-view-info"><nobr>Info</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="link-to-page-link" href="http://intranet/pages/viewinfo.action?pageId=15803720" title="Link to this Page ( Type 'k' )">
+    	<span class=""><nobr>Link to this Page…</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a style="display: none;" id="view-in-hierarchy-link" href="http://intranet/pages/listpages-dirview.action?key=ENG&amp;openId=15803720#selectedPageInHierarchy" title="">
+    	<span class=""><nobr>View in Hierarchy</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a style="display: none;" id="action-view-source-link" href="http://intranet/pages/viewpagesrc.action?pageId=15803720" title="">
+    	<span class="action-view-source popup-link"><nobr>View Wiki Markup</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="action-export-pdf-link" href="http://intranet/spaces/flyingpdf/pdfpageexport.action?pageId=15803720" title="">
+    	<span class=""><nobr>Export to PDF</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="action-export-word-link" href="http://intranet/exportword?pageId=15803720" title="">
+    	<span class="action-export-word"><nobr>Export to Word</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="import-word-doc" href="http://intranet/pages/worddav/uploadimport.action?pageId=15803720" title="">
+    	<span class=""><nobr>Import Word Document</nobr></span>    </a>
+    
+</li>
+	                	                        <li style="display: none;">    
+    
+    
+    <a href="http://intranet/pages/watchers/pagewatchers.action?pageId=15803720" title="">
+    	<span class=""><nobr>Watchers</nobr></span>    </a>
+    
+</li>
+	                	                        <li style="display: none;">    
+    
+    
+    <a href="http://intranet/pages/favourites/pagefavourites.action?pageId=15803720" title="">
+    	<span class=""><nobr>Favourites</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a href="http://intranet/plugins/lucidchart/selectVisio.action?pageId=15803720" title="">
+    	<span class=""><nobr>View Visio File</nobr></span>    </a>
+    
+</li>
+	                	                
+	            </ul>
+            	            <ul id="action-menu-link-modify" class="section-modify  section_rw_border_top">
+	                	                        <li>    
+    
+    
+    <a id="action-copy-page-link" href="http://intranet/pages/copypage.action?idOfPageToCopy=15803720&amp;spaceKey=ENG" title="">
+    	<span class="action-copy"><nobr>Copy</nobr></span>    </a>
+    
+</li>
+	                	                        <li>    
+    
+    
+    <a id="action-move-page-dialog-link" href="http://intranet/pages/viewpage.action?pageId=15803720" title="">
+    	<span class="action-move"><nobr>Move</nobr></span>    </a>
+    
+</li>
+	                	                
+	            </ul>
+                    </div>
+              
+    </li>
+            </ul>
+    </div>
+
+				
+								
+				
+												
+								
+								
+											</div>	
+			
+			
+										
+									<a href="http://intranet/category/sub-dashboard.action?categoryKey=teams" title="Turn Intranet" class="rw_menu_back"><span></span></a>
+								
+				<div class="rw_menu_bar_item">
+					<a href="http://intranet/display/ENG" class="rw_space_link" title="Engineering">
+						<span>
+															Engineering
+													</span>	
+					</a>
+				</div>
+						
+				<h1 id="title-heading" class="pagetitle">
+					<span class="space_title">
+											</span>
+				</h1>
+					</div> <!-- rw_menu_bar -->
+		
+		<div style="clear:both;"></div>
+			
+				<div id="main">
+           
+			
+			
+	
+								       
+		        		    			
+			
+			
+								 	
+		 			 				
+						
+			<!-- this is page.vmd -->
+
+
+
+
+
+
+
+		
+			
+		    
+	
+
+
+    
+    
+        
+    
+    
+                    
+    
+
+    
+
+<div id="rw_page_container">
+
+		
+	<div id="content" class="page view">
+		
+
+
+
+<div id="link-to-page-fields" class="hidden parameters">
+    <input id="linkToThisPageHeading" value="Link to this Page" type="hidden">
+    <input id="linkToThisPageLink" value="Link" type="hidden">
+    <input id="linkToThisPageTinyLink" value="Tiny Link" type="hidden">
+    <input id="linkToThisPageWikiMarkup" value="Wiki Markup" type="hidden">
+    <input id="linkToThisPageClose" value="Close" type="hidden">
+</div>
+<fieldset class="hidden parameters">
+    <input title="movePageDialogViewPageTitle" value="Move Page – ‘Overview and DataMine Parallel ETL’" type="hidden">
+    <input title="movePageDialogEditPageTitle" value="Set Page Location" type="hidden">
+    <input title="movePageDialogMoveButton" value="Move" type="hidden">
+    <input title="movePageDialogCancelButton" value="Cancel" type="hidden">
+    <input title="movePageDialogBrowsePanelTip" value="Click to select the new parent page for this page and its children." type="hidden">
+    <input title="movePageDialogSearchPanel" value="Search" type="hidden">
+    <input title="movePageDialogHistoryPanel" value="Recently Viewed" type="hidden">
+    <input title="movePageDialogHistoryNoResults" value="There were no recently viewed pages found." type="hidden">
+    <input title="movePageDialogLocationPanel" value="Known Location" type="hidden">
+    <input title="movePageDialogLocationNotFound" value="The specified page was not found." type="hidden">
+    <input title="movePageDialogBrowsePanel" value="Browse" type="hidden">
+    <input title="movePageDialogPanelLoadErrorMsg" value="Error reading the panel content from the server." type="hidden">
+    <input title="movePageDialogPanelLoadErrorTip" value="You could try reloading the page and launching the dialog again." type="hidden">
+    <input title="movePageDialogPanelLoadErrorStatus" value="HTTP Status" type="hidden">
+    <input title="movePageDialogNoSelectionErrorMsg" value="You must make a selection in the tree before you can move the page." type="hidden">
+    <input title="movePageDialogSearchError" value="Failed to retrieve search results from the server." type="hidden">
+    <input title="movePageDialogSearchNoResults" value="There were no pages found containing &lt;b&gt;{0}&lt;/b&gt;." type="hidden">
+    <input title="movePageDialogSearchResultCount" value="Showing &lt;b&gt;{0}&lt;/b&gt;-&lt;b&gt;{1}&lt;/b&gt; of &lt;b&gt;{2}&lt;/b&gt; pages containing &lt;b&gt;{3}&lt;/b&gt;." type="hidden">
+    <input title="movePageDialogMoveFailed" value="Move failed. There was a problem contacting the server." type="hidden">
+    <input title="movePageDialogCannotChangeSpace" value="You cannot move this page to another space because you do not have permission to remove it from this space." type="hidden">
+    <input title="pageTitle" value="Overview and DataMine Parallel ETL" type="hidden">
+    <input title="parentPageTitle" value="Data_Team_Knowledge_Base" type="hidden">
+    <input title="fromPageTitle" value="" type="hidden">
+    <input title="spaceKey" value="ENG" type="hidden">
+    <input title="spaceName" value="Engineering" type="hidden">
+    <input title="movePageDialogInvalidLocation" value="You cannot move a page to be underneath itself or its children." type="hidden">
+    <input title="movePageDialogOrderingTitle" value="Page Ordering" type="hidden">
+    <input title="movePageDialogBackButton" value="Back" type="hidden">
+    <input title="movePageDialogMoveAndOrderButton" value="Reorder" type="hidden">
+    <input title="movePageDialogNextButton" value="Move" type="hidden">
+</fieldset>
+
+<script type="text/x-template" title="movePageDialog">
+    <div class="row information">
+        <div class="inner">
+            <div class="element">
+                Specify the new parent page for this page and its children by space and title.
+            </div>
+        </div>
+    </div>
+    <div class="form">
+        <fieldset>
+                
+
+    <legend class="assistive"><span>Change the Parent Page to a Known Page</span></legend>
+            <div class="row">
+                <label for="new-space">New space:</label>
+                <div class="value new-space-value">
+                    <input id="new-space-key" name="new-space-key" type="hidden" value="ENG">
+                                            <span class="space-input">
+                            <input id="new-space" name="new-space" value="Engineering" disabled="disabled">
+                        </span>
+                        <span class="description warning">You cannot move this page to another space because you do not have permission to remove it from this space.</span>
+                                        <div class="new-space-dropdown aui-dd-parent autocomplete"></div>
+                </div>
+            </div>
+            <div class="row">
+                <label for="new-parent-page">New parent page:</label>
+                <div class="value new-parent-page-value">
+                    <span class="page-input">
+                        <input id="new-parent-page" name="new-parent-page" value="Data_Team_Knowledge_Base">
+                    </span>
+                    <span class="description">Start typing a page title to see a list of suggestions.</span>
+                    <div class="new-parent-page-dropdown aui-dd-parent autocomplete"></div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="location-info">
+        <div class="row">
+            <label>Current location:</label>
+            <div class="value breadcrumbs-container">
+                <div class="breadcrumbs-line">
+                    <ul id="current-parent-breadcrumbs" class="breadcrumbs">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label>New location:</label>
+            <div class="value breadcrumbs-container">
+                <div class="breadcrumbs-line">
+                    <ul id="new-parent-breadcrumbs" class="breadcrumbs">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/x-template" title="movePageErrors">
+    <div id="move-errors" class="hidden warning"></div>
+</script>
+<script type="text/x-template" title="movePageBreadcrumb">
+    <li><a class="{2}" title="{3}" tabindex="-1"><span>{0}</span></a></li>
+</script>
+<script type="text/x-template" title="movePageBreadcrumbLoading">
+    <li class="loading"><span>Loading breadcrumbs&hellip;</span></li>
+</script>
+<script type="text/x-template" title="movePageBreadcrumbError">
+    <li class="warning last"><span>Error retrieving breadcrumbs.</span></li>
+</script>
+<script type="text/x-template" title="movePageNoMatchingPages">
+    <ol><li><span class="warning">No matching pages found.</span></li></ol>
+</script>
+<script type="text/x-template" title="movePageNoMatchingSpaces">
+    <ol><li><span class="warning">No matching spaces found.</span></li></ol>
+</script>
+
+<script type="text/x-template" title="movePageSearchPanel">
+    <div class="row information">
+        <div class="inner">
+            <div class="element">
+                Search for and select the new parent page for this page and its children.
+            </div>
+        </div>
+    </div>
+    <div id="move-page-search-container" class="row">
+        <div class="search-form">
+            <fieldset>
+                    
+
+    <legend class="assistive"><span>Search for a New Parent Page</span></legend>
+                    
+
+    <label  for="move-page-search-query" class="assistive">Search keywords</label>
+                <input class="search-query" id="move-page-search-query">
+                    
+
+    <label  for="move-page-search-space" class="assistive">Search in space</label>
+                                    <select id="move-page-search-space" class="search-space" disabled="disabled">
+                        <option value="ENG" selected="selected">Engineering</option>
+                    </select>
+                                <input type="button" value="Search">
+                                    <div class="description warning">You cannot move this page to another space because you do not have permission to remove it from this space.</div>
+                            </fieldset>
+        </div>
+        <div class="search-results">
+        </div>
+    </div>
+</script>
+<script type="text/x-template" title="movePageSearchResultsLoading">
+    <div class="searching">Searching…</div>
+</script>
+
+<script type="text/x-template" title="movePageHistoryPanel">
+    <div class="row information">
+        <div class="inner">
+            <div class="element">
+                Select the new parent page for this page and its children from your history.
+            </div>
+        </div>
+    </div>
+    <div id="move-page-search-container" class="row">
+        <div class="search-results">
+        </div>
+    </div>
+</script>
+<script type="text/x-template" title="movePageHistoryLoading">
+    <div class="searching">Loading…</div>
+</script>
+<script type="text/x-template" title="movePageBrowsePanel">
+    <div class="row information">
+        <div class="inner">
+            <div class="element">
+                Click to select the new parent page for this page and its children.
+            </div>
+        </div>
+    </div>
+    <div class="tree"></div>
+</script>
+<script type="text/x-template" title="movePagePanelLoading">
+    <span>Loading…</span>
+</script>
+<script type="text/x-template" title="movePageBrowsePanelSpace">
+    <ul><li id='tree-root-node-item' class='root-node-list-item'><a class='root-node' href='#'>{0}</a></li></ul>
+</script>
+<script type="text/x-template" title="orderingPagePanel">
+<div id="orderingPlaceHolder"></div>
+</script>
+<script type="text/x-template" title="reorderCheckbox">
+<span id="reorderRequirement"><input id="reorderCheck" type="checkbox" name="reorderFlag" title="Choose the position of this page within the list of child pages."/><label for="reorderCheck" title="Choose the position of this page within the list of child pages.">Reorder</label></span>
+</script>
+<script type="text/x-template" title="move-help-link">
+    <div class="dialog-help-link">
+            <a href="http://docs.atlassian.com/confluence/docs-35/Moving+a+Page" target="_blank">Help</a>
+    </div>
+</script>
+<script type="text/x-template" title="searchResultsGrid">
+    <table>
+        <thead>
+            <tr class="header">
+                <th class="search-result-title">Page Title</th>
+                <th class="search-result-space">Space</th>
+                <th class="search-result-date">Updated</th>
+            </tr>
+        </thead>
+    </table>
+</script>
+<script type="text/x-template" title="searchResultsGridCount">
+    <p class="search-result-count">{0}</p>
+</script>
+<script type="text/x-template" title="searchResultsGridRow">
+    <tr class="search-result">
+        <th class="search-result-title"><a href="{1}" class="content-type-{2}"><span>{0}</span></a></th>
+        <td class="search-result-space"><a class="space" href="/display/{4}/" title="{3}">{3}</a></td>
+        <td class="search-result-date"><span class="date" title="{6}">{5}</span></td>
+    </tr>
+</script>
+<!-- Start restrictions section -->
+<script type="text/x-template" title="page-permissions-div">
+<div id="page-permissions-div">
+    <div id="page-permissions-editor-form">
+
+                <div id="page-permissions-error-div" class="hidden">
+            <a href="#" id="permissions-error-div-close">Ok</a>
+            <div></div>
+        </div>
+
+                <div id="page-permissions-type-radios" class="page-permissions-label-rows">
+            <div>
+                <input id="restrictViewRadio" type="radio" checked="checked" name="pagePermissionTypeRadio" value="view"/>
+                <label for="restrictViewRadio">Restrict viewing of this page</label>
+                <input id="restrictEditRadio" type="radio" name="pagePermissionTypeRadio" value="edit"/>
+                <label for="restrictEditRadio">Restrict editing of this page</label>
+            </div>
+        </div>
+        <div id="page-permissions-input" class="page-permissions-label-rows">
+            <div class="page-permissions-label">To:</div>
+            <div id="page-permissions-chooser-box">
+                                    <span id="page-permissions-choose-me" class="ajs-button normal">
+                        <img class="permission-entity-picture" src="/images/icons/profilepics/default.gif" border="0" alt="Me" align="absmiddle"/>
+                        <a href="#">Me</a>
+                        <span class="remote-user-name hidden">mwu</span>
+                    </span>
+                                <span id="page-permissions-choose-user" class="ajs-button">
+                    
+
+
+
+    
+
+
+
+<a href="#" id='userpicker-popup-link-image' onClick="var picker = window.open('/spaces/openuserpicker.action?key=ENG&amp;startIndex=0&amp;onPopupSubmit=AJS.PagePermissions.addUserPermissions', 'EntitiesPicker', 'status=yes,resizable=yes,top=100,left=200,width=700,height=680,scrollbars=yes'); picker.focus(); return false;"><img src="/s/en/2171/43/_/images/icons/user_16.gif" height=16 width=16 border=0 align="absmiddle"  title="Choose users" /></a>
+<a href="#" id='userpicker-popup-link-text' onClick="var picker = window.open('/spaces/openuserpicker.action?key=ENG&amp;startIndex=0&amp;onPopupSubmit=AJS.PagePermissions.addUserPermissions', 'EntitiesPicker', 'status=yes,resizable=yes,top=100,left=200,width=700,height=680,scrollbars=yes'); picker.focus(); return false;">Person...</a>
+
+
+                </span>
+                <span id="page-permissions-choose-group" class="ajs-button">
+                    
+
+
+
+    
+
+ 
+
+<a href="#" id='grouppicker-popup-link-image' onClick="var picker = window.open('/spaces/opengrouppicker.action?key=ENG&amp;startIndex=0&amp;actionName=dosearchgroups.action&amp;onPopupSubmit=AJS.PagePermissions.addGroupPermissions', 'EntitiesPicker', 'status=yes,resizable=yes,top=100,left=200,width=580,height=550,scrollbars=yes'); picker.focus(); return false;"><img src="/s/en/2171/43/_/images/icons/group_16.gif" height=16 width=16 border=0 align="absmiddle"  title="Choose groups" /></a>
+<a href="#" id='grouppicker-popup-link-text' onClick="var picker = window.open('/spaces/opengrouppicker.action?key=ENG&amp;startIndex=0&amp;actionName=dosearchgroups.action&amp;onPopupSubmit=AJS.PagePermissions.addGroupPermissions', 'EntitiesPicker', 'status=yes,resizable=yes,top=100,left=200,width=580,height=550,scrollbars=yes'); picker.focus(); return false;">Group...</a>
+
+
+                </span>
+            </div>
+            <div id="page-permissions-input-box">
+                                <span>
+                    <input type="text" id="page-permissions-names-input" class="input-placeholder" value="Enter user or group name" name="permissionNames" size="30" autocomplete="off"/>
+                </span>
+                <input
+    type="hidden"
+                            id="page-permissions-names-hidden"           />                <img height="16px" width="1px" src="/s/en/2171/43/_/images/border/spacer.gif"/>
+                <input type="button" id="add-typed-names" value="Restrict">
+            </div>
+        </div>
+    </div>
+    <div id="page-permissions-tables">
+        <div id="page-permissions-table-div">
+                        <table id="page-permissions-table" class="page-permissions-table">
+                <tr id="page-permissions-no-views" class="marker-row">
+                    <td colspan="3" class="page-permissions-marker-cell"><span>No view restrictions are defined for this page</span></td>
+                </tr>
+                <tr id="page-permissions-no-edits" class="marker-row">
+                    <td colspan="3" class="page-permissions-marker-cell"><span>No edit restrictions are defined for this page</span></td>
+                </tr>
+            </table>
+        </div>
+        <div id="page-inherited-permissions-table-div" class="hidden">
+            <span id="page-inherited-permissions-table-desc">
+                <a class="icon twisty-closed">Show/Hide</a>
+                <a id="toggle-inherited-permissions" title="Click to see inherited restrictions">This page has restricted parent pages. It can only be seen by users who can see those parent pages.</a>
+            </span>
+            <div id="page-inherited-permissions-tables" class="hidden page-inheritance-togglable"></div>
+        </div>
+    </div>
+</div>
+</script>
+
+<script type="text/x-template" title="permissions-row-template">
+    <tr class="permission-row">
+                                
+                <td class="page-permissions-marker-cell" width="20%">
+            <span>Viewing restricted to:</span>
+        </td>
+                <td class="permission-entity" nowrap="true" width="40%">
+            <span class="entity-container">
+                <img class="permission-entity-picture"/>
+                <span class="permission-entity-display-name"></span>
+                <span class="permission-entity-name-wrap">&nbsp;(<span class="permission-entity-name"></span>)</span>
+            </span>
+        </td>
+        <td class="permission-detail-column">
+            <div class="permission-remove-div">
+                <a href="#" class="remove-permission-link">Remove restriction</a>
+            </div>
+        </td>
+    </tr>
+</script>
+<script type="text/x-template" title="permissions-username-no-suggestion-template">
+    <ol>
+        <li><a href="#" class="message"><span>No matches</span></a></li>
+    </ol>
+</script>
+<script type="text/x-template" title="page-inherited-permissions-table-div-template">
+        <div class="page-inherited-permissions-owner-div">
+        <div class="page-inherited-permissions-table-desc">Viewing restrictions apply to “<a></a>”. In order to see “<span></span>”, a user must be in the following list of users and groups:</div>
+        <table class="page-permissions-table"></table>
+    </div>
+</script>
+<script type="text/x-template" title="page-restrictions-help-link">
+    <div class="dialog-help-link">
+            <a href="http://docs.atlassian.com/confluence/docs-35/Page+Restrictions" target="_blank">Help</a>
+    </div>
+</script>
+<!-- End restrictions section -->
+
+<fieldset class="hidden parameters">
+    <input title="spaceKeyEncoded" value="ENG" type="hidden">
+    <input title="spaceKeyDecoded" value="ENG" type="hidden">
+</fieldset>
+
+		
+				
+				
+					
+			<fieldset class="hidden parameters">
+				<input title="parentPageId" value="15803718" type="hidden">
+			</fieldset>
+		
+					
+			                    
+    
+		
+						    
+			
+			<table class="rw_page" border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+					<td id="rw_page_left_column" class="rw_padding_right" valign="top" width="23%">	
+				<div id="rw_show_left_column_div" style="display:none;" title="Show left column ( Type '[' )">
+					<span class="rw_icon_container_16 rw_arrow_right" style="display:inline-block;"></span>
+				</div>
+				<div id="rw_page_left">
+					
+					<div class="rw_custom_section">
+						    
+<div id="rw_pagetree" class="rw_page_left_section no_icons" style="">
+	    
+    
+
+<div class="plugin_pagetree">
+
+                <div id="pagetreesearch">
+            <form method="POST" action="/plugins/pagetreesearch/pagetreesearch.action" name="pagetreesearchform">
+                                    <input name="ancestorId" value="2294616" type="hidden">
+                                <input name="spaceKey" value="ENG" type="hidden">
+                <input size="20" name="queryString" type="text">
+                <input value="Search" type="submit">
+            </form>
+        </div>
+    
+                <div>
+            <span class="plugin_pagetree_status hidden">Collapse all</span>
+            <div class="plugin_pagetree_expandcollapse">
+                <a class="plugin_pagetree_expandall" href="#">Expand all</a>&nbsp;&nbsp;
+                <a class="plugin_pagetree_collapseall" href="#">Collapse all</a>
+            </div>
+        </div>
+    
+    <ul class="plugin_pagetree_children_list plugin_pagetree_children_list_noleftspace">
+        <div id="children2294616-0" class="plugin_pagetree_children">
+<ul class="plugin_pagetree_children_list" id="child_ul2294616-0">
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus5804742-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan5804742-0">                        <a href="http://intranet/display/ENG/Platform+Architecture">Platform Architecture</a>
+        </span>            </div>
+
+        <div id="children5804742-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus8069512-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan8069512-0">                        <a href="http://intranet/display/ENG/Engineering+Hiring">Engineering Hiring</a>
+        </span>            </div>
+
+        <div id="children8069512-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus5805017-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan5805017-0">                        <a href="http://intranet/display/ENG/New+Engineer+Handbook">New Engineer Handbook</a>
+        </span>            </div>
+
+        <div id="children5805017-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus7311122-0" class="plugin_pagetree_childtoggle icon icon-minus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan7311122-0">                        <a href="http://intranet/display/ENG/Platform+Data+Team">Platform Data Team</a>
+        </span>            </div>
+
+        <div id="children7311122-0" class="plugin_pagetree_children_container">
+                                                        <ul class="plugin_pagetree_children_list" id="child_ul7311122-0">
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan16656976-0">                        <a href="http://intranet/display/ENG/ATL2+datamine+allocation">ATL2 datamine allocation</a>
+        </span>            </div>
+
+        <div id="children16656976-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul16656976-0"></ul>
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan16657650-0">                        <a href="http://intranet/display/ENG/AUP+-+Vertical+Partition">AUP - Vertical Partition</a>
+        </span>            </div>
+
+        <div id="children16657650-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul16657650-0"></ul>
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan19663995-0">                        <a href="http://intranet/display/ENG/Cross+Device+Matching+project">Cross Device Matching project</a>
+        </span>            </div>
+
+        <div id="children19663995-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul19663995-0"></ul>
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus15803718-0" class="plugin_pagetree_childtoggle icon icon-minus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan15803718-0">                        <a href="http://intranet/display/ENG/Data_Team_Knowledge_Base">Data_Team_Knowledge_Base</a>
+        </span>            </div>
+
+        <div id="children15803718-0" class="plugin_pagetree_children_container">
+                                                        <ul class="plugin_pagetree_children_list" id="child_ul15803718-0">
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan15804169-0">                        <a href="http://intranet/display/ENG/AUP+and+ICA+Query+Capabilities">AUP and ICA Query Capabilities</a>
+        </span>            </div>
+
+        <div id="children15804169-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul15804169-0"></ul>
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan15804067-0">                        <a href="http://intranet/display/ENG/AUP+creation">AUP creation</a>
+        </span>            </div>
+
+        <div id="children15804067-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul15804067-0"></ul>
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan15804485-0">                        <a href="http://intranet/display/ENG/Code+Testing">Code Testing</a>
+        </span>            </div>
+
+        <div id="children15804485-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul15804485-0"></ul>
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan15804267-0">                        <a href="http://intranet/display/ENG/How+to+add+new+fields+to+ICA+table">How to add new fields to ICA table</a>
+        </span>            </div>
+
+        <div id="children15804267-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul15804267-0"></ul>
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan15804248-0">                        <a href="http://intranet/display/ENG/ICA+Query+Engine">ICA Query Engine</a>
+        </span>            </div>
+
+        <div id="children15804248-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul15804248-0"></ul>
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan15804065-0">                        <a href="http://intranet/display/ENG/membershipbus+evaluation+during+AUP+creation">membershipbus evaluation during AUP creation</a>
+        </span>            </div>
+
+        <div id="children15804065-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul15804065-0"></ul>
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18726936-0">                        <a href="http://intranet/display/ENG/Notes+on+Cheetah">Notes on Cheetah</a>
+        </span>            </div>
+
+        <div id="children18726936-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul18726936-0"></ul>
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span style="font-weight: bold;" class="plugin_pagetree_children_span" id="childrenspan15803720-0">                        <a href="http://intranet/display/ENG/Overview+and+DataMine+Parallel+ETL">Overview and DataMine Parallel ETL</a>
+        </span>            </div>
+
+        <div id="children15803720-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul15803720-0"></ul>
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan15804263-0">                        <a href="http://intranet/display/ENG/Troubleshooting">Troubleshooting</a>
+        </span>            </div>
+
+        <div id="children15804263-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul15804263-0"></ul>
+            </div>
+    </li>
+                                        </ul>
+                                        </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus8753010-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan8753010-0">                        <a href="http://intranet/display/ENG/DataMine+Internals">DataMine Internals</a>
+        </span>            </div>
+
+        <div id="children8753010-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus8062144-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan8062144-0">                        <a href="http://intranet/display/ENG/DataMine+Tutorial">DataMine Tutorial</a>
+        </span>            </div>
+
+        <div id="children8062144-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus8752992-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan8752992-0">                        <a href="http://intranet/display/ENG/DataMine+Wiki">DataMine Wiki</a>
+        </span>            </div>
+
+        <div id="children8752992-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18718741-0">                        <a href="http://intranet/display/ENG/Data+Team+Interview+Questions">Data Team Interview Questions</a>
+        </span>            </div>
+
+        <div id="children18718741-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul18718741-0"></ul>
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18725572-0">                        <a href="http://intranet/display/ENG/Data+Team+Weekly+Updates">Data Team Weekly Updates</a>
+        </span>            </div>
+
+        <div id="children18725572-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul18725572-0"></ul>
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18731431-0">                        <a href="http://intranet/display/ENG/Dimension+table+project">Dimension table project</a>
+        </span>            </div>
+
+        <div id="children18731431-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul18731431-0"></ul>
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus8757515-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan8757515-0">                        <a href="http://intranet/display/ENG/Experience+and+knowledge+sharing">Experience and knowledge sharing</a>
+        </span>            </div>
+
+        <div id="children8757515-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan16657231-0">                        <a href="http://intranet/display/ENG/Finding+id+mapping+from+datamine">Finding id mapping from datamine</a>
+        </span>            </div>
+
+        <div id="children16657231-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul16657231-0"></ul>
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan14975518-0">                        <a href="http://intranet/display/ENG/Ideas">Ideas</a>
+        </span>            </div>
+
+        <div id="children14975518-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul14975518-0"></ul>
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18726459-0">                        <a href="http://intranet/display/ENG/Intern+Projects">Intern Projects</a>
+        </span>            </div>
+
+        <div id="children18726459-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul18726459-0"></ul>
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan16649270-0">                        <a href="http://intranet/display/ENG/Offline+Membership">Offline Membership</a>
+        </span>            </div>
+
+        <div id="children16649270-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul16649270-0"></ul>
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan17515763-0">                        <a href="http://intranet/display/ENG/Offsite+Pictures+11-22-2013">Offsite Pictures 11-22-2013</a>
+        </span>            </div>
+
+        <div id="children17515763-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul17515763-0"></ul>
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus18725942-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18725942-0">                        <a href="http://intranet/display/ENG/Platform+Data+Engineering+Meeting+Agenda">Platform Data Engineering Meeting Agenda</a>
+        </span>            </div>
+
+        <div id="children18725942-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus8754066-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan8754066-0">                        <a href="http://intranet/display/ENG/Reading+list">Reading list</a>
+        </span>            </div>
+
+        <div id="children8754066-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus16647209-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan16647209-0">                        <a href="http://intranet/display/ENG/Regression+Test">Regression Test</a>
+        </span>            </div>
+
+        <div id="children16647209-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan16648456-0">                        <a href="http://intranet/display/ENG/Running+Adhoc+Pig+in+Production">Running Adhoc Pig in Production</a>
+        </span>            </div>
+
+        <div id="children16648456-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul16648456-0"></ul>
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan17503067-0">                        <a href="http://intranet/display/ENG/Steps+for+on+boarding+new+Datamine+Customers">Steps for on boarding new Datamine Customers</a>
+        </span>            </div>
+
+        <div id="children17503067-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul17503067-0"></ul>
+            </div>
+    </li>
+                                            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18719310-0">                        <a href="http://intranet/display/ENG/Tableau+Extract+Service+Requirement">Tableau Extract Service Requirement</a>
+        </span>            </div>
+
+        <div id="children18719310-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul18719310-0"></ul>
+            </div>
+    </li>
+                                        </ul>
+                                        </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus8061415-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan8061415-0">                        <a href="http://intranet/display/ENG/Reading+group">Reading group</a>
+        </span>            </div>
+
+        <div id="children8061415-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus8068314-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan8068314-0">                        <a href="http://intranet/display/ENG/Applications+Team">Applications Team</a>
+        </span>            </div>
+
+        <div id="children8068314-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan8069664-0">                        <a href="http://intranet/display/ENG/Turn+Accounting+Logic">Turn Accounting Logic</a>
+        </span>            </div>
+
+        <div id="children8069664-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul8069664-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan8071104-0">                        <a href="http://intranet/display/ENG/Budget+Control+Flow">Budget Control Flow</a>
+        </span>            </div>
+
+        <div id="children8071104-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul8071104-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus8752010-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan8752010-0">                        <a href="http://intranet/display/ENG/Platform+Runtime+Systems+Team">Platform Runtime Systems Team</a>
+        </span>            </div>
+
+        <div id="children8752010-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus8752729-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan8752729-0">                        <a href="http://intranet/display/ENG/Platform+Applied+Science+Team">Platform Applied Science Team</a>
+        </span>            </div>
+
+        <div id="children8752729-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan8757463-0">                        <a href="http://intranet/display/ENG/Reporting+Aggregate+Computations">Reporting Aggregate Computations</a>
+        </span>            </div>
+
+        <div id="children8757463-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul8757463-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan9700020-0">                        <a href="http://intranet/display/ENG/Console+Feature+to+Backend+Process+Map">Console Feature to Backend Process Map</a>
+        </span>            </div>
+
+        <div id="children9700020-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul9700020-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus9703452-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan9703452-0">                        <a href="http://intranet/display/ENG/Design+Documents">Design Documents</a>
+        </span>            </div>
+
+        <div id="children9703452-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus9704801-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan9704801-0">                        <a href="http://intranet/display/ENG/Bob+the+job+scheduler">Bob the job scheduler</a>
+        </span>            </div>
+
+        <div id="children9704801-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan9706665-0">                        <a href="http://intranet/display/ENG/Turn+Service+Resource+Dependency">Turn Service Resource Dependency</a>
+        </span>            </div>
+
+        <div id="children9706665-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul9706665-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus10455651-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan10455651-0">                        <a href="http://intranet/display/ENG/Real-Time+Bidding">Real-Time Bidding</a>
+        </span>            </div>
+
+        <div id="children10455651-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan10460476-0">                        <a href="http://intranet/display/ENG/Crosschannel+awareness+project">Crosschannel awareness project</a>
+        </span>            </div>
+
+        <div id="children10460476-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul10460476-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus14977085-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan14977085-0">                        <a href="http://intranet/display/ENG/Post-mortem+wiki">Post-mortem wiki</a>
+        </span>            </div>
+
+        <div id="children14977085-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus15797996-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan15797996-0">                        <a href="http://intranet/display/ENG/sMirror+Documentation">sMirror Documentation</a>
+        </span>            </div>
+
+        <div id="children15797996-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus15803425-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan15803425-0">                        <a href="http://intranet/display/ENG/Axon">Axon</a>
+        </span>            </div>
+
+        <div id="children15803425-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan15803732-0">                        <a href="http://intranet/display/ENG/Engineering+Massage+Schedule">Engineering Massage Schedule</a>
+        </span>            </div>
+
+        <div id="children15803732-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul15803732-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus15803853-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan15803853-0">                        <a href="http://intranet/display/ENG/Cannon">Cannon</a>
+        </span>            </div>
+
+        <div id="children15803853-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus15803914-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan15803914-0">                        <a href="http://intranet/display/ENG/Keystone">Keystone</a>
+        </span>            </div>
+
+        <div id="children15803914-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan15804099-0">                        <a href="http://intranet/display/ENG/TechStaff+Team+Details">TechStaff Team Details</a>
+        </span>            </div>
+
+        <div id="children15804099-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul15804099-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus15806113-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan15806113-0">                        <a href="http://intranet/display/ENG/Services+monitoring">Services monitoring</a>
+        </span>            </div>
+
+        <div id="children15806113-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus15807519-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan15807519-0">                        <a href="http://intranet/display/ENG/Platform+Reporting+Team">Platform Reporting Team</a>
+        </span>            </div>
+
+        <div id="children15807519-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan15810604-0">                        <a href="http://intranet/display/ENG/ZooKeeper">ZooKeeper</a>
+        </span>            </div>
+
+        <div id="children15810604-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul15810604-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus15811213-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan15811213-0">                        <a href="http://intranet/pages/viewpage.action?pageId=15811213">Server-Dev &amp; Middleware Team</a>
+        </span>            </div>
+
+        <div id="children15811213-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus16652902-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan16652902-0">                        <a href="http://intranet/display/ENG/Applied+Science+Infrastructure+Team">Applied Science Infrastructure Team</a>
+        </span>            </div>
+
+        <div id="children16652902-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan16654057-0">                        <a href="http://intranet/display/ENG/2013+July+Holiday+Coverage">2013 July Holiday Coverage</a>
+        </span>            </div>
+
+        <div id="children16654057-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul16654057-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan17498223-0">                        <a href="http://intranet/display/ENG/Engineering+All+Hands+Meeting+Agenda">Engineering All Hands Meeting Agenda</a>
+        </span>            </div>
+
+        <div id="children17498223-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul17498223-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan17500554-0">                        <a href="http://intranet/display/ENG/DB+Re-Architecture">DB Re-Architecture</a>
+        </span>            </div>
+
+        <div id="children17500554-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul17500554-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan17502401-0">                        <a href="http://intranet/display/ENG/Improving+Repository+Management">Improving Repository Management</a>
+        </span>            </div>
+
+        <div id="children17502401-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul17502401-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus17502232-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan17502232-0">                        <a href="http://intranet/display/ENG/Audience+Suite+Team">Audience Suite Team</a>
+        </span>            </div>
+
+        <div id="children17502232-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan17504971-0">                        <a href="http://intranet/display/ENG/2013+Year+End+Holiday+Coverage">2013 Year End Holiday Coverage</a>
+        </span>            </div>
+
+        <div id="children17504971-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul17504971-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus17505349-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan17505349-0">                        <a href="http://intranet/pages/viewpage.action?pageId=17505349">Report Center - Caches &amp; Aggregates</a>
+        </span>            </div>
+
+        <div id="children17505349-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus17506453-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan17506453-0">                        <a href="http://intranet/display/ENG/Campaign+Suite+Team">Campaign Suite Team</a>
+        </span>            </div>
+
+        <div id="children17506453-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan17507116-0">                        <a href="http://intranet/display/ENG/Report+Center+2.0+-+Retrospectives">Report Center 2.0 - Retrospectives</a>
+        </span>            </div>
+
+        <div id="children17507116-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul17507116-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan17507281-0">                        <a href="http://intranet/display/ENG/Platform+Engineering+Desktop+MAC+Addresses">Platform Engineering Desktop MAC Addresses</a>
+        </span>            </div>
+
+        <div id="children17507281-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul17507281-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus17508285-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan17508285-0">                        <a href="http://intranet/display/ENG/Turn+Hacks">Turn Hacks</a>
+        </span>            </div>
+
+        <div id="children17508285-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus17508336-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan17508336-0">                        <a href="http://intranet/display/ENG/Engineering+Weekly+Status">Engineering Weekly Status</a>
+        </span>            </div>
+
+        <div id="children17508336-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan17509693-0">                        <a href="http://intranet/display/ENG/Inga+--+Realtime+Stream+Processing">Inga -- Realtime Stream Processing</a>
+        </span>            </div>
+
+        <div id="children17509693-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul17509693-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus17510471-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan17510471-0">                        <a href="http://intranet/display/ENG/Fun+Stuff">Fun Stuff</a>
+        </span>            </div>
+
+        <div id="children17510471-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus17510816-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan17510816-0">                        <a href="http://intranet/display/ENG/API+Team">API Team</a>
+        </span>            </div>
+
+        <div id="children17510816-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus17510804-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan17510804-0">                        <a href="http://intranet/display/ENG/Shared+Testing+Environments+-+Calendar">Shared Testing Environments - Calendar</a>
+        </span>            </div>
+
+        <div id="children17510804-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan17511344-0">                        <a href="http://intranet/display/ENG/Middleware">Middleware</a>
+        </span>            </div>
+
+        <div id="children17511344-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul17511344-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan17512591-0">                        <a href="http://intranet/display/ENG/Agile+Roundtable+for+Audience+and+Campaign+Suites">Agile Roundtable for Audience and Campaign Suites</a>
+        </span>            </div>
+
+        <div id="children17512591-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul17512591-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18712577-0">                        <a href="http://intranet/display/ENG/fixit+day+%2812.11%29">fixit day (12.11)</a>
+        </span>            </div>
+
+        <div id="children18712577-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul18712577-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18715101-0">                        <a href="http://intranet/display/ENG/Facebook+integration+reference">Facebook integration reference</a>
+        </span>            </div>
+
+        <div id="children18715101-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul18715101-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18715951-0">                        <a href="http://intranet/display/ENG/Running+Turn+service+using+docker">Running Turn service using docker</a>
+        </span>            </div>
+
+        <div id="children18715951-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul18715951-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18717648-0">                        <a href="http://intranet/display/ENG/Kafka">Kafka</a>
+        </span>            </div>
+
+        <div id="children18717648-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul18717648-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18718177-0">                        <a href="http://intranet/display/ENG/Markov+Random+Field+Models+Design+Doc+%28to+be+completed%29">Markov Random Field Models Design Doc (to be completed)</a>
+        </span>            </div>
+
+        <div id="children18718177-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul18718177-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18718421-0">                        <a href="http://intranet/display/ENG/How+to+build+a+tarball">How to build a tarball</a>
+        </span>            </div>
+
+        <div id="children18718421-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul18718421-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus18718730-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18718730-0">                        <a href="http://intranet/display/ENG/Technical+Videos">Technical Videos</a>
+        </span>            </div>
+
+        <div id="children18718730-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus18724122-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18724122-0">                        <a href="http://intranet/display/ENG/TSE+Public+Docs">TSE Public Docs</a>
+        </span>            </div>
+
+        <div id="children18724122-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus18726036-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18726036-0">                        <a href="http://intranet/display/ENG/Internationalization+Support+across+Turn+System">Internationalization Support across Turn System</a>
+        </span>            </div>
+
+        <div id="children18726036-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus18726580-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18726580-0">                        <a href="http://intranet/display/ENG/Datamine+Console+Team">Datamine Console Team</a>
+        </span>            </div>
+
+        <div id="children18726580-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18726888-0">                        <a href="http://intranet/display/ENG/Offshore+Resource+Management">Offshore Resource Management</a>
+        </span>            </div>
+
+        <div id="children18726888-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul18726888-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18727744-0">                        <a href="http://intranet/display/ENG/I18N+Certification+-+Engineering">I18N Certification - Engineering</a>
+        </span>            </div>
+
+        <div id="children18727744-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul18727744-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18727738-0">                        <a href="http://intranet/display/ENG/Application+Infrastructure">Application Infrastructure</a>
+        </span>            </div>
+
+        <div id="children18727738-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul18727738-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18728167-0">                        <a href="http://intranet/display/ENG/Fixit+Day+03+20+2014">Fixit Day 03 20 2014</a>
+        </span>            </div>
+
+        <div id="children18728167-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul18728167-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus18729777-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18729777-0">                        <a href="http://intranet/display/ENG/Applications">Applications</a>
+        </span>            </div>
+
+        <div id="children18729777-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18729910-0">                        <a href="http://intranet/display/ENG/Customer+Success">Customer Success</a>
+        </span>            </div>
+
+        <div id="children18729910-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul18729910-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18729926-0">                        <a href="http://intranet/display/ENG/Digital+Envoy+Data+Auto+Update">Digital Envoy Data Auto Update</a>
+        </span>            </div>
+
+        <div id="children18729926-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul18729926-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus18732032-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18732032-0">                        <a href="http://intranet/display/ENG/Report+Center+2.0+-+Team">Report Center 2.0 - Team</a>
+        </span>            </div>
+
+        <div id="children18732032-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus18732093-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18732093-0">                        <a href="http://intranet/display/ENG/Quality+Engineering+Infrastructure">Quality Engineering Infrastructure</a>
+        </span>            </div>
+
+        <div id="children18732093-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                                             <a id="plusminus18733557-0" class="plugin_pagetree_childtoggle icon icon-plus" href="#">                
+            </a>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan18733557-0">                        <a href="http://intranet/display/ENG/Disaster+Recovery+Plan">Disaster Recovery Plan</a>
+        </span>            </div>
+
+        <div id="children18733557-0" class="plugin_pagetree_children_container">
+                                                            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan19666530-0">                        <a href="http://intranet/display/ENG/SOA+%282nd+Generation+Platform%29">SOA (2nd Generation Platform)</a>
+        </span>            </div>
+
+        <div id="children19666530-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul19666530-0"></ul>
+            </div>
+    </li>
+            <li>
+    <div class="plugin_pagetree_childtoggle_container">
+                    <span class="no-children icon icon-square"></span>
+            </div>
+    <div class="plugin_pagetree_children_content">
+                    <span class="plugin_pagetree_children_span" id="childrenspan19667255-0">                        <a href="http://intranet/display/ENG/App+Targeting+and+Reporting+Design+documentation">App Targeting and Reporting Design documentation</a>
+        </span>            </div>
+
+        <div id="children19667255-0" class="plugin_pagetree_children_container">
+                    <ul class="plugin_pagetree_children_list" id="child_ul19667255-0"></ul>
+            </div>
+    </li>
+    </ul>
+</div>
+    </ul>
+
+    <fieldset class="hidden">
+        <input name="treeId" value="" type="hidden">
+        <input name="treeRequestId" value="/plugins/pagetree/naturalchildren.action?decorator=none&amp;excerpt=false&amp;sort=position&amp;reverse=false&amp;disableLinks=false" type="hidden">
+        <input name="treePageId" value="15803720" type="hidden">
+
+        <input name="noRoot" value="false" type="hidden">
+        <input name="rootPageId" value="2294616" type="hidden">
+
+        <input name="rootPage" value="" type="hidden">
+        <input name="startDepth" value="0" type="hidden">
+        <input name="spaceKey" value="ENG" type="hidden">
+
+        <input name="i18n-pagetree.loading" value="Loading..." type="hidden">
+        <input name="i18n-pagetree.error.permission" value="Unable to load page tree. It seems that you do not have permission to view the root page." type="hidden">
+        <input name="i18n-pagetree.eeror.general" value="There was a problem retrieving the page tree. Please check the server log file for more information." type="hidden">
+        <input name="loginUrl" value="/login.action?os_destination=%2Fdisplay%2FENG%2FOverview%2Band%2BDataMine%2BParallel%2BETL" type="hidden">
+
+                <fieldset class="hidden">
+                                                <input name="ancestorId" value="15803718" type="hidden">
+                                    <input name="ancestorId" value="7311122" type="hidden">
+                                    <input name="ancestorId" value="2294616" type="hidden">
+                                    </fieldset>
+    </fieldset>
+</div>
+
+
+</div>
+
+
+
+<div id="pageInfo"><p>Added by <span class="user-flat"><a href="http://intranet/display/%7Emingxi.wu@turn.com" class="version-item">Mingxi Wu</a>
+</span>, last edited by <span class="user-flat"><a href="http://intranet/display/%7Eqyan" class="version-item">Yan Qi</a>
+</span> on Jan 25, 2013. View changes between versions <span class="diffs-flat"><a href="http://intranet/pages/diffpages.action?pageId=15803720&amp;originalId=15803725" class="version-item">3-2</a></span></p></div>
+
+    
+<div id="" class="rw_page_left_section " style="background:#ffffcd">
+	<img class="emoticon" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/help_16.gif" alt="" height="16" align="absmiddle" border="0" width="16"> <a href="http://confluence.atlassian.com/renderer/notationhelp.action?section=all" class="external-link">Confluence Notation Guide</a><br>
+<img class="emoticon" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/help_16.gif" alt="" height="16" align="absmiddle" border="0" width="16"> <a href="http://confluence.atlassian.com/display/CONF34/Confluence+User%27s+Guide" class="external-link">Confluence User Guide</a>
+</div>
+
+
+
+					</div>
+					
+				</div>
+			</td>
+				<td id="rw_page_right_column" class="right" valign="top" width="77%">	
+			<div id="rw_fullscreen_wrapper">
+				<div id="rw_fullscreen_container">
+					<div id="rw_page_right">
+					
+												<div class="rw_custom_section">
+															<p></p>
+													
+																				
+							
+							
+<a id="rw_open_fullscreen" class="rw_icon_button" title="Open page in fullscreen ( Type 'f' )"><span class="rw_icon_container_20 rw_open_fullscreen"></span></a>
+<a id="rw_close_fullscreen" class="rw_icon_button_active" style="display:none;" title="Exit fullscreen mode ( Type 'esc' )"><span class="rw_icon_container_20 rw_close_fullscreen"></span></a>
+
+ 
+  	  	<script>
+  		originalTheme.leftColumnState = "$pageInfoBean.leftColumnState";	  		
+  	</script>
+  	<a id="rw_hide_left_column" class="rw_icon_button rw_hide_left_column rw_margin_right_5px" title="Hide left column ( Type '[' )"><span class="rw_icon_container_20 rw_hide_left_column"></span></a>
+	<a id="rw_show_left_column" class="rw_icon_button_active rw_show_left_column rw_margin_right_5px" style="display:none;" title="Show left column ( Type '[' )"><span class="rw_icon_container_20 rw_show_left_column"></span></a>
+
+	  	
+  	  	<div id="abstractPageIdVar" style="display:none;">15803720</div>
+  	    
+<a id="attachment_show" class="rw_icon_button rw_margin_right_5px" title="Show attachments ( Type 'a' )" href="#">	
+	<span class="rw_icon_container_20_40 rw_open_attachments"></span>
+</a>		
+<a id="attachment_hide" class="rw_icon_button_active rw_margin_right_5px" style="display:none;" title="Hide attachments ( Type 'esc' )" href="#">
+	<span class="rw_icon_container_20_40 rw_close_attachments"></span>
+</a>					
+
+
+
+
+	<h1 class="rw_page_title">
+		<span id="title-text">
+			Overview and DataMine Parallel ETL
+		</span>
+	</h1>
+
+<div class="page-metadata-wrapper">
+	<div class="page-metadata">
+	  	
+		<ul>
+	        	            <li class="page-metadata-item noprint">
+    
+            
+    
+    <a id="content-metadata-page-restrictions" href="#" class="page-metadata-icon page-restrictions hidden" title="Page restrictions apply. Click the lock icon to view or edit the restriction.">
+                   <span>Page restrictions apply</span></a>        </li>
+	        	            <li class="page-metadata-item noprint">
+    
+        
+    
+    <a id="content-metadata-attachments" href="http://intranet/pages/viewpageattachments.action?pageId=15803720&amp;metadataLink=true" class="page-metadata-icon action-view-attachments" accesskey="a" title="Attachments: 1">
+                   <span><span class="page-metadata-attachments-text">Attachments:</span><span class="page-metadata-attachments-count">1</span></span></a>        </li>
+	        	        <li class="page-metadata-modification-info">
+	        	            Added by <a data-user-hover-bound="true" title="" href="http://intranet/display/%7Emingxi.wu@turn.com" class="url fn confluence-userlink userlink-0" data-username="mingxi.wu@turn.com">Mingxi Wu</a>, last edited by <a data-user-hover-bound="true" title="" href="http://intranet/display/%7Eqyan" class="url fn confluence-userlink userlink-1" data-username="qyan">Yan Qi</a> on Jan 25, 2013
+	            	            	                <span class="noprint">&nbsp;(<a id="view-change-link" href="http://intranet/pages/diffpages.action?pageId=15803720&amp;originalId=15803725">view change</a>)</span>
+	            	        	        </li>
+	        	       
+	    </ul>
+		
+				    <ul>
+		    	<li>
+		     		
+		    	</li>
+		    </ul>
+	    	    
+	  
+
+	    <div style="clear:both;"></div>
+	      <div id="version-comment" class="noteMacro" style="display: none;">
+      <strong>Comment:</strong>
+      <br>
+  </div>
+	    
+	    		    			<div id="attachments_wrapper" style="display:none;">
+			</div>
+			<div id="attachments_loader" class="rw_macro_loader" style="display:none;margin-top:15px;">
+				<img alt="Loading" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/ajax-loader-spinner-small.gif">
+			</div>	
+			    
+	    
+	</div>
+		
+</div>
+						
+																						
+													</div>
+
+						<div style="clear:both;"></div>
+						
+						<fieldset class="hidden parameters">
+														<input title="browsePageTreeMode" value="view" type="hidden">
+						</fieldset>
+						
+																																
+												
+						<div class="wiki-content">
+						   <!-- wiki content -->
+            <p><span class="image-wrap" style=""><img src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/PETL.jpeg" style="border: 1px solid black" height="1212" width="1616"></span></p>
+
+<p>----- DataMine ETL</p>
+
+<p>1. Parallel ETL</p>
+
+<ul>
+	<li>Transform<br>
+com.turn.platform.cheetah.storage.parallel_etl.v2.Transform*</li>
+</ul>
+
+
+<ul>
+	<li>Join<br>
+com.turn.platform.cheetah.storage.parallel_etl.v2.Join*</li>
+</ul>
+
+
+<ul>
+	<li>Compress<br>
+com.turn.platform.cheetah.storage.parallel_etl.v2.Compress*</li>
+</ul>
+
+
+<ul>
+	<li>Merge<br>
+com.turn.platform.cheetah.storage.parallel_etl.v2.Merge*</li>
+</ul>
+
+
+
+<p>2. AUP ETL</p>
+
+<ul>
+	<li>AUP data structure<br>
+com.turn.platform.cheetah.storage.dmp.analytical_profile.dmp.AnalyticalUserProfile</li>
+</ul>
+
+
+<ul>
+	<li>DSP AUPs<br>
+com.turn.platform.cheetah.storage.dmp.analytical_profile.dmp.AnalyticalDspUserProfile</li>
+</ul>
+
+
+<ul>
+	<li>DMP AUPs<br>
+com.turn.platform.cheetah.storage.dmp.analytical_profile.dmp.AnalyticalDmpUserProfile</li>
+</ul>
+
+
+<ul>
+	<li>AUP Creation</li>
+</ul>
+
+
+<p>DSP<br>
+Daily<br>
+com.turn.platform.cheetah.storage.dmp.analytical_profile.dsp.daily_dsp.*</p>
+
+<p>Merge<br>
+com.turn.platform.cheetah.storage.dmp.analytical_profile.merge.*</p>
+
+<p>DMP<br>
+Daily<br>
+com.turn.platform.cheetah.storage.dmp.analytical_profile.dmp.daily_dmp.*</p>
+
+<p>For private domain<br>
+convert Turn ICA data to OMG/Experian cookie space<br>
+com.turn.platform.cheetah.partitionjoin.PartitionJoin*</p>
+
+<p>Merge<br>
+com.turn.platform.cheetah.storage.dmp.analytical_profile.merge.*</p>
+
+<p>We can increase # partitions if necessary to scale. Currently we have 1920 partitions.<br>
+We have repartition utilities to increase the number of partitions there.<br>
+Skew is the biggest enemy.</p>
+
+
+<p>3. Cheetah Service</p>
+<ul>
+	<li>Incremental ETL run</li>
+	<li>Midnight ETL run<br>
+com.turn.platform.cheetah.service.CheetahService<br>
+com.turn.platform.cheetah.service.PrivateCheetahService<br>
+com.turn.platform.cheetah.service.TestClusterCheetahService</li>
+</ul>
+
+
+
+<p>----- Query Engine</p>
+
+<p>Older version of CQL</p>
+
+<p>1. ICA Query Engine</p>
+
+<ul>
+	<li>Scanner, ImpressionReader, ClickReader, TransactionReader<br>
+com.turn.platform.cheetah.storage.reader.*</li>
+</ul>
+
+
+<ul>
+	<li>Old QueryDriver<br>
+com.turn.platform.cheetah.queryprocessing.QueryDriver</li>
+</ul>
+
+
+<ul>
+	<li>Map operators<br>
+com.turn.platform.cheetah.queryprocessing.QueryMapper</li>
+</ul>
+
+
+<ul class="alternate" type="square">
+	<li>Scan, WHERE clause and re-scan</li>
+	<li>Hash-based aggregation</li>
+	<li>Unpivot columns</li>
+	<li>Multi-query optimization</li>
+</ul>
+
+
+<ul>
+	<li>Reduce operators<br>
+com.turn.platform.cheetah.queryprocessing.QueryReducer</li>
+</ul>
+
+
+<ul class="alternate" type="square">
+	<li>Re-aggregation</li>
+	<li>Filtering</li>
+	<li>Additional Transformations</li>
+	<li>Multi-query optimization</li>
+</ul>
+
+
+<p>2. AUP Query Engine</p>
+
+<ul>
+	<li>Query Driver<br>
+com.turn.platform.cheetah.queryprocessing.profile.ProfileQueryDriver</li>
+</ul>
+
+
+<ul>
+	<li>Query Mapper<br>
+com.turn.platform.cheetah.queryprocessing.ProfileQueryMapper</li>
+	<li>Scanner<br>
+com.turn.platform.cheetah.query.nested.table.Nested*<br>
+com.turn.platform.cheetah.query2.nested.table.Nested*</li>
+	<li>Fetcher<br>
+com.turn.platform.cheetah.query.nested.column.Fetch*</li>
+	<li>List functions<br>
+com.turn.platform.cheetah.queryexpression.udfs2.*</li>
+	<li>Hash-based aggregation</li>
+	<li>Multi-query optimization<br>
+shared unnest of nested tables</li>
+</ul>
+
+
+<ul>
+	<li>Query Reducer<br>
+com.turn.platform.cheetah.queryprocessing.ProfileQueryReducer</li>
+</ul>
+
+
+
+<p>Newer version of CQL</p>
+
+<p>1. ICA Query Engine</p>
+
+<ul>
+	<li>Scanner, ImpressionReader, ClickReader, TransactionReader<br>
+com.turn.platform.cheetah.storage.reader.*</li>
+</ul>
+
+
+<ul>
+	<li>Old QueryDriver<br>
+com.turn.platform.cheetah.queryprocessing.QueryDriver</li>
+</ul>
+
+
+<ul>
+	<li>Map operators<br>
+com.turn.platform.cheetah.queryprocessing.QueryMapper</li>
+</ul>
+
+
+<ul class="alternate" type="square">
+	<li>Scan, WHERE clause and re-scan</li>
+	<li>Hash-based aggregation</li>
+	<li>Unpivot columns</li>
+	<li>Multi-query optimization</li>
+</ul>
+
+
+<ul>
+	<li>Reduce operators<br>
+com.turn.platform.cheetah.queryprocessing.QueryReducer</li>
+</ul>
+
+
+<ul class="alternate" type="square">
+	<li>Re-aggregation</li>
+	<li>Filtering</li>
+	<li>Additional Transformations</li>
+	<li>Multi-query optimization</li>
+</ul>
+
+
+<p>2. AUP Query Engine Total 6 hours</p>
+
+<ul>
+	<li>Query Driver<br>
+com.turn.platform.cheetah.universal.universal_queryprocessing.profile.ProfileQueryDriver</li>
+</ul>
+
+
+<ul>
+	<li>Query Mapper<br>
+com.turn.platform.cheetah.queryprocessing.profile.ProfileQueryMapper</li>
+	<li>Scanner<br>
+com.turn.platform.cheetah.query.nested.table.Nested*<br>
+com.turn.platform.cheetah.query2.nested.table.Nested*</li>
+	<li>Fetcher<br>
+com.turn.platform.cheetah.query.nested.column.Fetch*</li>
+	<li>List functions<br>
+com.turn.platform.cheetah.queryexpression.udfs2.*</li>
+	<li>Hash-based aggregation</li>
+	<li>Multi-query optimization</li>
+</ul>
+
+
+<ul>
+	<li>Query Reducer<br>
+com.turn.platform.cheetah.universal.universal_queryprocessing.profile.ProfileQueryReducer</li>
+	<li>Hash-based aggregation</li>
+	<li>Multi-query optimization</li>
+</ul>
+
+
+
+<p>----- Adhoc Reports (Louis's team)</p>
+
+<p>1. Cadreon FTP Reports Total 2 hours</p>
+
+<p>----- Hadrian ETL</p>
+
+<ul>
+	<li>PrivateCheetahService<br>
+com.turn.platform.cheetah.service.PrivateCheetahService</li>
+</ul>
+						</div>
+						
+						
+						<div style="clear:both;"></div>
+						
+																								
+																					
+							<div style="clear:both;"></div>
+							
+							<!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+         <rdf:Description
+    rdf:about="http://intranet/display/ENG/Overview+and+DataMine+Parallel+ETL"
+    dc:identifier="http://intranet/display/ENG/Overview+and+DataMine+Parallel+ETL"
+    dc:title="Overview and DataMine Parallel ETL"
+    trackback:ping="http://intranet/rpc/trackback/15803720"/>
+</rdf:RDF>
+-->
+						
+							    
+    
+
+
+<fieldset class="hidden parameters">
+    <legend>Labels parameters</legend>
+    <input id="domainName" value="http://intranet" type="hidden">
+    <input id="pageId" value="15803720" type="hidden">
+    <input id="spaceKey" value="ENG" type="hidden">
+</fieldset>
+
+<div id="labels-section" class="pageSection">
+    <div class="labels-editor">
+        <span id="labels-section-title" class="label-title">
+            <b>Labels:</b>
+        </span>
+        <div id="labels-section-content" class="content-column">
+            <span id="labels-section-title-none" class="label-title none ">
+                None
+            </span>
+
+            <div id="labelsList" class="label-list">
+                            </div>
+
+                            <a id="labels-edit" href="#" class="show-labels-editor editor-icon" title="Edit Labels ( Type 'l' )">
+                    <span class="icon icon-edit">Edit Labels</span>
+                </a>
+                    </div>
+
+        <span class="errorMessage error" id="errorSpan"></span>
+        <form method="GET" action="" id="add-labels-form">
+            <div id="labelInputSpan" class="labels-input">
+                <div id="labelOperationErrorContainer" class="hidden">
+                    <span class="error"><span class="errorMessage" id="labelOperationErrorMessage"></span></span>
+                </div>
+
+                <div class="caption">Enter labels to add to this page:</div>
+                <div id="label-input-fields">
+                    <input autocomplete="off" id="labelsString" name="labelsString" size="40">
+                    <input id="add-labels-editor-button" class="add-labels" value="Add" type="submit">
+                    <input id="close-labels-editor-button" class="hide-labels-editor" value="Done" type="submit">
+                </div>
+                <div id="waitImageAndStatus">
+                    <img class="waiting" alt="Please wait" src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/wait.gif">&nbsp;
+                    <span id="labelOperationStatus" class="smalltext"></span>
+                </div>
+                <div id="labelsAutocompleteList" class="aui-dd-parent"></div>
+                <div class="labels-tip">
+                    <div id="suggestedLabelsSpan"></div>
+                    Looking for a label? Just start typing.
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+							
+							<div style="clear:both;"></div>
+							
+							    							
+							<div style="clear:both;"></div>
+							
+							
+							    
+
+
+
+
+            
+    
+
+        
+<fieldset class="parameters hidden">
+    <input id="deleteCommentConfirmMessage" value="Are you sure you want to remove the comment?" type="hidden">
+    <input id="collapseTooltip" value="Click to toggle the display of this comment." type="hidden">
+        </fieldset>
+
+<fieldset class="hidden parameters i18n">
+        <input title="i18n.cancel.name" value="Cancel" type="hidden">
+</fieldset>
+
+
+
+
+
+
+<div id="comments-section" class="pageSection">
+    
+    
+    
+    
+                                        <a id="add-comment-bottom" href="http://intranet/display/ENG/Overview+and+DataMine+Parallel+ETL?showComments=true&amp;showCommentArea=true#addcomment">
+                    Add Comment
+                </a>
+                        </div>
+
+												
+																			<div style="clear:both;"></div>
+							<div class="rw_custom_section">
+								
+
+    
+
+<div class="plugin_attachments_container">
+    <div class="plugin_attachments_table_container">
+        <fieldset class="hidden">
+            <input class="plugin_attachments_macro_render_param" name="pageId" value="15803720" type="hidden">
+            <input name="deleteConfirmMessage" value="Are you sure you want to remove the attached file {0}?" type="hidden">
+            <input name="i18n-notpermitted" value="You are not permitted to perform this operation." type="hidden">
+                                                    <input name="outputType" value="display" type="hidden">
+        </fieldset>
+                    <fieldset class="hidden parameters">
+    <input id="removeAttachmentWarning" value="Are you sure you want to remove the attached file {0}?" type="hidden">
+</fieldset>
+
+<table class="tableview attachments">
+    <tbody><tr>
+                <th class="filename-column">            <a href="http://intranet/display/ENG/Overview+and+DataMine+Parallel+ETL?sortBy=name">Name</a>
+    </th>
+        <th>            <a href="http://intranet/display/ENG/Overview+and+DataMine+Parallel+ETL?sortBy=size">Size</a>
+    </th>
+        <th>Creator</th>
+        <th>            <a href="http://intranet/display/ENG/Overview+and+DataMine+Parallel+ETL?sortBy=createddate">Creation Date</a>
+    </th>
+        <th class="comment">Comment</th>
+                    <th>&nbsp;</th>
+            </tr>
+
+    
+    
+                
+        
+                <tr id="attachment-15762315">
+                                <td class="filename-column">
+                
+<span class="icon icon-file-image" title="JPEG" file="">JPEG File</span>                <a class="filename" href="http://intranet/download/attachments/15803720/PETL.jpeg" title="PETL.jpeg" data-filename="PETL.jpeg">
+                    PETL.jpeg
+                </a>
+            </td>
+            <td>1.90 MB</td>
+            <td><a data-user-hover-bound="true" title="" href="http://intranet/display/%7Eqyan" class="url fn confluence-userlink userlink-1" data-username="qyan">Yan Qi</a></td>
+            <td>Jan 25, 2013 16:04</td>
+            <td class="comment">
+                                    &nbsp;
+                            </td>
+                        <td class="attachment-actions">
+                                                <ul>
+                                            <li class="first">
+    
+        
+    
+    <a href="http://intranet/pages/editattachment.action?pageId=15803720&amp;fileName=PETL.jpeg" class="editAttachmentLink" title="">
+                   <span>Properties</span></a>        </li>
+                                    </ul>
+                            </td>
+                    </tr>
+
+            </tbody></table>
+            </div>
+
+    <div class="plugin_attachments_upload_container">
+            </div>
+</div>
+
+
+<script language="JavaScript">
+
+function teamspacebuttons(spaceKey)
+{
+
+	var elm=document.getElementById("add-menu-link-space");
+
+	var ul1=document.createElement("ul");
+	elm.appendChild(ul1); //add a break before custom buttons
+
+	var faqAddLI=document.createElement("li");
+	var faqAdd=document.createElement("a");
+	var faqUrl="http://intranet/pages/createpage-name.action?templateId=7602184&parentPageString=FAQ&spaceKey="+spaceKey+"&live=true&templateName=FAQ";
+	faqAdd.setAttribute("href",faqUrl);
+	faqAdd.innerHTML="&nbsp;&nbsp;<img src='http://intranet/download/thumbnails/7308725/faq-small.jpg'> FAQ";
+	faqAddLI.appendChild(faqAdd);
+	elm.appendChild(faqAddLI);
+
+	var prAddLI=document.createElement("li");
+	var prAdd=document.createElement("a");
+	var prUrl="http://intranet/pages/createpage-name.action?parentPageString=Processes&spaceKey="+spaceKey;
+	prAdd.setAttribute("href",prUrl);
+	prAdd.innerHTML="&nbsp;&nbsp;<img src='http://intranet/download/thumbnails/7308725/process-small.jpg'> Process";
+	prAddLI.appendChild(prAdd);
+	elm.appendChild(prAddLI);
+
+	var tmpAddLI=document.createElement("li");
+	var tmpAdd=document.createElement("a");
+	var tmpUrl="http://intranet/pages/createpage-name.action?parentPageString=Templates&spaceKey="+spaceKey;
+	tmpAdd.setAttribute("href",tmpUrl);
+	tmpAdd.innerHTML="&nbsp;&nbsp;<img src='http://intranet/download/thumbnails/7308725/document-small.jpg'> Templates";
+	tmpAddLI.appendChild(tmpAdd);
+	elm.appendChild(tmpAddLI);
+
+	//now add the browse buttons
+
+	var browse=document.getElementById("browse-menu-link-leading");
+	var ul3=document.createElement("ul");
+
+	var faqAllLI=document.createElement("li");
+	var faqAll=document.createElement("a");
+	faqAll.setAttribute("href","/display/"+spaceKey+"/Frequently+asked+questions");
+	faqAll.innerHTML="&nbsp; All FAQ";
+	faqAllLI.appendChild(faqAll);
+
+	//inserting in reverse order
+	browse.insertBefore(faqAllLI,browse.firstChild);
+	browse.insertBefore(ul3,browse.childNodes[1]);//inserts space
+
+}
+//--------------------------------------------------------------//
+function isTeamSpace(spaceKey)
+{
+  var returnValue=false;
+ switch(spaceKey)
+ {
+  case "BizDev":
+    returnValue=true;
+  break;
+  case "BizOps":
+    returnValue=true;
+  break;
+  case "CSTeam":
+    returnValue=true;
+  break;
+  case "PS":
+    returnValue=true;
+  break;
+  case "Sales":
+    returnValue=true;
+  break;
+  case "PlatformSolutions":
+     returnValue=true;
+  break;
+  case "ENG":
+     returnValue=true;
+  break;
+  case "IT":
+     returnValue=true;
+  break;
+  case "tops":
+     returnValue=true;
+  break;
+  case "PMO":
+     returnValue=true;
+  break;
+  case "RQA":
+     returnValue=true;
+  break;
+  case "Support":
+    returnValue=true;
+  break;
+  case "Marketing":
+    returnValue=true;
+  break;
+  case "PM":
+    returnValue=true;
+  break;
+  case "UX":
+    returnValue=true;
+  break;
+
+  case "emea":
+    returnValue=true;
+  break;
+ 
+ case "campaigncenter":
+    returnValue=true;
+  break;
+
+case "audiencecenter":
+    returnValue=true;
+  break;
+
+case "reportcenter":
+    returnValue=true;
+  break;
+
+case "integrations":
+    returnValue=true;
+  break;
+
+case "emergingmedia":
+    returnValue=true;
+  break;
+
+
+ default:
+   returnValue=false;
+ break;
+ }
+  return returnValue;
+}
+//--------------------------------------------------------------//
+function trainingSpaceButtons(spaceKey)
+{
+ if(spaceKey=="ProductTraining")
+ {
+   	var randomnumber=Math.floor(Math.random()*10000); 
+
+	var elm=document.getElementById("add-menu-link-space");
+
+	var ul1=document.createElement("ul");
+	elm.appendChild(ul1); //add a break before custom buttons
+
+	var faqAddLI=document.createElement("li");
+	var faqAdd=document.createElement("a");
+	var faqUrl="http://intranet/pages/createpage-name.action?templateId=7602184&parentPageString=FAQ&spaceKey="+spaceKey+"&live=true&templateName=FAQ";
+	faqAdd.setAttribute("href",faqUrl);
+	faqAdd.innerHTML="&nbsp;&nbsp;<img src='http://intranet/download/thumbnails/7308725/faq-small.jpg'> FAQ";
+	faqAddLI.appendChild(faqAdd);
+	elm.appendChild(faqAddLI);
+
+
+  	var articleAddLI=document.createElement("li");
+  	var articleAdd=document.createElement("a");
+  	var articleUrl="http://intranet/pages/createpage-name.action?templateId=8912970&parentPageString=ProductUsage&spaceKey="+spaceKey+"&live=true&templateName=ProductUsage&prefix=ProductUsage-";
+  	articleAdd.setAttribute("href",articleUrl);
+  	articleAdd.innerHTML="&nbsp;&nbsp;<img src='http://intranet/download/attachments/7308725/notes-internal-small.jpg'> Product Usage";
+  	articleAddLI.appendChild(articleAdd);
+  	elm.appendChild(articleAddLI);
+
+  	var bestPracticesAddLI=document.createElement("li");
+  	var bestPracticesAdd=document.createElement("a");
+  	var bestPracticesUrl="http://intranet/pages/createpage-name.action?templateId=8913032&parentPageString=BestPractices&spaceKey="+spaceKey+"&live=true&templateName=Best Practices&prefix=BestPractices-";
+  	bestPracticesAdd.setAttribute("href",bestPracticesUrl);
+  	bestPracticesAdd.innerHTML="&nbsp;&nbsp;<img src='http://intranet/download/thumbnails/7308725/notes-clients-small.jpg'> Best Practices";
+  	bestPracticesAddLI.appendChild(bestPracticesAdd);
+  	elm.appendChild(bestPracticesAddLI);
+
+
+
+ }
+
+}
+//--------------------------------------------------------------//
+function partnerSpaceButtons(spaceKey)
+{
+ if(spaceKey=="Partners")
+ {
+
+  var elm=document.getElementById("add-menu-link-space");
+  
+  var ul1=document.createElement("ul");
+  elm.appendChild(ul1); //add a break before custom buttons
+  
+  
+  
+  var invAddLI=document.createElement("li");
+  var invAdd=document.createElement("a");
+  var invUrl="http://intranet/pages/createpage-name.action?templateId=7602242&parentPageString=Inventory Partners&spaceKey="+spaceKey+"&live=true&templateName=Partner Page";
+  invAdd.setAttribute("href",invUrl);
+  invAdd.innerHTML="&nbsp;&nbsp;<img src='http://intranet/download/thumbnails/7308725/inventory-small.png'> Inventory Partner";
+  invAddLI.appendChild(invAdd);
+  elm.appendChild(invAddLI);
+  
+  
+  var verAddLI=document.createElement("li");
+  var verAdd=document.createElement("a");
+  var verUrl="http://intranet/pages/createpage-name.action?templateId=7602242&parentPageString=Content Partners&spaceKey="+spaceKey+"&live=true&templateName=Partner Page";
+  verAdd.setAttribute("href",verUrl);
+  verAdd.innerHTML="&nbsp;&nbsp;<img src='http://intranet/download/attachments/7308725/brandsafety-small.jpg'> Verification Partner";
+  verAddLI.appendChild(verAdd);
+  elm.appendChild(verAddLI);
+  
+  var contextualAddLI=document.createElement("li");
+  var contextualAdd=document.createElement("a");
+  var contextualUrl="http://intranet/pages/createpage-name.action?templateId=7602242&parentPageString=Content Partners&spaceKey="+spaceKey+"&live=true&templateName=Partner Page";
+  contextualAdd.setAttribute("href",contextualUrl);
+  contextualAdd.innerHTML="&nbsp;&nbsp;<img src='http://intranet/download/thumbnails/7308725/contextual-small.jpg'> Contextual Partner";
+  contextualAddLI.appendChild(contextualAdd);
+  elm.appendChild(contextualAddLI);
+
+
+  var userAddLI=document.createElement("li");
+  var userAdd=document.createElement("a");
+  var userUrl="http://intranet/pages/createpage-name.action?templateId=7602242&parentPageString=User Data Partners&spaceKey="+spaceKey+"&live=true&templateName=Partner Page";
+  userAdd.setAttribute("href",userUrl);
+  userAdd.innerHTML="&nbsp;&nbsp;<img src='http://intranet/download/thumbnails/7308725/user-profile-small.jpg'> User Partner";
+  userAddLI.appendChild(userAdd);
+  elm.appendChild(userAddLI);
+
+  var mediaAddLI=document.createElement("li");
+  var mediaAdd=document.createElement("a");
+  var mediaUrl="http://intranet/pages/createpage-name.action?templateId=7602242&parentPageString=Media Provider Partners&spaceKey="+spaceKey+"&live=true&templateName=Partner Page";
+  mediaAdd.setAttribute("href",mediaUrl);
+  mediaAdd.innerHTML="&nbsp;&nbsp;<img src='http://intranet/download/attachments/7308725/media.jpg'> Media Partner";
+  mediaAddLI.appendChild(mediaAdd);
+  elm.appendChild(mediaAddLI);
+
+
+ }
+
+}
+//--------------------------------------------------------------//
+function uxSpaceButtons(spaceKey)
+{
+ if(spaceKey=="UX")
+ {
+  var elm=document.getElementById("add-menu-link-space");
+  
+  var ul1=document.createElement("ul");
+  var ul2=document.createElement("ul");
+  
+   var randomnumber=Math.floor(Math.random()*10000); 
+  elm.appendChild(ul2);
+
+  var wireAddLI=document.createElement("li");
+  var wireAdd=document.createElement("a");
+  var wireUrl="http://intranet/pages/createpage-name.action?parentPageString=All+UX&spaceKey="+spaceKey+"&prefix=UX-";
+  wireAdd.setAttribute("href",wireUrl);
+  wireAdd.innerHTML="&nbsp;&nbsp;<img src='http://intranet/download/thumbnails/7308725/ux-small.png'> User Experience";
+  wireAddLI.appendChild(wireAdd);
+  elm.appendChild(wireAddLI);
+
+  var wireAllLI=document.createElement("li");
+  var wireAll=document.createElement("a");
+  wireAll.setAttribute("href","/display/"+spaceKey+"/All+UX");
+  wireAll.innerHTML="All Wireframes";
+  wireAllLI.appendChild(wireAll);
+
+
+
+ }
+}
+//--------------------------------------------------------------//
+  function pmSpaceButtons(spaceKey)
+  {
+ if(spaceKey=="campaigncenter"|| spaceKey=="reportcenter" || spaceKey=="audiencecenter" || spaceKey=="integrations" || spaceKey=="emergingmedia")
+ {
+  var elm=document.getElementById("add-menu-link-space");
+  
+  var ul1=document.createElement("ul");
+  var ul2=document.createElement("ul");
+  
+   var randomnumber=Math.floor(Math.random()*10000);  
+
+  //buttons specific to PM
+  
+  elm.appendChild(ul2);
+  
+  var prdAddLI=document.createElement("li");
+  var prdAdd=document.createElement("a");
+  var prdUrl="http://intranet/pages/createpage-name.action?parentPageString=All+PRDs&spaceKey="+spaceKey+"&prefix=PRD-"+"&templateId=17235969&live=true&templateName=PRD-2013";
+  prdAdd.setAttribute("href",prdUrl);
+  prdAdd.innerHTML="&nbsp;&nbsp;<img src='http://jira.turn.com/images/icons/ico_epic.png'> PRD";
+  prdAddLI.appendChild(prdAdd);
+  elm.appendChild(prdAddLI);
+  
+  var scopeAddLI=document.createElement("li");
+  var scopeAdd=document.createElement("a");
+  var scopeUrl="http://intranet/pages/createpage-name.action?parentPageString=All+PRDs&spaceKey="+spaceKey+"&templateId=18087940&templateName=Simple Story&live=true&prefix=SimpleStory-";
+  scopeAdd.setAttribute("href",scopeUrl);
+  scopeAdd.innerHTML="&nbsp;&nbsp;<img src='http://jira.turn.com/images/icons/ico_story.png'> Simple Story";
+  scopeAddLI.appendChild(scopeAdd);
+  elm.appendChild(scopeAddLI);
+  
+
+  
+  var analysisAddLI=document.createElement("li");
+  var analysisAdd=document.createElement("a");
+  var analysisUrl="http://intranet/pages/createpage-name.action?parentPageString=All+Research&templateId=8913072&templateName=Research&live=true&prefix=Research-&spaceKey="+spaceKey;
+  analysisAdd.setAttribute("href",analysisUrl);
+  analysisAdd.innerHTML="&nbsp;&nbsp;<img src='http://intranet/download/attachments/7308725/analysis-small.png'> Research";
+  analysisAddLI.appendChild(analysisAdd);
+  elm.appendChild(analysisAddLI);
+
+  
+/*
+  var prjAddLI=document.createElement("li");
+  var prjAdd=document.createElement("a");
+  var prjUrl="http://intranet/pages/createpage-name.action?templateId=8552516&parentPageString=All Projects&spaceKey=PM&live=true&templateName=Project&name=Project-"+randomnumber;
+  prjAdd.setAttribute("href",prjUrl);
+  prjAdd.innerHTML="&nbsp;&nbsp;<img src='http://intranet/download/attachments/7308725/project.jpg'> Project";
+  prjAddLI.appendChild(prjAdd);
+  elm.appendChild(prjAddLI);
+*/
+  
+  //now add the browse buttons
+  
+  var browse=document.getElementById("browse-menu-link-leading");
+  
+  var ul3=document.createElement("ul");
+  
+  
+  //buttons specific to PM
+  
+
+  
+  var scopeAllLI=document.createElement("li");
+  var scopeAll=document.createElement("a");
+  scopeAll.setAttribute("href","/display/"+spaceKey+"/All+Scope+Documents");
+  scopeAll.innerHTML="All Scope Docs";
+  scopeAllLI.appendChild(scopeAll);
+  
+  
+  var prdAllLI=document.createElement("li");
+  var prdAll=document.createElement("a");
+  prdAll.setAttribute("href","/display/"+spaceKey+"/All+PRDs");
+  prdAll.innerHTML="All PRDs";
+  prdAllLI.appendChild(prdAll);
+  
+  
+  var analysisAllLI=document.createElement("li");
+  var analysisAll=document.createElement("a");
+  analysisAll.setAttribute("href","/display/"+spaceKey+"/All+Analyses");
+  analysisAll.innerHTML="All Analyses";
+  analysisAllLI.appendChild(analysisAll);
+  
+  //inserting in reverse order
+ 
+/* 
+  browse.insertBefore(analysisAllLI,browse.firstChild);
+  browse.insertBefore(wireAllLI,browse.firstChild);
+  browse.insertBefore(scopeAllLI,browse.firstChild);
+  browse.insertBefore(prdAllLI,browse.firstChild);
+*/
+  
+  //browse.insertBefore(ul3,browse.childNodes[4]);//inserts space. disabled as other macro is inserting the space
+   }
+  }
+//--------------------------------------------------------------//
+function productSpaceButtons(spaceKey)
+{
+ if(spaceKey=="Product")
+ {
+  var elm=document.getElementById("add-menu-link-space");
+  
+  var ul1=document.createElement("ul");
+  elm.appendChild(ul1); //add a break before custom buttons
+  
+  
+  
+  var rnIntLI=document.createElement("li");
+  var rnInt=document.createElement("a");
+  var invUrl="http://intranet/pages/createpage-name.action?parentPageString=Internal Release Notes&spaceKey="+spaceKey;
+  rnInt.setAttribute("href",invUrl);
+  rnInt.innerHTML="&nbsp;&nbsp;<img src='http://intranet/download/attachments/7308725/notes-internal-small.jpg'> Internal Release Notes";
+  rnIntLI.appendChild(rnInt);
+  elm.appendChild(rnIntLI);
+  
+  
+  
+  var rnCustLI=document.createElement("li");
+  var rnCust=document.createElement("a");
+  var invUrl="http://intranet/pages/createpage-name.action?parentPageString=External Release Notes&spaceKey="+spaceKey;
+  rnCust.setAttribute("href",invUrl);
+  rnCust.innerHTML="&nbsp;&nbsp;<img src='http://intranet/download/attachments/7308725/notes-clients-small.jpg'> Client Release Notes";
+  rnCustLI.appendChild(rnCust);
+  elm.appendChild(rnCustLI);
+  
+
+ }
+
+}
+//--------------------------------------------------------------//
+  function pmoSpaceButtons(spaceKey)
+  {
+ if(spaceKey=="PMO")
+ {
+  var elm=document.getElementById("add-menu-link-space");
+  
+  var ul2=document.createElement("ul");
+  
+   var randomnumber=Math.floor(Math.random()*10000);  
+
+  //buttons specific to PM
+  
+  elm.appendChild(ul2);
+  
+  var prjAddLI=document.createElement("li");
+  var prjAdd=document.createElement("a");
+  var prjUrl="http://intranet/pages/createpage-name.action?templateId=8552516&parentPageString=All Forced Rank Projects&spaceKey=PMO&live=true&templateName=Project&name=Project-";
+  prjAdd.setAttribute("href",prjUrl);
+  prjAdd.innerHTML="&nbsp;&nbsp;<img src='http://intranet/download/attachments/7308725/project.jpg'> Project";
+  prjAddLI.appendChild(prjAdd);
+  elm.appendChild(prjAddLI);
+
+   }
+  }
+
+//--------------------------------------------------------------//
+function clientQuotesButton()
+{
+  var elm=document.getElementById("add-menu-link-space");
+  
+  var ul1=document.createElement("ul");
+  elm.appendChild(ul1); //add a break before custom buttons
+  
+  var rnIntLI=document.createElement("li");
+  var rnInt=document.createElement("a");
+  var invUrl="http://intranet/pages/createpage-name.action?templateId=8552449&parentPageString=Client Quotes&spaceKey=Product&live=true&templateName=ClientQuotes";
+  rnInt.setAttribute("href",invUrl);
+  rnInt.innerHTML="&nbsp;&nbsp;<img src='http://intranet/download/attachments/7308725/quote.jpg'> Client Quote";
+  rnIntLI.appendChild(rnInt);
+  elm.appendChild(rnIntLI);
+
+}
+//--------------------------------------------------------------//
+function competitorButton()
+{
+  var elm=document.getElementById("add-menu-link-space");
+  
+  var ul1=document.createElement("ul");
+  elm.appendChild(ul1); //add a break before custom buttons
+  
+  var rnIntLI=document.createElement("li");
+  var rnInt=document.createElement("a");
+  var invUrl="http://intranet/pages/createpage-name.action?templateId=7602201&parentPageString=All Competitors&spaceKey=Competitors&live=true&templateName=Competitor Page";
+  rnInt.setAttribute("href",invUrl);
+  rnInt.innerHTML="&nbsp;&nbsp;<img src='http://intranet/download/thumbnails/7308725/competitors.jpg'> Competitor";
+  rnIntLI.appendChild(rnInt);
+  elm.appendChild(rnIntLI);
+
+}
+//--------------------------------------------------------------//
+function custombuttons()
+{
+
+ var obj=document.getElementById("confluence-space-key");
+ var spaceKey=obj.content;
+
+
+
+ //buttons common to all team spaces
+ if(isTeamSpace(spaceKey)==true)
+ {
+	teamspacebuttons(spaceKey);
+ }
+ partnerSpaceButtons(spaceKey);
+ pmSpaceButtons(spaceKey); 
+ uxSpaceButtons(spaceKey);
+ productSpaceButtons(spaceKey);
+ pmoSpaceButtons(spaceKey);
+/* FH: competitor details and training materials are no longer managed by PMs. Unclear if these will stay in Confluence. Removing these button calls */
+ //trainingSpaceButtons(spaceKey); 
+ //clientQuotesButton();
+ //competitorButton();
+
+}
+
+
+custombuttons();
+</script>
+<script language="JavaScript">
+var objs=new Array();
+objs[0]="action-view-source-link";
+objs[1]="view-in-hierarchy-link";
+
+
+for(var i=0;i<objs.length;i++)
+{
+var obj=document.getElementById(objs[i]);
+obj.style.display="none";
+}
+
+var impWObj=document.getElementById("import-word-doc");
+var pli=impWObj.parentNode;
+
+var watchers=pli.nextSibling.nextSibling;
+var favorites=watchers.nextSibling.nextSibling;
+favorites.style.display="none";
+watchers.style.display="none";
+
+</script>
+
+<div class="" align="center"><font color="red"><b>Turn Confidential</b></font></div>
+
+<div class="" align="center"><font color="#808080">Unless clearly marked, all materials on the Turn Intranet are for internal use only and are not meant for external distribution.</font></div>
+
+							</div>
+											</div>
+				</div>
+			</div>
+			<div id="rw_fullscreen_bg" style="display:none;"></div>
+		</td>
+	</tr><tr>
+</tr></tbody></table>
+			
+		
+							
+	</div>
+	
+</div>
+
+
+
+    
+
+
+
+
+
+	
+    
+	
+
+    
+    
+    
+
+
+<script type="text/x-template" title="manage-watchers-dialog">
+<div class="dialog-content">
+    <div class="column page-watchers">
+        <h3>Watching this page</h3>
+        <p class="description">These people are notified when the page is changed. You can add or remove people from this list.</p>
+        <form action="/json/addwatch.action" method="POST">
+                <input type="hidden" name="atl_token" value="ac05f16125f8f3058c5b80c998d8ec83920f2bdf">
+            <input type="hidden" name="pageId" value="15803720"/>
+            <input type="hidden" id="add-watcher-username" name="username" value=""/>
+            <label for="add-watcher-user">User</label>
+            <input id="add-watcher-user" name="userFullName" type="search" class="autocomplete-user"
+               value="" placeholder="Full name or username" autocomplete="off"
+               data-max="10" data-target="#add-watcher-username" data-dropdown-target="#add-watcher-dropdown"
+               data-template="{title}" data-none-message="No matching users found.">
+            <input id="add-watcher-submit" type="submit" name="add" value="Add">
+            <div id="add-watcher-dropdown" class="aui-dd-parent autocomplete"></div>
+            <div class="status hidden"></div>
+        </form>
+        <ul class="user-list">
+            <li class="loading">Loading&hellip;</li>
+            <li class="no-users hidden">No page watchers</li>
+        </ul>
+    </div>
+    <div class="column space-watchers">
+        <h3>Watching this space</h3>
+        <p class="description">These people are notified when any content in the space is changed. You cannot modify this list.</p>
+        <ul class="user-list">
+            <li class="loading">Loading&hellip;</li>
+            <li class="no-users hidden">No space watchers</li>
+        </ul>
+    </div>
+</div>
+</script>
+<script type="text/x-template" title="manage-watchers-user">
+    <li class="watch-user">
+        <img class="profile-picture confluence-userlink" src="{iconUrl}" data-username="{username}">
+        <a class="confluence-userlink" href="{url}" data-username="{username}">{fullName} <span class="username">({username})</span></a>
+        <span class="remove-watch" title="Remove"
+            data-username="{username}">Remove</span>
+    </li>
+</script>
+<script type="text/x-template" title="manage-watchers-help-link">
+    <div class="dialog-help-link">
+            <a href="http://docs.atlassian.com/confluence/docs-35/Managing+Watchers" target="_blank">Help</a>
+    </div>
+</script>
+			<br class="clear">
+		</div> <!-- main -->
+		
+					
+
+</div> <!-- rw_main_middle_right -->
+</div> <!-- rw_main_middle_left -->
+<div id="rw_main_bottom_left">
+	<div id="rw_main_bottom_right">
+	</div>
+</div>
+
+<div id="rw_footer">
+	Powered by <a href="http://www.atlassian.com/software/confluence" title="Atlassian Confluence" target="_blank">Atlassian Confluence</a>, <a href="http://www.refinedwiki.com/" title="RefinedWiki" target="_blank"> a Confluence theme by RefinedWiki</a>
+</div>
+		
+	<div id="rw_favorite_popup" class="rw_popup" style="display:none;"><div id="rw_favorite_popup_container" class="rw_popup_container"></div><div id="fav_page_space_loader" class="rw_popup_loader"><img src="Overview%20and%20DataMine%20Parallel%20ETL%20-%20Engineering%20-%20Intranet_files/ajax-loader-gray.gif"></div></div><div id="rw_popup_bg" style="display:none;"></div></div> <!-- rw_main -->
+	
+</div><!-- rw_wrapper -->
+</div><!-- page -->
+
+
+
+    <!-- include system javascript resources -->
+                        
+    
+    
+    
+    <!-- end system javascript resources -->
+
+
+
+<div id="content-hover-0" class="ajs-content-hover"><div style="width: 300px;" class="contents"></div></div><div id="content-hover-1" class="ajs-content-hover"><div style="width: 300px;" class="contents"></div></div><div disabled="" style="margin-top: -105px; margin-left: -300px; width: 600px; height: 210px; background: none repeat scroll 0% 0% rgb(255, 255, 255); z-index: 3002; display: none;" id="link-page-popup" class="aui-popup aui-dialog"><div class="dialog-components"><h2 class="dialog-title">Link to this Page</h2><ul style="height: 114px; display: none;" class="dialog-page-menu"><li class="page-menu-item selected"><button class="item-button">Link to this Page</button></li></ul><div class="dialog-page-body"><div style="height: 104px;" class="dialog-panel-body"><form id="link-page-popup-form" class="aui"><fieldset><div class="field-group"><label for="link-popup-field-link">Link:</label><input id="link-popup-field-link" readonly="readonly" value="http://intranet/display/ENG/Overview+and+DataMine+Parallel+ETL" '="" class="text" type="text"></div><div class="field-group"><label for="link-popup-field-tiny-link">Tiny Link:</label><input id="link-popup-field-tiny-link" readonly="readonly" value="http://intranet/x/SCXx" '="" class="text" type="text"></div><div class="field-group"><label for="link-popup-field-wiki-markup">Wiki Markup:</label><input id="link-popup-field-wiki-markup" readonly="readonly" value="[ENG:Overview and DataMine Parallel ETL]" '="" class="text" type="text"></div></fieldset></form></div></div><div class="dialog-button-panel"><a class="button-panel-link button-panel-cancel-link" href="#">Close</a></div></div></div><div style="display: none;" id="content-hover-shadow"><div class="tl"></div><div class="tr"></div><div class="l"></div><div class="r"></div><div class="bl"></div><div class="br"></div><div class="b"></div></div><div id="fancy_overlay"></div><div id="fancy_wrap"><div class="fancy_loading" id="fancy_loading"><div></div></div><div id="fancy_outer"><div id="fancy_inner"><div id="fancy_close"></div><div id="fancy_bg"><div class="fancy_bg fancy_bg_n"></div><div class="fancy_bg fancy_bg_ne"></div><div class="fancy_bg fancy_bg_e"></div><div class="fancy_bg fancy_bg_se"></div><div class="fancy_bg fancy_bg_s"></div><div class="fancy_bg fancy_bg_sw"></div><div class="fancy_bg fancy_bg_w"></div><div class="fancy_bg fancy_bg_nw"></div></div><a href="javascript:;" id="fancy_left"><span class="fancy_ico" id="fancy_left_ico"></span></a><a href="javascript:;" id="fancy_right"><span class="fancy_ico" id="fancy_right_ico"></span></a><div id="fancy_content"></div><div id="fancy_title"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="fancy_title" id="fancy_title_left"></td><td class="fancy_title" id="fancy_title_main"><div></div></td><td class="fancy_title" id="fancy_title_right"></td></tr></tbody></table></div></div></div></div><div id="filuploadShim"></div><div class="plupload html5" style="position: absolute; background: none repeat scroll 0% 0% transparent; width: 1602px; height: 0px; overflow: hidden; z-index: 99999; opacity: 0; top: 920px; left: 0px;" id="p18nroqr3h1g2hld911unjhk1hf00_html5_container"><input id="p18nroqr3h1g2hld911unjhk1hf00_html5" style="width:100%;" accept="" multiple="multiple" type="file"></div></body></html>
