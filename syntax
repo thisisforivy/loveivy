@@ -220,6 +220,26 @@ from  CONCAT
 2, t2, 1121,121      2,t1,t3, 234,232
 2, t3, 23,23         3,t2,t3,2342,2342
 
+New syntax
+
+Here is a refined query syntax. Much more generic and intuitive. Aggregate function is suffixed with _within_entity, or _entity to indicate the level. Without suffix, it is record level.
+
+
+
+select  weight_bucket(avg_within_entity(weight)) as A1, 
+        blood_bucket(avg_within_entity(blood_pressure)) as A2,
+        count_entity(*) as co_occurence
+from mup.weight_time_series, mup.blood_pressure_time_series
+where  mup.weight_time_series.ts <=180 and 
+       mup.weight_time_series.ts >90 and 
+      mup.blood_pressure_time_series.ts<= 180 and
+      mup.blood_pressure_times_series.ts >90 and
+      count_entity(A2)>1500
+group by A1, co_occurence, A2
+having co_occurence >1000
+order by A1, co_occurence, A2
+limited A2 by 10 per A1
+
 
 
 
