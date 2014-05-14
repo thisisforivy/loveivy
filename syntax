@@ -385,3 +385,8 @@ select (select dmp.impression.adv_id, count_entity(*), count(*)
 from CONCAT
 
 
+Reference
+=========
+Hive supported feature
+https://cwiki.apache.org/confluence/display/Hive/Tutorial#Tutorial-TypeSystem
+
