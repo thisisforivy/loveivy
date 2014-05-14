@@ -384,6 +384,11 @@ select (select dmp.impression.adv_id, count_entity(*), count(*)
 
 from CONCAT
 
+//correlated query at entity level
+select i.adv_id, max_entity(c.ts) 
+from dmp.impressions i, dmp.clicks c
+where   i.adv_id = c.adv_id 
+
 
 Reference
 =========
