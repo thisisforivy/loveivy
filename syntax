@@ -366,6 +366,7 @@ from  CONCAT
 2, t3, 23,23 3,t2,t3,2342,2342
 
 
+//count adv_1 and adv_2 reach and their co-reach, and their individual record level agg.
 select (select dmp.impression.adv_id, count_entity(*), count(*)
         from dmp.impression
         where dmp.impression.adv_id =123) A1,
@@ -375,7 +376,12 @@ select (select dmp.impression.adv_id, count_entity(*), count(*)
        (select i1.adv_id, i2.adv_id, count_entity(*)
         from dmp.impression as i1, dmp.impression as i2
         where i1.adv_id =123 and i2.adv_id = 456
-        group by i1.adv_id, i2.adv_id ) A3
+        group by i1.adv_id, i2.adv_id ) A3,
+       (select adv_id, count(*)
+        from dmp.impression
+        where adv_id =123
+        group by adv_id ) A4
+
 from CONCAT
 
 
