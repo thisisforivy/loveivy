@@ -310,11 +310,11 @@ limited by 10 each group
 
 2. Using scalar subquery to compute group by attributes, and group by on them.
 
-select   (select weight_bucket(avg_within_entity(weight) 
+select   (select weight_bucket(avg_within_entity(weight))
           from mup.weight_time_series 
           where mup.weight_time_series.ts <=180 and 
                 mup.weight_time_series.ts >90) A1,
-         (select blood_bucket(avg_within_entity(blood_pressure)
+         (select blood_bucket(avg_within_entity(blood_pressure))
           from mup.blood_pressure_time_series
           where mup.blood_pressure_time_series.ts<= 180 and
                 mup.blood_pressure_times_series.ts >90) A2,
@@ -388,6 +388,25 @@ from CONCAT
 select i.adv_id, max_entity(c.ts) 
 from dmp.impressions i, dmp.clicks c
 where   i.adv_id = c.adv_id 
+
+select ( select (select count_within_entity(*)
+           from dmp.impressions  i
+           where i.advertiser_id =23113 and 
+                 i.ts<9999 and i.ts >2211
+        ) frequency, count_entity(*)
+   from dmp
+   group by frequency), 
+(select sum(dmp.impressions.cost)
+ from dmp.impressions
+ where dmp.impressions.adv_id=23113 and dmp.impressions.ts<9999
+       and dmp.impressions.ts > 2211
+),
+(select count_entity(*)
+ from dmp.actions
+ where dmp.actions.adv_id =23113)
+from CONCAT
+
+
 
 
 Reference
