@@ -406,8 +406,16 @@ select ( select (select count_within_entity(*)
  where dmp.actions.adv_id =23113)
 from CONCAT
 
+4. Correlated query
 
+select adv_id, count_within_entity(adv_id), count_entity(*)
+from dmp.impressions 
+group by adv_id, count_within_entity(adv_id)
 
+//typical subqueries, two nested table has correlated variable.
+select adv_id, (select count_within_entity(*) from dmp.clicks where dmp.clicks.adv_id = adv_id) A, count_entity(*)
+from dmp.impressions
+group by adv_id, A 
 
 Reference
 =========
