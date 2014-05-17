@@ -417,6 +417,29 @@ select adv_id, (select count_within_entity(*) from dmp.clicks where dmp.clicks.a
 from dmp.impressions
 group by adv_id, A 
 
+5. Feature preparation
+Recency feature.
+//the following query take average recency feature from each user
+select sum(i1.ts - i2.ts)/count(*)-1
+from dmp.impressions i1, dmp.impressions i2
+where i1
+//the following query take reach based on recency
+select count_entity(select 1 from dmp.impression i1, dmp.impression i2 where i1.ts<i2.ts  and (i2.ts - i1.ts ) = 1 day) as 1_day, 
+count_entity(select 1 from dmp.impression i1, dmp.impression i2 where i1.ts<i2.ts  and (i2.ts - i1.ts ) = 2 day) as 2_day, 
+count_entity(select 1 from dmp.impression i1, dmp.impression i2 where i1.ts<i2.ts  and (i2.ts - i1.ts ) = 3 day) as 3_day, 
+from dmp
+
+
+
+
+
+
+
+
+ount_entity(select 1 from dmp.impression i1, dmp.impression i2 where i1.ts<i2.ts  nd (i2.ts - i1.ts ) = 1 day) as 1_day, 
+
+
+
 Reference
 =========
 Hive supported feature
