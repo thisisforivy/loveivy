@@ -238,6 +238,21 @@ having co_occurence >1000
 order by A1, co_occurence, A2
 limited A2 by 10 per A1
 
+
+select (
+  select (select count_within_entity(*) 
+            from dmp.impressions
+           where dmp.impressions.mp_package_id in (121,1232,2131)) A1,
+        (select count_within_entity(*)
+          from dmp.impressions
+          where dmp.impressions.mp_package_id in (21,12,221)) A2,
+              count_entity(*)
+  from dmp
+  group by A1, A2), 
+      (
+     select count(*) from dmp.impressions where dmp.impression.mp_package_id in (121, 1232,2131)) A3
+from concat
+
 The following one is good. The outer from clause determine what to scan, the subquery is ALWAYS 
 within entity, so we can evaluate the sub query on entity fed from outer query.
 
