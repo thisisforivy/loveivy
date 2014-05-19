@@ -419,10 +419,48 @@ group by adv_id, A
 
 5. Feature preparation
 Recency feature.
-//the following query take average recency feature from each user
-select sum(i1.ts - i2.ts)/count(*)-1
+
+//average recency
+select sum(i1.ts - i2.ts)/count(*)
 from dmp.impressions i1, dmp.impressions i2
-where i1
+where i1.rownum +1 = i2.rownum
+
+//bin recency
+select bin_num 
+          case 
+            when i1.ts - i2.ts ==0, then bin0 
+            when i1.ts - i2.ts ==1, then bin1
+            when i1.ts - i2.ts ==2, then bin2
+           else bin3
+          end,
+        count(*)
+from dmp.impressions i1, dmp.impressions i2
+where i1.rownum +1 = i2.rownum
+group by bin_num
+order by bin_num
+
+//feature extraction
+//pivot will only pivot one column, 
+//it takes the second argument as column number
+select gender, 
+       state, 
+       pivot(select bin_num 
+                    case 
+                      when i1.ts - i2.ts ==0, then bin0 
+                      when i1.ts - i2.ts ==1, then bin1
+                      when i1.ts - i2.ts ==2, then bin2
+                      else bin3
+                    end,
+                   count(*)
+             from dmp.impressions i1, dmp.impressions i2
+             where i1.rownum +1 = i2.rownum
+             group by bin_num
+             order by bin_num, 1)
+from dmp
+
+
+
+
 //the following query take reach based on recency
 select count_entity(select 1 from dmp.impression i1, dmp.impression i2 where i1.ts<i2.ts  and (i2.ts - i1.ts ) = 1 day) as 1_day, 
 count_entity(select 1 from dmp.impression i1, dmp.impression i2 where i1.ts<i2.ts  and (i2.ts - i1.ts ) = 2 day) as 2_day, 
