@@ -38,7 +38,7 @@ This trimester goal is to
 		issue.
 
 		
-05/19/2014      Happens to see Hadoop partition function 
+05/19/2014      Happens to see Hadoop partition function , it use Integer.MAX_VALUE to get rid of the negative hashCode
 			public class HashPartitioner<K, V> extends Partitioner<K, V> {
 			    public int getPartition(K key, V value, int numReduceTasks) {
 				        return (key.hashCode() & Integer.MAX_VALUE) % numReduceTasks;
