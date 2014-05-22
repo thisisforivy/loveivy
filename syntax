@@ -1,3 +1,6 @@
+some examples on playing RDD API.
+http://homepage.cs.latrobe.edu.au/zhe/ZhenHeSparkRDDAPIExamples.html
+
 1. Correlation query: find top 10 correlated category_id for a given beacon_id.
 
 select dmp.impression.beacon_id, top10(dmp.data.category_id)
