@@ -37,6 +37,16 @@ This trimester goal is to
 		"This is a large market where relational systems excel and have enjoyed wide adoption. In Hadoop/spark, high performance, reliability and scalability is not an
 		issue.
 
+05/26/2014      Found out HBase has the advantage of incremental update in 
+                real time, and can be used for analytical processing by 
+                map-reduce job. It sits ontop of HDFS. So, the question is to 
+                find out whether it supports nested relational model. 
+                Splice machine uses it as the storage layer, since it support
+                transactional update. A new architecture come to my mind 
+                is that using HBase as entity db storage, and using spark to 
+                query it. And use HBase to update it and maybe MR to do ETL.
+                Need to find out how Splice machine put RDBMS ontop of it.
+
 		
 05/19/2014      Happens to see Hadoop partition function , it use Integer.MAX_VALUE to get rid of the negative hashCode
 			public class HashPartitioner<K, V> extends Partitioner<K, V> {
