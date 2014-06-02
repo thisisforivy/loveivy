@@ -46,6 +46,8 @@ This trimester goal is to
                 is that using HBase as entity db storage, and using spark to 
                 query it. And use HBase to update it and maybe MR to do ETL.
                 Need to find out how Splice machine put RDBMS ontop of it.
+06/01/2014      Find Carlos horizontal aggregate paper. Very relevant as
+                pivoting some aggregate results.
 
 		
 05/19/2014      Happens to see Hadoop partition function , it use Integer.MAX_VALUE to get rid of the negative hashCode
