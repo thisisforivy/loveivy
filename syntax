@@ -1,6 +1,11 @@
 some examples on playing RDD API.
 http://homepage.cs.latrobe.edu.au/zhe/ZhenHeSparkRDDAPIExamples.html
 
+Find subsequence pattern reach in a time series.
+- MTA
+- beacon correlation query
+- skew (segment reach)
+
 1. Correlation query: find top 10 correlated category_id for a given beacon_id.
 
 select dmp.impression.beacon_id, top10(dmp.data.category_id)
