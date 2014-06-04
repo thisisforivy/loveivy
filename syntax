@@ -6,6 +6,8 @@ Find subsequence pattern reach in a time series.
 - beacon correlation query
 - skew (segment reach)
 
+Qiyang's stream anomaly detection paper could be used for time series detection
+
 1. Correlation query: find top 10 correlated category_id for a given beacon_id.
 
 select dmp.impression.beacon_id, top10(dmp.data.category_id)
